@@ -156,7 +156,13 @@ $(document).on('ready', function(){
 
 		var dataValue = $(this).data('value');
 		$('#colors').attr('href',dataValue);
+		localStorage.setItem("color", dataValue);
+		console.log(dataValue)
+		
 	});
+	var color = localStorage.getItem('color')	
+	if(color== null) $('#colors').attr('href','css/colors/color1-0487cc.css');	
+	else $('#colors').attr('href',color);
 
 	/**** Magnific Popup ****/
 	var groups = {};
