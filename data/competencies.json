@@ -1,0 +1,89 @@
+{
+  "sectionTitle": "Hệ sinh thái Công nghệ & Năng lực Chuyên môn",
+  "sectionSubtitle": "Kết hợp chuyên môn sâu về ERP Microsoft Dynamics AX 2012 với kiến trúc Microservices & High-Scale Database.",
+  "categories": [
+    {
+      "id": "all",
+      "label": "Tất cả"
+    },
+    {
+      "id": "erp",
+      "label": "ERP & POS"
+    },
+    {
+      "id": "backend",
+      "label": ".NET & Integration"
+    },
+    {
+      "id": "db",
+      "label": "SQL & Caching"
+    }
+  ],
+  "groups": [
+    {
+      "id": "skill-erp-retail",
+      "category": "erp",
+      "title": "Enterprise ERP & Retail Systems",
+      "experience": "10+ năm",
+      "accent": "primary",
+      "description": "Làm chủ toàn diện kiến trúc bên trong Microsoft Dynamics AX 2012 R3, phát triển X++ trên MorphX IDE, tối ưu hóa Posting Engine và vận hành hệ thống bán lẻ POS quy mô trên 1.000 cửa hàng.",
+      "skills": [
+        { "name": "Dynamics AX 2012 R3", "highlighted": true },
+        { "name": "X++ / MorphX IDE", "highlighted": true },
+        { "name": "Retail POS & Modern POS", "highlighted": true },
+        { "name": "AIF / DIXF", "highlighted": false },
+        { "name": "SSRS Reporting", "highlighted": false },
+        { "name": "Inventory & General Ledger", "highlighted": false },
+        { "name": "Multi-thread Batch Jobs", "highlighted": false }
+      ]
+    },
+    {
+      "id": "skill-backend-integration",
+      "category": "backend",
+      "title": "Backend & Distributed Integration",
+      "experience": "9+ năm",
+      "accent": "telemetry",
+      "description": "Thiết kế cổng giao tiếp AX Adapter độc quyền, kiến trúc hướng sự kiện (Event-Driven), áp dụng nghiêm ngặt mẫu thiết kế kháng lỗi Circuit Breaker, Rate Limiting và Idempotent Consumers.",
+      "skills": [
+        { "name": "C# / .NET 8 / .NET Core", "highlighted": true },
+        { "name": "ASP.NET Core Web API", "highlighted": true },
+        { "name": "Polly Circuit Breaker", "highlighted": true },
+        { "name": "Dapper / EF Core", "highlighted": false },
+        { "name": "Clean Architecture & CQRS", "highlighted": false },
+        { "name": "Node.js / Java Spring", "highlighted": false }
+      ]
+    },
+    {
+      "id": "skill-database-engineering",
+      "category": "db",
+      "title": "High-Volume Database Engineering",
+      "experience": "10+ năm",
+      "accent": "primary",
+      "description": "Chuyên gia giải quyết khủng hoảng hiệu năng SQL Server: phân tích Execution Plan, tối ưu hóa chỉ mục (Index Tuning), phân vùng bảng (Table Partitioning) và triệt tiêu Deadlock cho các bảng trăm triệu bản ghi.",
+      "skills": [
+        { "name": "SQL Server (T-SQL)", "highlighted": true },
+        { "name": "Execution Plan Analysis", "highlighted": true },
+        { "name": "Deadlock Resolution", "highlighted": true },
+        { "name": "Table Partitioning", "highlighted": false },
+        { "name": "Query Store & Extended Events", "highlighted": false },
+        { "name": "PostgreSQL / Oracle", "highlighted": false }
+      ]
+    },
+    {
+      "id": "skill-caching-devops",
+      "category": "db",
+      "title": "Caching, Messaging & DevOps",
+      "experience": "8+ năm",
+      "accent": "telemetry",
+      "description": "Triển khai bộ nhớ đệm phân tán tốc độ cao, hàng đợi thông điệp bất đồng bộ chịu tải hàng triệu sự kiện mỗi ngày và quy trình CI/CD kiểm soát chất lượng mã nguồn chặt chẽ.",
+      "skills": [
+        { "name": "Redis Cluster (Lua)", "highlighted": true },
+        { "name": "RabbitMQ / Apache Kafka", "highlighted": true },
+        { "name": "Elasticsearch", "highlighted": true },
+        { "name": "Docker & Nginx / IIS", "highlighted": false },
+        { "name": "High Availability & DR", "highlighted": false },
+        { "name": "Git / CI-CD Pipelines", "highlighted": false }
+      ]
+    }
+  ]
+}

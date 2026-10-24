@@ -1,0 +1,136 @@
+{
+  "meta": {
+    "title": "Võ Minh Sơn (minhsonuit) | Senior Software Architect & ERP Solutions Lead",
+    "description": "Hồ sơ năng lực & Kiến trúc hệ thống của Võ Minh Sơn (minhsonuit) - Chuyên gia Kiến trúc Phần mềm, Microsoft Dynamics AX 2012 R3 (X++), Retail POS 1.000+ điểm bán, .NET 8 AX Adapter Gateway & SQL Server Tuning.",
+    "keywords": "Võ Minh Sơn, minhsonuit, Microsoft Dynamics AX 2012, X++, Retail POS, Software Architect, C# .NET 8, SQL Server Performance Tuning, Pharmacity, ERP Solutions Lead",
+    "author": "Võ Minh Sơn",
+    "siteUrl": "https://minhsonuit.github.io/",
+    "ogImage": "https://minhsonuit.github.io/resources/avatar.jpg"
+  },
+  "identity": {
+    "fullName": "Võ Minh Sơn",
+    "handle": "@minhsonuit",
+    "shortRole": "Architect",
+    "headline": "Võ Minh Sơn — Senior Software Architect & ERP Solutions Lead",
+    "operationalRole": "Principal ERP / System Architect & Tech Lead",
+    "location": "TP. Hồ Chí Minh, VN",
+    "locationShort": "TP. Hồ Chí Minh",
+    "experienceShort": "10+ năm KN",
+    "timezone": "GMT+7",
+    "avatar": "./resources/avatar.jpg",
+    "availability": {
+      "status": "healthy",
+      "shortLabel": "Sẵn sàng",
+      "heroBadge": "Sẵn sàng cho vai trò Principal Architect / Tech Lead / Tư vấn ERP"
+    },
+    "academicBadge": "UIT VNU-HCM • Kỹ sư Hệ thống Thông tin",
+    "techSummaryBadge": "AX 2012 • .NET 8 • SQL",
+    "summaryHtml": "Hơn <strong>10 năm kinh nghiệm thực chiến</strong> thiết kế kiến trúc, phát triển và tối ưu hóa hệ thống ERP lõi <strong>Microsoft Dynamics AX 2012 R3 (X++ / MorphX)</strong>, <strong>Retail POS</strong> và nền tảng phân tán <strong>C# / .NET 8</strong>. Trực tiếp dẫn dắt kỹ thuật tại <strong>PHARMACITY JSC</strong> vận hành mạng lưới <strong>hơn 1.000 cửa hàng bán lẻ</strong> trên toàn quốc, xử lý hơn <strong>10,4 triệu giao dịch mỗi ngày</strong> với yêu cầu khắt khe về tính toàn vẹn dữ liệu tài chính và khả năng chịu lỗi cao."
+  },
+  "headerTelemetry": {
+    "breadcrumbTitle": "minhsonuit",
+    "breadcrumbSubtitle": "Enterprise ERP & Distributed Systems Architecture",
+    "primaryPill": {
+      "status": "healthy",
+      "text": "AX 2012 R3 • 1,000+ POS"
+    },
+    "secondaryMetric": "SLA 99.98%"
+  },
+  "navigation": [
+    {
+      "id": "overview",
+      "label": "Tổng quan & Hồ sơ",
+      "badgeSource": "static",
+      "badgeValue": "01",
+      "accent": false
+    },
+    {
+      "id": "architecture",
+      "label": "Kiến trúc & Case Studies",
+      "badgeSource": "architectureCount",
+      "badgeValue": "06",
+      "accent": true
+    },
+    {
+      "id": "telemetry",
+      "label": "Biểu đồ Hiệu năng Thực tế",
+      "badgeSource": "telemetryCount",
+      "badgeValue": "02",
+      "accent": false
+    },
+    {
+      "id": "competencies",
+      "label": "Hệ sinh thái Kỹ năng",
+      "badgeSource": "competenciesCount",
+      "badgeValue": "04",
+      "accent": false
+    },
+    {
+      "id": "experience",
+      "label": "Lịch sử Chuyên môn",
+      "badgeSource": "experienceCount",
+      "badgeValue": "03",
+      "accent": false
+    },
+    {
+      "id": "governance",
+      "label": "Nguyên tắc Tích hợp AX",
+      "badgeSource": "governanceCount",
+      "badgeValue": "06",
+      "accent": false
+    },
+    {
+      "id": "education",
+      "label": "Học vấn & Đào tạo",
+      "badgeSource": "static",
+      "badgeValue": "UIT",
+      "accent": false
+    },
+    {
+      "id": "contact",
+      "label": "Liên hệ & Tư vấn",
+      "badgeSource": "static",
+      "badgeValue": "24/7",
+      "accent": false
+    }
+  ],
+  "sidebarCompliance": {
+    "title": "Chuẩn Kiến trúc AX 2012",
+    "badge": "ENFORCED",
+    "items": [
+      "AX Adapter là điểm duy nhất gọi AX",
+      "Cấm ghi trực tiếp vào AX SQL Server",
+      "SQL AX chỉ cho Read-Only Fallback",
+      "100% Parameterized + Circuit Breaker"
+    ]
+  },
+  "contact": {
+    "sectionTitle": "Kết nối Hợp tác & Tư vấn Giải pháp Kiến trúc",
+    "sectionSubtitle": "Liên hệ trực tiếp để trao đổi về cơ hội hợp tác chiến lược, vị trí Principal Architect / Tech Lead hoặc tư vấn tối ưu hệ thống ERP & Database.",
+    "cardTitle": "Thông tin Liên hệ Trực tiếp",
+    "cardDescription": "Sẵn sàng trao đổi chuyên sâu về bài toán mở rộng chuỗi bán lẻ, tích hợp AX 2012 an toàn và xử lý sự cố hiệu năng SQL Server.",
+    "email": "minhson.uit@gmail.com",
+    "linkedin": {
+      "label": "linkedin.com/in/minhson-uit",
+      "url": "https://www.linkedin.com/in/minhson-uit/",
+      "badge": "Verified"
+    },
+    "github": {
+      "label": "github.com/minhsonuit",
+      "url": "https://github.com/minhsonuit",
+      "badge": "Open Source"
+    },
+    "form": {
+      "namePlaceholder": "Trần Minh Quân • CTO / HR Lead",
+      "emailPlaceholder": "quan.tran@enterprise.vn",
+      "subjectPlaceholder": "Mời hợp tác vị trí Principal Architect / Tư vấn tối ưu AX & SQL Server",
+      "messagePlaceholder": "Mô tả quy mô hệ thống hiện tại, mục tiêu kỹ thuật hoặc thông tin vị trí...",
+      "slaNote": "Phản hồi nhanh trong vòng 24 giờ làm việc.",
+      "submitLabel": "Gửi yêu cầu tư vấn"
+    }
+  },
+  "footer": {
+    "copyrightYear": 2026,
+    "tagline": "Thiết kế chuẩn High-Craft UI & Data-Driven Architecture."
+  }
+}

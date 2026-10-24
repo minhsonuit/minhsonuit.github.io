@@ -1,0 +1,36 @@
+{
+  "sectionTitle": "Chỉ số Đo lường Hiệu năng Thực tế (Production Telemetry)",
+  "sectionSubtitle": "So sánh số liệu đo đạc trước và sau khi tái cấu trúc cơ sở dữ liệu SQL Server & triển khai cổng AX Adapter Gateway.",
+  "benchmarks": [
+    {
+      "id": "telemetry-sql-cpu",
+      "title": "Tải CPU Cụm SQL Server ERP Lõi (Giờ Cao Điểm)",
+      "subtitle": "Sau khi áp dụng Table Partitioning & Covering Index",
+      "pillText": "92% → 32% CPU",
+      "status": "healthy",
+      "accentVar": "var(--accent-telemetry)",
+      "thresholdLineColor": "rgba(239,68,68,0.35)",
+      "thresholdLabel": "Ngưỡng quá tải cũ: 90% CPU",
+      "ariaLabel": "Biểu đồ giảm tải CPU SQL Server",
+      "points": [92, 88, 81, 65, 50, 43, 38, 35, 34, 33, 32, 32],
+      "footerLeft": "Trước tối ưu: 92% CPU (45p chạy báo cáo EOD)",
+      "footerRight": "Hiện tại: 32% CPU (1.8p EOD)",
+      "footerRightAccent": "primary"
+    },
+    {
+      "id": "telemetry-ax-gateway",
+      "title": "Thông lượng AX Adapter Gateway (.NET 8 + Redis)",
+      "subtitle": "Bảo vệ AOS Server trong các đợt Flash Sale E-commerce",
+      "pillText": "P99: 42 ms",
+      "status": "healthy",
+      "accentVar": "var(--accent-primary)",
+      "thresholdLineColor": "var(--border-hover)",
+      "thresholdLabel": "Đỉnh tải Flash Sale: 4,200 req/s (Circuit Closed)",
+      "ariaLabel": "Biểu đồ thông lượng AX Adapter Gateway",
+      "points": [1200, 1550, 1980, 2600, 3450, 4050, 4200, 3900, 3550, 3750, 3950, 4120],
+      "footerLeft": "Cache Hit Ratio: 94.6% (Redis Cluster)",
+      "footerRight": "Timeout 3.0s • Zero AOS Crash",
+      "footerRightAccent": "telemetry"
+    }
+  ]
+}

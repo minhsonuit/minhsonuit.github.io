@@ -1,0 +1,257 @@
+{
+  "sectionTitle": "Danh mục Giải pháp Kiến trúc & Hệ thống Trọng điểm",
+  "sectionSubtitleHtml": "Nhấn vào bất kỳ dòng hệ thống nào bên dưới để mở bảng <strong>Chi tiết Kiến trúc, Telemetry &amp; Code mẫu</strong> ở khung bên phải.",
+  "defaultSelectedId": "ARCH-AX01",
+  "domains": [
+    {
+      "id": "all",
+      "label": "Tất cả"
+    },
+    {
+      "id": "erp-pos",
+      "label": "ERP & Retail POS"
+    },
+    {
+      "id": "integration",
+      "label": "AX Adapter & Gateway"
+    },
+    {
+      "id": "database",
+      "label": "SQL Server & BI"
+    }
+  ],
+  "sortOptions": [
+    {
+      "value": "impact",
+      "label": "Sắp xếp: Tác động cao nhất"
+    },
+    {
+      "value": "latency",
+      "label": "Sắp xếp: Độ trễ P99 thấp nhất"
+    },
+    {
+      "value": "throughput",
+      "label": "Sắp xếp: Lưu lượng lớn nhất"
+    }
+  ],
+  "systems": [
+    {
+      "id": "ARCH-AX01",
+      "name": "Mạng lưới Retail POS 1.000+ Cửa hàng & Đồng bộ AX Real-time",
+      "domain": "erp-pos",
+      "domainLabel": "ERP & Retail POS",
+      "company": "PHARMACITY JSC",
+      "period": "2017 – Hiện tại",
+      "scale": "1,000+ POS Stores",
+      "throughput": "10.4M tx/ngày",
+      "throughputValue": 10400000,
+      "latencyP99": "185 ms",
+      "latencyValue": 185,
+      "impactScore": 99,
+      "status": "healthy",
+      "statusText": "SLA 99.98% • Active",
+      "summary": "Kiến trúc bán lẻ phân tán Offline-first cho hơn 1.000 nhà thuốc trên toàn quốc, đảm bảo quầy thu ngân thanh toán dưới 2 giây ngay cả khi mất kết nối WAN và đồng bộ đối soát 100% chính xác về AX 2012 R3 Head Office.",
+      "problem": "Khi quy mô chuỗi vượt mốc 500 cửa hàng, cơ chế đồng bộ CDX/Async Server mặc định bị nghẽn cổ chai vào giờ cao điểm (17:00–21:00), gây trễ tồn kho và lệch công nợ ca bán hàng.",
+      "solution": "Tái thiết kế luồng đồng bộ phân tầng kết hợp Local Store DB (SQL Express), hàng đợi nén gói tin theo lô (Batch Compression) và X++ Posting Engine bất đồng bộ tại AOS Cluster.",
+      "metrics": [
+        { "label": "Thời gian thanh toán POS", "value": "< 1.8 giây", "delta": "-68% độ trễ" },
+        { "label": "Khớp lệnh tài chính POS-GL", "value": "100.0%", "delta": "Zero Data Loss" },
+        { "label": "Khả năng chịu lỗi Offline", "value": "72 giờ", "delta": "Tự động hồi phục" },
+        { "label": "Tải đỉnh xử lý đồng thời", "value": "4,200 req/s", "delta": "+340% công suất" }
+      ],
+      "governance": [
+        "Giao thức đồng bộ một chiều kiểm soát chặt qua AX Adapter Service.",
+        "Toàn bộ giao dịch POS áp dụng Idempotency Key chống ghi trùng khi mạng chập chờn.",
+        "Đối soát tự động cuối ca (End-of-Day Shift Reconciliation) trước khi post General Ledger."
+      ],
+      "techStack": ["Dynamics AX 2012 R3", "X++ (MorphX)", "Retail POS", "C# .NET", "SQL Replication", "Async Server"],
+      "telemetryTitle": "Lưu lượng đồng bộ POS về HO (Nghìn giao dịch / giờ)",
+      "telemetryUnit": "k tx/h",
+      "telemetryThreshold": "Ngưỡng cảnh báo tải: 650k tx/h",
+      "telemetryPoints": [310, 340, 390, 420, 480, 520, 590, 610, 575, 540, 490, 460],
+      "codeSnippet": "// X++: Kiểm tra Idempotency & Post Statement an toàn theo lô\npublic void postRetailStatementBatch(RetailStatementId _statementId)\n{\n    RetailStatementTable statementTable;\n    ttsBegin;\n    select firstOnly forUpdate statementTable\n        where statementTable.statementId == _statementId;\n    if (statementTable && statementTable.Status == RetailStatementStatus::Validated)\n    {\n        RetailStatementPost::runServer(_statementId);\n    }\n    ttsCommit;\n}"
+    },
+    {
+      "id": "ARCH-GW02",
+      "name": "AX Integration Adapter & Event-Driven Gateway (.NET 8)",
+      "domain": "integration",
+      "domainLabel": "Integration Gateway",
+      "company": "PHARMACITY JSC",
+      "period": "2018 – Hiện tại",
+      "scale": "Omnichannel Hub",
+      "throughput": "3,850 req/s",
+      "throughputValue": 8800000,
+      "latencyP99": "42 ms",
+      "latencyValue": 42,
+      "impactScore": 98,
+      "status": "healthy",
+      "statusText": "Circuit Closed • 99.99%",
+      "summary": "Cổng giao tiếp trung gian duy nhất (Single Point of Entry) kết nối ERP lõi Dynamics AX 2012 với E-commerce, Mobile App, Đối tác giao hàng (Grab/AhaMove) và cổng thanh toán điện tử.",
+      "problem": "Các kênh bán hàng trực tuyến thường xuyên mở chiến dịch Flash Sale khiến lượng truy cập tăng đột biến gấp 10 lần, đe dọa làm treo AOS Server và khóa bảng InventSum trong AX.",
+      "solution": "Xây dựng AX Adapter độc quyền bằng ASP.NET Core (.NET 8), tích hợp Polly Circuit Breaker, Timeout nghiêm ngặt, Redis Read-Through Cache và RabbitMQ Dead-Letter Queue. Tuyệt đối cấm ứng dụng ngoài ghi trực tiếp vào SQL Server của AX.",
+      "metrics": [
+        { "label": "Độ trễ phản hồi API (P99)", "value": "42 ms", "delta": "-85% so với AIF cũ" },
+        { "label": "Tỷ lệ Cache Hit tồn kho", "value": "94.6%", "delta": "Giảm tải 90% cho AX" },
+        { "label": "Cô lập sự cố (Fault Isolation)", "value": "100%", "delta": "Polly Circuit Breaker" },
+        { "label": "Chống SQL Injection", "value": "100%", "delta": "100% Parameterized" }
+      ],
+      "governance": [
+        "AX Adapter là điểm duy nhất được phép gọi vào hệ thống AX.",
+        "Cấm tuyệt đối write trực tiếp vào AX SQL Server từ các dịch vụ vệ tinh.",
+        "SQL Server AX chỉ được phép dùng cho read-only fallback khi thật sự cần thiết.",
+        "100% truy vấn Parameterized, cấm hoàn toàn dynamic string SQL.",
+        "Áp dụng cứng Timeout (3s) + Circuit Breaker (ngắt mạch sau 5 lỗi liên tiếp)."
+      ],
+      "techStack": [".NET 8 Web API", "C#", "Polly Circuit Breaker", "RabbitMQ", "Redis Cluster", "AIF Custom Services"],
+      "telemetryTitle": "Độ trễ phản hồi AX Adapter Gateway P99 (ms)",
+      "telemetryUnit": "ms",
+      "telemetryThreshold": "Ngưỡng SLA Timeout: 250 ms",
+      "telemetryPoints": [68, 62, 55, 49, 46, 44, 48, 43, 41, 40, 42, 42],
+      "codeSnippet": "// .NET 8: Chính sách Timeout + Circuit Breaker bắt buộc cho AX Adapter\nvar axResiliencePipeline = new ResiliencePipelineBuilder<AxResponse>()\n    .AddTimeout(TimeSpan.FromSeconds(3.0))\n    .AddCircuitBreaker(new CircuitBreakerStrategyOptions<AxResponse> {\n        FailureRatio = 0.25,\n        SamplingDuration = TimeSpan.FromSeconds(30),\n        MinimumThroughput = 20,\n        BreakDuration = TimeSpan.FromSeconds(15)\n    }).Build();"
+    },
+    {
+      "id": "ARCH-DB03",
+      "name": "Tối ưu hóa CSDL SQL Server Hàng trăm Triệu Bản ghi",
+      "domain": "database",
+      "domainLabel": "High-Scale Database",
+      "company": "PHARMACITY JSC & Enterprise Clients",
+      "period": "2017 – Hiện tại",
+      "scale": "500M+ Rows / Table",
+      "throughput": "28,500 QPS",
+      "throughputValue": 9600000,
+      "latencyP99": "18 ms",
+      "latencyValue": 18,
+      "impactScore": 97,
+      "status": "healthy",
+      "statusText": "Deadlock -78% • Optimal",
+      "summary": "Phân tích sâu Execution Plan, thiết kế lại chiến lược Covering Index, Table Partitioning theo kỳ kế toán và loại bỏ Key Lookup / Lock Escalation trên các bảng giao dịch cốt lõi (InventTrans, RetailTransactionSalesTrans).",
+      "problem": "Bảng lịch sử giao dịch kho và bán lẻ vượt ngưỡng 400 triệu dòng khiến CPU máy chủ SQL Server thường xuyên chạm mức 92%–98%, phát sinh hàng chục vụ Deadlock mỗi ngày làm gián đoạn việc chốt đơn.",
+      "solution": "Sử dụng Extended Events & Query Store để khoanh vùng Top 25 câu truy vấn tốn tài nguyên nhất; áp dụng Partitioning theo tháng, tinh chỉnh `MAXDOP`, bật `READ_COMMITTED_SNAPSHOT` có kiểm soát và chuẩn hóa toàn bộ câu lệnh Parameterized.",
+      "metrics": [
+        { "label": "Mức sử dụng CPU SQL Server", "value": "32%", "delta": "Giảm từ 92% giờ cao điểm" },
+        { "label": "Tần suất Deadlock / ngày", "value": "< 1 vụ", "delta": "Giảm hơn 78% sự cố khóa" },
+        { "label": "Tốc độ chạy báo cáo EOD", "value": "1.8 phút", "delta": "Nhanh gấp 18 lần (từ 45p)" },
+        { "label": "Buffer Cache Hit Ratio", "value": "99.8%", "delta": "Tối ưu I/O Disk Read" }
+      ],
+      "governance": [
+        "Mọi câu truy vấn bắt buộc đi qua Parameterized Query / Stored Procedure đã kiểm duyệt Execution Plan.",
+        "Không sử dụng `NOLOCK` bừa bãi gây Dirty Read trên các bảng số dư tài chính và tồn kho khả dụng.",
+        "Bảo trì Index định kỳ (Smart Reorganize/Rebuild) và cập nhật Statistics tự động ngoài giờ cao điểm."
+      ],
+      "techStack": ["SQL Server 2019 Enterprise", "T-SQL Tuning", "Execution Plan", "Table Partitioning", "Extended Events", "Query Store"],
+      "telemetryTitle": "Mức tải CPU SQL Server cụm ERP Core (%)",
+      "telemetryUnit": "% CPU",
+      "telemetryThreshold": "Ngưỡng cảnh báo nóng: 75% CPU",
+      "telemetryPoints": [89, 84, 76, 65, 54, 48, 42, 38, 35, 34, 32, 32],
+      "codeSnippet": "-- T-SQL: Truy vấn Parameterized an toàn với Covering Index Seek\nexec sp_executesql \n  N'SELECT ITEMID, AVAILPHYSICAL, RESERVPHYSICAL\n    FROM dbo.INVENTSUM WITH (INDEX(IDX_INVENTSUM_ITEM_DIM_INC))\n    WHERE DATAAREAID = @pDataAreaId \n      AND ITEMID = @pItemId \n      AND CLOSED = 0;',\n  N'@pDataAreaId nvarchar(4), @pItemId nvarchar(20)',\n  @pDataAreaId = N'pmc', @pItemId = N'SKU-008492';"
+    },
+    {
+      "id": "ARCH-INV04",
+      "name": "Hệ thống Phân bổ Tồn kho Real-time & Chống Overselling",
+      "domain": "erp-pos",
+      "domainLabel": "ERP & Retail POS",
+      "company": "PHARMACITY JSC",
+      "period": "2019 – Hiện tại",
+      "scale": "50,000+ SKUs • 1,000 Kho",
+      "throughput": "1,950 rsv/s",
+      "throughputValue": 6200000,
+      "latencyP99": "29 ms",
+      "latencyValue": 29,
+      "impactScore": 95,
+      "status": "healthy",
+      "statusText": "99.96% Accuracy",
+      "summary": "Cơ chế giữ chỗ tồn kho (Inventory Reservation) thời gian thực theo từng lô thuốc (Batch/Expiry Date - FEFO) kết hợp bộ nhớ đệm phân tán Redis và đối soát ngược với bảng InventSum của Dynamics AX.",
+      "problem": "Đặc thù ngành bán lẻ dược phẩm yêu cầu quản lý tồn kho chính xác theo số lô (Batch Number) và hạn sử dụng (FEFO). Khi khách đặt hàng qua App và mua trực tiếp tại nhà thuốc cùng lúc, nguy cơ bán vượt tồn (Overselling) hoặc xuất nhầm lô cận hạn rất cao.",
+      "solution": "Thiết kế bộ máy tính tồn kho khả dụng (Available-to-Promise) sử dụng Redis Lua Script nguyên tử (Atomic Decrement) kết hợp đồng bộ sự kiện thay đổi tồn kho từ AX Adapter qua Message Queue.",
+      "metrics": [
+        { "label": "Tỷ lệ Overselling đơn Online", "value": "< 0.04%", "delta": "Giảm từ 3.8% trước đó" },
+        { "label": "Thời gian giữ chỗ FEFO", "value": "29 ms", "delta": "Atomic Redis + AX Sync" },
+        { "label": "Tuân thủ chuẩn GPP/FEFO", "value": "100%", "delta": "Kiểm soát chặt hạn dùng" },
+        { "label": "Đồng bộ biến động tồn kho", "value": "< 1.5 giây", "delta": "Near Real-time" }
+      ],
+      "governance": [
+        "Chỉ đọc số liệu fallback từ AX Replica khi Redis Cluster cần warm-up.",
+        "Mọi lệnh trừ tồn kho chính thức đều phải đi qua AX Adapter để ghi nhận InventTrans chuẩn xác.",
+        "Tự động giải phóng tồn kho tạm giữ (Reservation TTL) khi đơn hàng quá hạn thanh toán."
+      ],
+      "techStack": ["Dynamics AX InventTrans", "Redis Lua Script", "C# .NET 8", "RabbitMQ", "FEFO Algorithm"],
+      "telemetryTitle": "Độ lệch tồn kho giữa Cache và AX Core (%)",
+      "telemetryUnit": "% Drift",
+      "telemetryThreshold": "Ngưỡng cho phép tối đa: 0.15%",
+      "telemetryPoints": [0.14, 0.12, 0.10, 0.08, 0.07, 0.05, 0.04, 0.04, 0.03, 0.03, 0.02, 0.02],
+      "codeSnippet": "// C#: Truy vấn tồn kho FEFO qua AX Adapter với Read-Only Fallback an toàn\npublic async Task<InventorySnapshot> GetStoreFefoStockAsync(string storeId, string itemId, CancellationToken ct)\n{\n    var cached = await _redisCache.GetStockAsync(storeId, itemId, ct);\n    if (cached is not null) return cached;\n\n    return await _axAdapterClient.QueryReadOnlyStockAsync(\n        storeId: storeId, itemId: itemId, timeoutMs: 2500, ct);\n}"
+    },
+    {
+      "id": "ARCH-BI05",
+      "name": "Kiến trúc Báo cáo Quản trị SSRS & Data Pipeline Cuối ngày",
+      "domain": "database",
+      "domainLabel": "High-Scale Database",
+      "company": "PHARMACITY JSC & Tư vấn Doanh nghiệp",
+      "period": "2016 – Hiện tại",
+      "scale": "120+ Báo cáo Tài chính/Kho",
+      "throughput": "450 GB/ngày",
+      "throughputValue": 4500000,
+      "latencyP99": "110 ms",
+      "latencyValue": 110,
+      "impactScore": 92,
+      "status": "warning",
+      "statusText": "Batch Window 01:00–03:00",
+      "summary": "Tách biệt hoàn toàn tải báo cáo phân tích (OLAP/SSRS) ra khỏi cơ sở dữ liệu giao dịch trực tuyến (OLTP), giúp đội ngũ Kế toán & Chuỗi cung ứng kết xuất báo cáo nhập-xuất-tồn hàng triệu dòng mà không gây khóa bảng.",
+      "problem": "Các báo cáo tổng hợp giá trị tồn kho, sổ cái kế toán và doanh thu theo ca chạy trực tiếp trên DB chính vào ban ngày thường xuyên gây Lock Escalation làm chậm hoạt động bán hàng tại các chi nhánh.",
+      "solution": "Thiết kế kiến trúc Read-Only Standby / Reporting Mart đồng bộ định kỳ, viết lại các Data Provider Class (RDP) trong X++ sử dụng `RecordInsertList` và bảng tạm `TempDB` thay vì lặp từng bản ghi.",
+      "metrics": [
+        { "label": "Thời gian kết xuất Nhập-Xuất-Tồn", "value": "48 giây", "delta": "Giảm từ 38 phút" },
+        { "label": "Ảnh hưởng lên DB OLTP chính", "value": "0%", "delta": "Tách luồng Read-Only" },
+        { "label": "Số lượng báo cáo SSRS tối ưu", "value": "120+ mẫu", "delta": "Chuẩn VAS & IFRS" },
+        { "label": "Tốc độ xử lý Batch Job đêm", "value": "3.2x nhanh hơn", "delta": "Multi-thread AOS Batch" }
+      ],
+      "governance": [
+        "Báo cáo nặng chỉ được phép truy vấn trên cụm SQL Read-Only Fallback / Reporting Replica.",
+        "Cấm sử dụng vòng lặp `while select` lồng nhau quá 3 cấp trong X++ Report Data Provider.",
+        "Bắt buộc giới hạn khoảng thời gian truy vấn và phân trang hợp lý."
+      ],
+      "techStack": ["SSRS Reports", "X++ RDP Classes", "TempDB Optimization", "SQL AlwaysOn Read-Replica", "DIXF"],
+      "telemetryTitle": "Thời gian hoàn thành Batch Job đóng sổ cuối ngày (Phút)",
+      "telemetryUnit": "phút",
+      "telemetryThreshold": "Ngưỡng SLA ca đêm: 120 phút",
+      "telemetryPoints": [145, 132, 118, 96, 84, 72, 65, 58, 54, 51, 49, 47],
+      "codeSnippet": "// X++: Tối ưu SSRS Report Data Provider bằng RecordInsertList & TempDB\nRecordInsertList insertList = new RecordInsertList(tableNum(InventValueReportTmp), true, true, true, false, true, inventValueTmp);\nwhile select sum(PostedQty), sum(PostedValue) from inventSum\n    group by ItemId, InventDimId\n    where inventSum.Closed == NoYes::No\n{\n    inventValueTmp.clear();\n    inventValueTmp.ItemId     = inventSum.ItemId;\n    inventValueTmp.TotalQty   = inventSum.PostedQty;\n    insertList.add(inventValueTmp);\n}\ninsertList.insertDatabase();"
+    },
+    {
+      "id": "ARCH-MSG06",
+      "name": "Hệ thống Đối soát Hóa đơn Điện tử & Công nợ Đa kênh Tự động",
+      "domain": "integration",
+      "domainLabel": "Integration Gateway",
+      "company": "Tư vấn Kiến trúc Doanh nghiệp",
+      "period": "2019 – Hiện tại",
+      "scale": "300K+ Hóa đơn / ngày",
+      "throughput": "1,200 msg/s",
+      "throughputValue": 3200000,
+      "latencyP99": "64 ms",
+      "latencyValue": 64,
+      "impactScore": 94,
+      "status": "healthy",
+      "statusText": "100% Tax Synced",
+      "summary": "Kiến trúc bất đồng bộ xử lý phát hành hóa đơn điện tử có mã của cơ quan thuế và đối soát thanh toán QR/Ví điện tử cho hàng trăm nghìn biên lai bán lẻ mỗi ngày.",
+      "problem": "Việc gọi đồng bộ (Synchronous HTTP) sang cổng Hóa đơn điện tử và Ngân hàng tại thời điểm in bill khiến thu ngân phải chờ 5–10 giây khi cổng đối tác phản hồi chậm.",
+      "solution": "Chuyển đổi sang mô hình Outbox Pattern + Message Broker (RabbitMQ/Kafka), kết hợp cơ chế Retry theo cấp số nhân (Exponential Backoff) và cập nhật trạng thái hóa đơn về AX thông qua AX Adapter.",
+      "metrics": [
+        { "label": "Thời gian in hóa đơn tại quầy", "value": "0.4 giây", "delta": "Không chờ API bên thứ 3" },
+        { "label": "Tỷ lệ phát hành thành công", "value": "99.99%", "delta": "Auto-Retry & DLQ" },
+        { "label": "Thời gian đối soát công nợ", "value": "Tự động 100%", "delta": "Giảm 85% nhân sự đối soát" },
+        { "label": "Độ trễ xử lý bất đồng bộ", "value": "64 ms", "delta": "High-Throughput Worker" }
+      ],
+      "governance": [
+        "Mọi lệnh cập nhật số hóa đơn VAT về AX đều đi qua AX Adapter với đầy đủ chữ ký số kiểm tra.",
+        "Áp dụng Circuit Breaker tự động chuyển sang chế độ lưu trữ tạm (Queue Buffering) khi cổng thuế bảo trì.",
+        "Lưu vết kiểm toán (Audit Trail) toàn diện cho từng giao dịch tài chính."
+      ],
+      "techStack": [".NET Core Worker", "RabbitMQ / Kafka", "Outbox Pattern", "Polly Resilience", "PostgreSQL / SQL Server"],
+      "telemetryTitle": "Tỷ lệ xử lý thành công hàng đợi Hóa đơn Điện tử (%)",
+      "telemetryUnit": "% Success",
+      "telemetryThreshold": "Mục tiêu cam kết SLA: 99.90%",
+      "telemetryPoints": [99.85, 99.88, 99.91, 99.93, 99.95, 99.96, 99.97, 99.98, 99.98, 99.99, 99.99, 99.99],
+      "codeSnippet": "// .NET Worker: Xử lý Outbox Message với Idempotency & Circuit Breaker\npublic async Task ProcessInvoiceOutboxAsync(InvoiceEvent evt, CancellationToken ct)\n{\n    if (await _auditRepo.IsProcessedAsync(evt.TransactionId, ct)) return;\n    var taxResult = await _taxProviderPipeline.ExecuteAsync(\n        token => _taxClient.IssueEInvoiceAsync(evt, token), ct);\n    await _axAdapter.UpdateFiscalReferenceAsync(evt.TransactionId, taxResult.FiscalCode, ct);\n}"
+    }
+  ]
+}

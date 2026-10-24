@@ -1,0 +1,54 @@
+{
+  "sectionTitle": "Nguyên tắc Bất khả xâm phạm trong Kiến trúc & Tích hợp AX",
+  "sectionSubtitle": "Bộ quy chuẩn kỹ thuật bắt buộc được áp dụng xuyên suốt mọi dự án tích hợp ERP nhằm bảo vệ toàn vẹn dữ liệu và chống sập hệ thống lõi.",
+  "rules": [
+    {
+      "code": "RULE 01",
+      "codeAccent": "primary",
+      "pillText": "Mandatory",
+      "status": "healthy",
+      "title": "AX Adapter Độc quyền",
+      "descriptionHtml": "<strong>AX Adapter là điểm duy nhất được phép gọi vào AX.</strong> Mọi ứng dụng vệ tinh (Web, App, POS, 3PL) bắt buộc phải giao tiếp qua lớp Adapter chuẩn hóa, không kết nối phân tán."
+    },
+    {
+      "code": "RULE 02",
+      "codeAccent": "primary",
+      "pillText": "Strict Write Ban",
+      "status": "danger",
+      "title": "Cấm Ghi Trực tiếp AX SQL",
+      "descriptionHtml": "<strong>Cấm tuyệt đối write trực tiếp vào AX SQL Server.</strong> Mọi thao tác thêm/sửa/xóa phải đi qua tầng nghiệp vụ AX để bảo toàn <code>RecId</code>, <code>RecVersion</code>, bộ đệm AOS và tính toàn vẹn kế toán."
+    },
+    {
+      "code": "RULE 03",
+      "codeAccent": "telemetry",
+      "pillText": "Fallback Only",
+      "status": "warning",
+      "title": "SQL AX Chỉ Cho Read-Only Fallback",
+      "descriptionHtml": "<strong>SQL Server AX chỉ phục vụ Read-Only Fallback</strong> hoặc truy vấn báo cáo tách luồng trên bản sao (Read Replica), không làm ảnh hưởng đến hiệu năng giao dịch OLTP."
+    },
+    {
+      "code": "RULE 04",
+      "codeAccent": "primary",
+      "pillText": "100% Safe SQL",
+      "status": "healthy",
+      "title": "Truy vấn Parameterized",
+      "descriptionHtml": "<strong>100% Query Parameterized, cấm hoàn toàn dynamic string SQL.</strong> Loại bỏ triệt để nguy cơ SQL Injection và giúp SQL Server tái sử dụng Execution Plan hiệu quả (chống Plan Cache Bloat)."
+    },
+    {
+      "code": "RULE 05",
+      "codeAccent": "primary",
+      "pillText": "Resilience",
+      "status": "healthy",
+      "title": "Timeout + Circuit Breaker Bắt buộc",
+      "descriptionHtml": "<strong>Mọi kết nối tích hợp bắt buộc cấu hình Timeout &amp; Circuit Breaker.</strong> Tự động ngắt mạch cô lập lỗi khi dịch vụ đích chậm, ngăn chặn hiệu ứng sập dây chuyền (Cascading Failure)."
+    },
+    {
+      "code": "RULE 06",
+      "codeAccent": "telemetry",
+      "pillText": "ACID & Audit",
+      "status": "healthy",
+      "title": "Đối soát & Toàn vẹn Dữ liệu",
+      "descriptionHtml": "Mọi giao dịch bán lẻ và tài chính đều gắn mã định danh duy nhất (Idempotency Key), đảm bảo đối soát khớp 100% giữa POS, Kho và Sổ cái."
+    }
+  ]
+}

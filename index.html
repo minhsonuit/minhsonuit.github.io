@@ -86,7 +86,7 @@
   <div id="inspector-backdrop" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-xs hidden xl:hidden transition-opacity duration-150" aria-hidden="true"></div>
 
   <!-- ==========================================================================
-       App Shell Container (Unified Tonal Family, Natural Viewport Scrolling)
+       App Shell Container (Pure UI Shell — All Content Loaded from ./data/*.json)
        ========================================================================== -->
   <div class="min-h-screen flex flex-col lg:flex-row bg-[var(--bg-canvas)]">
 
@@ -95,15 +95,9 @@
          ======================================================================== -->
     <aside id="left-sidebar" aria-label="Điều hướng chính" class="fixed inset-y-0 left-0 z-50 w-64 lg:w-60 lg:sticky lg:top-0 lg:h-screen shrink-0 bg-[var(--bg-canvas)] border-r border-[var(--border-default)] flex flex-col justify-between p-4 -translate-x-full lg:translate-x-0 shadow-2xl lg:shadow-none transition-transform duration-150">
       <div class="space-y-5 overflow-y-auto no-scrollbar">
-        <!-- Brand Identity & Mobile Close Button -->
+        <!-- Brand Identity & Mobile Close Button (Populated from data/profile.json) -->
         <div class="flex items-center justify-between gap-2 pb-3.5 border-b border-[var(--border-default)]">
-          <a href="#overview" class="flex items-center gap-2.5 min-w-0">
-            <img src="./resources/avatar.jpg" alt="Võ Minh Sơn" class="w-9 h-9 rounded-lg object-cover border border-[var(--border-default)] shrink-0">
-            <div class="min-w-0">
-              <div class="text-sm font-semibold text-[var(--text-primary)] truncate">Võ Minh Sơn</div>
-              <div class="font-mono-tabular text-[11px] text-[var(--text-muted)] whitespace-nowrap">@minhsonuit • Architect</div>
-            </div>
-          </a>
+          <a id="sidebar-brand-identity" href="#overview" class="flex items-center gap-2.5 min-w-0"></a>
           <button id="btn-close-sidebar" type="button" class="lg:hidden p-1.5 rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-subtle)]" aria-label="Đóng menu điều hướng">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
@@ -111,81 +105,14 @@
           </button>
         </div>
 
-        <!-- Operational Role Status -->
-        <div class="p-2.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-default)]">
-          <div class="flex items-center justify-between gap-2 mb-1">
-            <span class="text-[11px] font-medium text-[var(--text-muted)] whitespace-nowrap">Trạng thái công việc</span>
-            <span class="status-pill status-healthy">
-              <span class="status-pill-dot"></span>
-              <span>Sẵn sàng</span>
-            </span>
-          </div>
-          <div class="text-xs font-medium text-[var(--text-primary)] leading-snug">Principal ERP / System Architect &amp; Tech Lead</div>
-          <div class="font-mono-tabular text-[11px] text-[var(--text-secondary)] mt-1 whitespace-nowrap">TP. Hồ Chí Minh • 10+ năm KN</div>
-        </div>
+        <!-- Operational Role Status (Populated from data/profile.json) -->
+        <div id="sidebar-role-status" class="p-2.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-default)]"></div>
 
-        <!-- Section Navigation Links -->
-        <nav class="space-y-1" aria-label="Danh mục hồ sơ">
-          <div class="px-2 pb-1 text-[11px] font-medium text-[var(--text-muted)] whitespace-nowrap">Điều hướng Hồ sơ</div>
-          <a href="#overview" class="sidebar-link active">
-            <span>Tổng quan &amp; Hồ sơ</span>
-            <span class="font-mono-tabular text-[11px] text-[var(--text-muted)]">01</span>
-          </a>
-          <a href="#architecture" class="sidebar-link">
-            <span>Kiến trúc &amp; Case Studies</span>
-            <span class="font-mono-tabular text-[11px] text-[var(--accent-primary)]">06</span>
-          </a>
-          <a href="#telemetry" class="sidebar-link">
-            <span>Biểu đồ Hiệu năng Thực tế</span>
-            <span class="font-mono-tabular text-[11px] text-[var(--text-muted)]">02</span>
-          </a>
-          <a href="#competencies" class="sidebar-link">
-            <span>Hệ sinh thái Kỹ năng</span>
-            <span class="font-mono-tabular text-[11px] text-[var(--text-muted)]">04</span>
-          </a>
-          <a href="#experience" class="sidebar-link">
-            <span>Lịch sử Chuyên môn</span>
-            <span class="font-mono-tabular text-[11px] text-[var(--text-muted)]">03</span>
-          </a>
-          <a href="#governance" class="sidebar-link">
-            <span>Nguyên tắc Tích hợp AX</span>
-            <span class="font-mono-tabular text-[11px] text-[var(--text-muted)]">05</span>
-          </a>
-          <a href="#education" class="sidebar-link">
-            <span>Học vấn &amp; Đào tạo</span>
-            <span class="font-mono-tabular text-[11px] text-[var(--text-muted)]">UIT</span>
-          </a>
-          <a href="#contact" class="sidebar-link">
-            <span>Liên hệ &amp; Tư vấn</span>
-            <span class="font-mono-tabular text-[11px] text-[var(--text-muted)]">24/7</span>
-          </a>
-        </nav>
+        <!-- Section Navigation Links with Dynamic Auto-Counters (Populated from data/profile.json + computed counts) -->
+        <nav id="sidebar-nav-links" class="space-y-1" aria-label="Danh mục hồ sơ"></nav>
 
-        <!-- Mandatory AX Integration Compliance Summary -->
-        <div class="p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-2">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-xs font-semibold text-[var(--text-primary)] whitespace-nowrap">Chuẩn Kiến trúc AX 2012</span>
-            <span class="font-mono-tabular text-[10px] text-[var(--accent-telemetry)] whitespace-nowrap">ENFORCED</span>
-          </div>
-          <ul class="space-y-1.5 text-[11px] text-[var(--text-secondary)] leading-normal">
-            <li class="flex items-start gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)] mt-1.5 shrink-0"></span>
-              <span>AX Adapter là điểm duy nhất gọi AX</span>
-            </li>
-            <li class="flex items-start gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)] mt-1.5 shrink-0"></span>
-              <span>Cấm ghi trực tiếp vào AX SQL Server</span>
-            </li>
-            <li class="flex items-start gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)] mt-1.5 shrink-0"></span>
-              <span>SQL AX chỉ cho Read-Only Fallback</span>
-            </li>
-            <li class="flex items-start gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)] mt-1.5 shrink-0"></span>
-              <span>100% Parameterized + Circuit Breaker</span>
-            </li>
-          </ul>
-        </div>
+        <!-- Mandatory AX Integration Compliance Summary (Populated from data/profile.json) -->
+        <div id="sidebar-ax-compliance" class="p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-2"></div>
       </div>
 
       <!-- Bottom Quick Operational Actions -->
@@ -203,7 +130,7 @@
             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
           </svg>
-          <span class="font-mono-tabular">minhson.uit@gmail.com</span>
+          <span id="sidebar-email-label" class="font-mono-tabular">minhson.uit@gmail.com</span>
         </button>
       </div>
     </aside>
@@ -227,22 +154,12 @@
             </svg>
           </button>
 
-          <div class="flex items-center gap-2 min-w-0">
-            <span class="font-mono-tabular text-xs font-semibold text-[var(--text-primary)] whitespace-nowrap">minhsonuit</span>
-            <span class="text-[var(--text-muted)] hidden sm:inline">/</span>
-            <span class="text-xs text-[var(--text-secondary)] truncate hidden sm:inline">Enterprise ERP &amp; Distributed Systems Architecture</span>
-          </div>
+          <div id="header-breadcrumb" class="flex items-center gap-2 min-w-0"></div>
         </div>
 
         <!-- Center/Right: Secondary Telemetry Statuses (Hidden on < 768px) & Action Controls -->
         <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
-          <div class="hidden md:flex items-center gap-2 pr-2 border-r border-[var(--border-default)]">
-            <span class="status-pill status-healthy">
-              <span class="status-pill-dot"></span>
-              <span class="font-mono-tabular">AX 2012 R3 • 1,000+ POS</span>
-            </span>
-            <span class="font-mono-tabular text-xs text-[var(--text-secondary)] whitespace-nowrap">SLA 99.98%</span>
-          </div>
+          <div id="header-telemetry-badges" class="hidden md:flex items-center gap-2 pr-2 border-r border-[var(--border-default)]"></div>
 
           <!-- Toggle Right Inspector Panel Button -->
           <button type="button" data-action="toggle-inspector" class="px-2.5 py-1.5 rounded-md bg-[var(--bg-surface)] hover:bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] text-xs font-medium inline-flex items-center gap-1.5 transition-colors duration-150 whitespace-nowrap" title="Đóng/Mở bảng Chi tiết Kiến trúc">
@@ -274,170 +191,36 @@
       <div class="flex-1 flex min-w-0">
 
         <!-- ====================================================================
-             MAIN CONTENT SCROLL AREA
+             MAIN CONTENT SCROLL AREA (Populated dynamically from ./data/*.json)
              ==================================================================== -->
         <main id="main-workspace" class="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-6 space-y-8 max-w-6xl mx-auto">
 
           <!-- ==================================================================
                SECTION 1: EXECUTIVE ARCHITECT PROFILE & PROGRESSIVE KPI GRID
+               Data source: data/profile.json & data/kpis.json
                ================================================================== -->
           <section id="overview" class="space-y-5">
-            <div class="p-5 sm:p-6 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)]">
-              <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                <div class="space-y-3 max-w-3xl">
-                  <div class="flex flex-wrap items-center gap-2">
-                    <span class="status-pill status-healthy">
-                      <span class="status-pill-dot"></span>
-                      <span>Sẵn sàng cho vai trò Principal Architect / Tech Lead / Tư vấn ERP</span>
-                    </span>
-                    <span class="font-mono-tabular text-xs px-2.5 py-0.5 rounded-full bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] whitespace-nowrap">
-                      UIT VNU-HCM • Kỹ sư Hệ thống Thông tin
-                    </span>
-                  </div>
-
-                  <div>
-                    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text-primary)] leading-tight">
-                      Võ Minh Sơn — Senior Software Architect &amp; ERP Solutions Lead
-                    </h1>
-                    <p class="text-sm sm:text-base text-[var(--text-secondary)] mt-2 leading-relaxed">
-                      Hơn <strong>10 năm kinh nghiệm thực chiến</strong> thiết kế kiến trúc, phát triển và tối ưu hóa hệ thống ERP lõi
-                      <strong>Microsoft Dynamics AX 2012 R3 (X++ / MorphX)</strong>, <strong>Retail POS</strong> và nền tảng phân tán
-                      <strong>C# / .NET 8</strong>. Trực tiếp dẫn dắt kỹ thuật tại <strong>PHARMACITY JSC</strong> vận hành mạng lưới
-                      <strong>hơn 1.000 cửa hàng bán lẻ</strong> trên toàn quốc, xử lý hơn <strong>10,4 triệu giao dịch mỗi ngày</strong> với yêu cầu khắt khe về tính toàn vẹn dữ liệu tài chính và khả năng chịu lỗi cao.
-                    </p>
-                  </div>
-
-                  <div class="flex flex-wrap items-center gap-2.5 pt-1 no-print">
-                    <a href="#contact" class="px-3.5 py-2 rounded-lg bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] text-white text-xs font-semibold inline-flex items-center gap-2 transition-colors duration-150 whitespace-nowrap">
-                      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                      </svg>
-                      <span>Gửi yêu cầu tư vấn kiến trúc</span>
-                    </a>
-
-                    <a href="#architecture" class="px-3.5 py-2 rounded-lg bg-[var(--bg-subtle)] hover:border-[var(--border-hover)] text-[var(--text-primary)] border border-[var(--border-default)] text-xs font-semibold inline-flex items-center gap-2 transition-colors duration-150 whitespace-nowrap">
-                      <svg class="w-4 h-4 text-[var(--accent-telemetry)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="16 18 22 12 16 6"/>
-                        <polyline points="8 6 2 12 8 18"/>
-                      </svg>
-                      <span>Kiểm tra hồ sơ hệ thống (6 Case Studies)</span>
-                    </a>
-
-                    <button type="button" class="btn-copy-email px-3.5 py-2 rounded-lg bg-[var(--bg-subtle)] hover:border-[var(--border-hover)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-default)] text-xs font-medium inline-flex items-center gap-2 transition-colors duration-150 whitespace-nowrap">
-                      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-                      </svg>
-                      <span>Sao chép địa chỉ Email</span>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Architect Portrait & Verification Card -->
-                <div class="w-full md:w-auto flex sm:flex-row md:flex-col items-center gap-4 p-3.5 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-default)] shrink-0">
-                  <img src="./resources/avatar.jpg" alt="Chân dung Võ Minh Sơn" class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg object-cover border border-[var(--border-default)]" width="96" height="96">
-                  <div class="text-left md:text-center space-y-1">
-                    <div class="text-xs font-semibold text-[var(--text-primary)] whitespace-nowrap">Võ Minh Sơn</div>
-                    <div class="font-mono-tabular text-[11px] text-[var(--accent-telemetry)] whitespace-nowrap">AX 2012 • .NET 8 • SQL</div>
-                    <div class="flex items-center md:justify-center gap-2 pt-1">
-                      <a href="https://github.com/minhsonuit" target="_blank" rel="noopener noreferrer" class="text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] underline underline-offset-2 font-mono-tabular">GitHub</a>
-                      <span class="text-[var(--text-muted)]">•</span>
-                      <a href="https://www.linkedin.com/in/minhson-uit/" target="_blank" rel="noopener noreferrer" class="text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] underline underline-offset-2 font-mono-tabular">LinkedIn</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Mandatory Progressive KPI Grid (grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3.5) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3.5">
-              <!-- KPI 1 -->
-              <div class="p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col justify-between gap-2">
-                <div class="flex items-center justify-between gap-2">
-                  <span class="text-xs font-medium text-[var(--text-secondary)] whitespace-nowrap">Quy mô Vận hành POS</span>
-                  <span class="status-pill status-healthy">
-                    <span class="status-pill-dot"></span>
-                    <span>Toàn quốc</span>
-                  </span>
-                </div>
-                <div class="font-mono-tabular text-2xl font-bold text-[var(--text-primary)] whitespace-nowrap">1,000+ Stores</div>
-                <div class="text-xs text-[var(--text-muted)]">Đồng bộ Offline-first về AX 2012 HO</div>
-              </div>
-
-              <!-- KPI 2 -->
-              <div class="p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col justify-between gap-2">
-                <div class="flex items-center justify-between gap-2">
-                  <span class="text-xs font-medium text-[var(--text-secondary)] whitespace-nowrap">Sản lượng Giao dịch</span>
-                  <span class="status-pill status-healthy">
-                    <span class="status-pill-dot"></span>
-                    <span>ACID 100%</span>
-                  </span>
-                </div>
-                <div class="font-mono-tabular text-2xl font-bold text-[var(--text-primary)] whitespace-nowrap">10.4M tx/ngày</div>
-                <div class="text-xs text-[var(--text-muted)]">Khớp lệnh tồn kho &amp; sổ cái kế toán</div>
-              </div>
-
-              <!-- KPI 3 -->
-              <div class="p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col justify-between gap-2">
-                <div class="flex items-center justify-between gap-2">
-                  <span class="text-xs font-medium text-[var(--text-secondary)] whitespace-nowrap">Tối ưu SQL Server</span>
-                  <span class="status-pill status-healthy">
-                    <span class="status-pill-dot"></span>
-                    <span>-78% Deadlock</span>
-                  </span>
-                </div>
-                <div class="font-mono-tabular text-2xl font-bold text-[var(--accent-telemetry)] whitespace-nowrap">18x Nhanh hơn</div>
-                <div class="text-xs text-[var(--text-muted)]">Hạ CPU đỉnh từ 92% xuống 32%</div>
-              </div>
-
-              <!-- KPI 4 -->
-              <div class="p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col justify-between gap-2">
-                <div class="flex items-center justify-between gap-2">
-                  <span class="text-xs font-medium text-[var(--text-secondary)] whitespace-nowrap">Độ sẵn sàng Hệ thống</span>
-                  <span class="status-pill status-healthy">
-                    <span class="status-pill-dot"></span>
-                    <span>Circuit Breaker</span>
-                  </span>
-                </div>
-                <div class="font-mono-tabular text-2xl font-bold text-[var(--text-primary)] whitespace-nowrap">99.98% Uptime</div>
-                <div class="text-xs text-[var(--text-muted)]">AX Adapter cô lập lỗi đa kênh</div>
-              </div>
-            </div>
+            <div id="overview-hero-card" class="p-5 sm:p-6 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)]"></div>
+            <div id="kpi-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3.5"></div>
           </section>
 
           <!-- ==================================================================
                SECTION 2: INTERACTIVE ARCHITECTURE & PRODUCTION SYSTEMS TABLE
-               (Click any row to inspect full telemetry & code in Right Inspector)
+               Data source: data/architecture-systems.json
                ================================================================== -->
           <section id="architecture" class="space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
               <div>
-                <h2 class="text-lg font-bold text-[var(--text-primary)]">Danh mục Giải pháp Kiến trúc &amp; Hệ thống Trọng điểm</h2>
-                <p class="text-xs text-[var(--text-secondary)] mt-0.5">
-                  Nhấn vào bất kỳ dòng hệ thống nào bên dưới để mở bảng <strong>Chi tiết Kiến trúc, Telemetry &amp; Code mẫu</strong> ở khung bên phải.
-                </p>
+                <h2 id="arch-section-title" class="text-lg font-bold text-[var(--text-primary)]"></h2>
+                <p id="arch-section-subtitle" class="text-xs text-[var(--text-secondary)] mt-0.5"></p>
               </div>
-              <span id="arch-result-count" class="font-mono-tabular text-xs text-[var(--text-muted)] whitespace-nowrap">6 / 6 hệ thống</span>
+              <span id="arch-result-count" class="font-mono-tabular text-xs text-[var(--text-muted)] whitespace-nowrap"></span>
             </div>
 
             <!-- Anti-Clipping Filter Bar (flex flex-wrap items-center justify-between gap-3) -->
             <div class="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] no-print">
               <!-- Horizontally Scrollable Segmented Control on Mobile (< 640px) -->
-              <div class="flex items-center gap-1 p-1 rounded-lg bg-[var(--bg-subtle)] border border-[var(--border-default)] overflow-x-auto max-w-full no-scrollbar" role="tablist" aria-label="Lọc theo phân hệ kiến trúc">
-                <button type="button" data-arch-tab="all" class="seg-btn active px-2.5 py-1 rounded-md text-xs font-medium text-[var(--text-secondary)] border border-transparent">
-                  Tất cả (6)
-                </button>
-                <button type="button" data-arch-tab="erp-pos" class="seg-btn px-2.5 py-1 rounded-md text-xs font-medium text-[var(--text-secondary)] border border-transparent">
-                  ERP &amp; Retail POS (2)
-                </button>
-                <button type="button" data-arch-tab="integration" class="seg-btn px-2.5 py-1 rounded-md text-xs font-medium text-[var(--text-secondary)] border border-transparent">
-                  AX Adapter &amp; Gateway (2)
-                </button>
-                <button type="button" data-arch-tab="database" class="seg-btn px-2.5 py-1 rounded-md text-xs font-medium text-[var(--text-secondary)] border border-transparent">
-                  SQL Server &amp; BI (2)
-                </button>
-              </div>
+              <div id="arch-domain-tabs" class="flex items-center gap-1 p-1 rounded-lg bg-[var(--bg-subtle)] border border-[var(--border-default)] overflow-x-auto max-w-full no-scrollbar" role="tablist" aria-label="Lọc theo phân hệ kiến trúc"></div>
 
               <!-- Search Input & Sort Select (w-full sm:w-auto) -->
               <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 w-full sm:w-auto">
@@ -449,11 +232,7 @@
                   <input id="arch-search-input" type="search" placeholder="Tìm mã ARCH, X++, Redis, SQL..." class="w-full pl-8 pr-3 py-1.5 rounded-lg bg-[var(--bg-subtle)] border border-[var(--border-default)] focus:border-[var(--accent-primary)] focus:outline-none text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)]">
                 </div>
 
-                <select id="arch-sort-select" aria-label="Sắp xếp hệ thống" class="w-full sm:w-auto px-2.5 py-1.5 rounded-lg bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs text-[var(--text-primary)] focus:border-[var(--accent-primary)] focus:outline-none font-medium">
-                  <option value="impact">Sắp xếp: Tác động cao nhất</option>
-                  <option value="latency">Sắp xếp: Độ trễ P99 thấp nhất</option>
-                  <option value="throughput">Sắp xếp: Lưu lượng lớn nhất</option>
-                </select>
+                <select id="arch-sort-select" aria-label="Sắp xếp hệ thống" class="w-full sm:w-auto px-2.5 py-1.5 rounded-lg bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs text-[var(--text-primary)] focus:border-[var(--accent-primary)] focus:outline-none font-medium"></select>
               </div>
             </div>
 
@@ -471,9 +250,7 @@
                       <th class="px-3.5 py-2.5 font-semibold whitespace-nowrap">Trạng thái Vận hành</th>
                     </tr>
                   </thead>
-                  <tbody id="arch-table-body">
-                    <!-- Populated dynamically by js/main.js -->
-                  </tbody>
+                  <tbody id="arch-table-body"></tbody>
                 </table>
               </div>
             </div>
@@ -481,452 +258,77 @@
 
           <!-- ==================================================================
                SECTION 3: VERCEL-STYLE TELEMETRY BENCHMARKS (SVG CHARTS)
+               Data source: data/telemetry.json
                ================================================================== -->
           <section id="telemetry" class="space-y-4 print-break-inside-avoid">
             <div>
-              <h2 class="text-lg font-bold text-[var(--text-primary)]">Chỉ số Đo lường Hiệu năng Thực tế (Production Telemetry)</h2>
-              <p class="text-xs text-[var(--text-secondary)] mt-0.5">
-                So sánh số liệu đo đạc trước và sau khi tái cấu trúc cơ sở dữ liệu SQL Server &amp; triển khai cổng AX Adapter Gateway.
-              </p>
+              <h2 id="telemetry-section-title" class="text-lg font-bold text-[var(--text-primary)]"></h2>
+              <p id="telemetry-section-subtitle" class="text-xs text-[var(--text-secondary)] mt-0.5"></p>
             </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <!-- Telemetry Card 1: SQL Server CPU & Deadlock Reduction -->
-              <div class="p-4 sm:p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-3">
-                <div class="flex items-start justify-between gap-2">
-                  <div>
-                    <div class="text-sm font-semibold text-[var(--text-primary)]">Tải CPU Cụm SQL Server ERP Lõi (Giờ Cao Điểm)</div>
-                    <div class="text-xs text-[var(--text-secondary)]">Sau khi áp dụng Table Partitioning &amp; Covering Index</div>
-                  </div>
-                  <span class="status-pill status-healthy">
-                    <span class="status-pill-dot"></span>
-                    <span class="font-mono-tabular">92% → 32% CPU</span>
-                  </span>
-                </div>
-
-                <svg viewBox="0 0 480 130" class="w-full h-32 overflow-visible" role="img" aria-label="Biểu đồ giảm tải CPU SQL Server">
-                  <defs>
-                    <linearGradient id="sqlCpuGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="var(--accent-telemetry)" stop-opacity="0.18"/>
-                      <stop offset="100%" stop-color="var(--accent-telemetry)" stop-opacity="0.0"/>
-                    </linearGradient>
-                  </defs>
-                  <!-- Threshold Dashed Lines -->
-                  <line x1="10" y1="22" x2="470" y2="22" stroke="rgba(239,68,68,0.35)" stroke-dasharray="4 4" stroke-width="1"/>
-                  <text x="14" y="17" fill="var(--text-muted)" font-size="10" font-family="JetBrains Mono">Ngưỡng quá tải cũ: 90% CPU</text>
-                  <line x1="10" y1="68" x2="470" y2="68" stroke="var(--border-default)" stroke-dasharray="3 3" stroke-width="1"/>
-                  <line x1="10" y1="112" x2="470" y2="112" stroke="var(--border-subtle)" stroke-width="1"/>
-
-                  <!-- Area & 1.75px Path -->
-                  <path d="M 10 24 L 52 28 L 94 35 L 136 52 L 178 68 L 220 76 L 262 82 L 304 86 L 346 89 L 388 91 L 430 92 L 470 93 L 470 112 L 10 112 Z" fill="url(#sqlCpuGrad)"/>
-                  <path d="M 10 24 L 52 28 L 94 35 L 136 52 L 178 68 L 220 76 L 262 82 L 304 86 L 346 89 L 388 91 L 430 92 L 470 93" fill="none" stroke="var(--accent-telemetry)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-                  <circle cx="470" cy="93" r="3.5" fill="var(--accent-telemetry)"/>
-                </svg>
-
-                <div class="flex items-center justify-between text-[11px] font-mono-tabular text-[var(--text-muted)] pt-1 border-t border-[var(--border-subtle)]">
-                  <span>Trước tối ưu: 92% CPU (45p chạy báo cáo EOD)</span>
-                  <span class="text-[var(--accent-primary)] font-medium">Hiện tại: 32% CPU (1.8p EOD)</span>
-                </div>
-              </div>
-
-              <!-- Telemetry Card 2: AX Adapter Gateway Throughput & Resilience -->
-              <div class="p-4 sm:p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-3">
-                <div class="flex items-start justify-between gap-2">
-                  <div>
-                    <div class="text-sm font-semibold text-[var(--text-primary)]">Thông lượng AX Adapter Gateway (.NET 8 + Redis)</div>
-                    <div class="text-xs text-[var(--text-secondary)]">Bảo vệ AOS Server trong các đợt Flash Sale E-commerce</div>
-                  </div>
-                  <span class="status-pill status-healthy">
-                    <span class="status-pill-dot"></span>
-                    <span class="font-mono-tabular">P99: 42 ms</span>
-                  </span>
-                </div>
-
-                <svg viewBox="0 0 480 130" class="w-full h-32 overflow-visible" role="img" aria-label="Biểu đồ thông lượng AX Adapter Gateway">
-                  <defs>
-                    <linearGradient id="axGatewayGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="var(--accent-primary)" stop-opacity="0.18"/>
-                      <stop offset="100%" stop-color="var(--accent-primary)" stop-opacity="0.0"/>
-                    </linearGradient>
-                  </defs>
-                  <!-- Threshold Dashed Lines -->
-                  <line x1="10" y1="26" x2="470" y2="26" stroke="var(--border-hover)" stroke-dasharray="4 4" stroke-width="1"/>
-                  <text x="14" y="20" fill="var(--text-muted)" font-size="10" font-family="JetBrains Mono">Đỉnh tải Flash Sale: 4,200 req/s (Circuit Closed)</text>
-                  <line x1="10" y1="70" x2="470" y2="70" stroke="var(--border-default)" stroke-dasharray="3 3" stroke-width="1"/>
-                  <line x1="10" y1="112" x2="470" y2="112" stroke="var(--border-subtle)" stroke-width="1"/>
-
-                  <!-- Area & 1.75px Path -->
-                  <path d="M 10 86 L 52 80 L 94 72 L 136 60 L 178 44 L 220 32 L 262 29 L 304 35 L 346 42 L 388 38 L 430 34 L 470 31 L 470 112 L 10 112 Z" fill="url(#axGatewayGrad)"/>
-                  <path d="M 10 86 L 52 80 L 94 72 L 136 60 L 178 44 L 220 32 L 262 29 L 304 35 L 346 42 L 388 38 L 430 34 L 470 31" fill="none" stroke="var(--accent-primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-                  <circle cx="470" cy="31" r="3.5" fill="var(--accent-primary)"/>
-                </svg>
-
-                <div class="flex items-center justify-between text-[11px] font-mono-tabular text-[var(--text-muted)] pt-1 border-t border-[var(--border-subtle)]">
-                  <span>Cache Hit Ratio: 94.6% (Redis Cluster)</span>
-                  <span class="text-[var(--accent-telemetry)] font-medium">Timeout 3.0s • Zero AOS Crash</span>
-                </div>
-              </div>
-            </div>
+            <div id="telemetry-benchmarks-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-4"></div>
           </section>
 
           <!-- ==================================================================
                SECTION 4: TECHNICAL COMPETENCIES & SKILL MATRIX
+               Data source: data/competencies.json
                ================================================================== -->
           <section id="competencies" class="space-y-4 print-break-inside-avoid">
             <div class="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <h2 class="text-lg font-bold text-[var(--text-primary)]">Hệ sinh thái Công nghệ &amp; Năng lực Chuyên môn</h2>
-                <p class="text-xs text-[var(--text-secondary)] mt-0.5">
-                  Kết hợp chuyên môn sâu về ERP Microsoft Dynamics AX 2012 với kiến trúc Microservices &amp; High-Scale Database.
-                </p>
+                <h2 id="competencies-section-title" class="text-lg font-bold text-[var(--text-primary)]"></h2>
+                <p id="competencies-section-subtitle" class="text-xs text-[var(--text-secondary)] mt-0.5"></p>
               </div>
-
-              <!-- Competency Filter Bar -->
-              <div class="flex items-center gap-1 p-1 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-default)] overflow-x-auto max-w-full no-scrollbar no-print">
-                <button type="button" data-skill-filter="all" class="seg-btn active px-2.5 py-1 rounded text-xs font-medium text-[var(--text-secondary)] border border-transparent">Tất cả</button>
-                <button type="button" data-skill-filter="erp" class="seg-btn px-2.5 py-1 rounded text-xs font-medium text-[var(--text-secondary)] border border-transparent">ERP &amp; POS</button>
-                <button type="button" data-skill-filter="backend" class="seg-btn px-2.5 py-1 rounded text-xs font-medium text-[var(--text-secondary)] border border-transparent">.NET &amp; Integration</button>
-                <button type="button" data-skill-filter="db" class="seg-btn px-2.5 py-1 rounded text-xs font-medium text-[var(--text-secondary)] border border-transparent">SQL &amp; Caching</button>
-              </div>
+              <div id="competencies-filter-tabs" class="flex items-center gap-1 p-1 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-default)] overflow-x-auto max-w-full no-scrollbar no-print"></div>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- Skill Domain 1 -->
-              <div data-skill-group="erp" class="p-4 sm:p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-3">
-                <div class="flex items-center justify-between gap-2">
-                  <h3 class="text-sm font-semibold text-[var(--text-primary)]">Enterprise ERP &amp; Retail Systems</h3>
-                  <span class="font-mono-tabular text-xs text-[var(--accent-primary)] whitespace-nowrap">10+ năm</span>
-                </div>
-                <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                  Làm chủ toàn diện kiến trúc bên trong Microsoft Dynamics AX 2012 R3, phát triển X++ trên MorphX IDE, tối ưu hóa Posting Engine và vận hành hệ thống bán lẻ POS quy mô trên 1.000 cửa hàng.
-                </p>
-                <div class="flex flex-wrap gap-1.5 pt-1">
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">Dynamics AX 2012 R3</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">X++ / MorphX IDE</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">Retail POS &amp; Modern POS</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] whitespace-nowrap">AIF / DIXF</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] whitespace-nowrap">SSRS Reporting</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] whitespace-nowrap">Inventory &amp; General Ledger</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] whitespace-nowrap">Multi-thread Batch Jobs</span>
-                </div>
-              </div>
-
-              <!-- Skill Domain 2 -->
-              <div data-skill-group="backend" class="p-4 sm:p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-3">
-                <div class="flex items-center justify-between gap-2">
-                  <h3 class="text-sm font-semibold text-[var(--text-primary)]">Backend &amp; Distributed Integration</h3>
-                  <span class="font-mono-tabular text-xs text-[var(--accent-telemetry)] whitespace-nowrap">9+ năm</span>
-                </div>
-                <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                  Thiết kế cổng giao tiếp AX Adapter độc quyền, kiến trúc hướng sự kiện (Event-Driven), áp dụng nghiêm ngặt mẫu thiết kế kháng lỗi Circuit Breaker, Rate Limiting và Idempotent Consumers.
-                </p>
-                <div class="flex flex-wrap gap-1.5 pt-1">
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">C# / .NET 8 / .NET Core</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">ASP.NET Core Web API</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">Polly Circuit Breaker</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] whitespace-nowrap">Dapper / EF Core</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] whitespace-nowrap">Clean Architecture &amp; CQRS</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] whitespace-nowrap">Node.js / Java Spring</span>
-                </div>
-              </div>
-
-              <!-- Skill Domain 3 -->
-              <div data-skill-group="db" class="p-4 sm:p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-3">
-                <div class="flex items-center justify-between gap-2">
-                  <h3 class="text-sm font-semibold text-[var(--text-primary)]">High-Volume Database Engineering</h3>
-                  <span class="font-mono-tabular text-xs text-[var(--accent-primary)] whitespace-nowrap">10+ năm</span>
-                </div>
-                <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                  Chuyên gia giải quyết khủng hoảng hiệu năng SQL Server: phân tích Execution Plan, tối ưu hóa chỉ mục (Index Tuning), phân vùng bảng (Table Partitioning) và triệt tiêu Deadlock cho các bảng trăm triệu bản ghi.
-                </p>
-                <div class="flex flex-wrap gap-1.5 pt-1">
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">SQL Server (T-SQL)</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">Execution Plan Analysis</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">Deadlock Resolution</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] whitespace-nowrap">Table Partitioning</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] whitespace-nowrap">Query Store &amp; Extended Events</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] whitespace-nowrap">PostgreSQL / Oracle</span>
-                </div>
-              </div>
-
-              <!-- Skill Domain 4 -->
-              <div data-skill-group="db" class="p-4 sm:p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-3">
-                <div class="flex items-center justify-between gap-2">
-                  <h3 class="text-sm font-semibold text-[var(--text-primary)]">Caching, Messaging &amp; DevOps</h3>
-                  <span class="font-mono-tabular text-xs text-[var(--accent-telemetry)] whitespace-nowrap">8+ năm</span>
-                </div>
-                <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                  Triển khai bộ nhớ đệm phân tán tốc độ cao, hàng đợi thông điệp bất đồng bộ chịu tải hàng triệu sự kiện mỗi ngày và quy trình CI/CD kiểm soát chất lượng mã nguồn chặt chẽ.
-                </p>
-                <div class="flex flex-wrap gap-1.5 pt-1">
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">Redis Cluster (Lua)</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">RabbitMQ / Apache Kafka</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">Elasticsearch</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] whitespace-nowrap">Docker &amp; Nginx / IIS</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] whitespace-nowrap">High Availability &amp; DR</span>
-                  <span class="px-2.5 py-1 rounded-md text-xs font-mono-tabular bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] whitespace-nowrap">Git / CI-CD Pipelines</span>
-                </div>
-              </div>
-            </div>
+            <div id="competencies-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
           </section>
 
           <!-- ==================================================================
                SECTION 5: PROFESSIONAL EXPERIENCE TIMELINE
+               Data source: data/experience.json
                ================================================================== -->
           <section id="experience" class="space-y-4">
             <div>
-              <h2 class="text-lg font-bold text-[var(--text-primary)]">Hành trình Sự nghiệp &amp; Kinh nghiệm Thực chiến</h2>
-              <p class="text-xs text-[var(--text-secondary)] mt-0.5">
-                Đóng góp trực tiếp vào quá trình mở rộng thần tốc và vận hành ổn định của chuỗi bán lẻ hàng đầu Việt Nam.
-              </p>
+              <h2 id="experience-section-title" class="text-lg font-bold text-[var(--text-primary)]"></h2>
+              <p id="experience-section-subtitle" class="text-xs text-[var(--text-secondary)] mt-0.5"></p>
             </div>
-
-            <div class="space-y-4">
-              <!-- Role 1 -->
-              <article class="p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-3 print-break-inside-avoid">
-                <div class="flex flex-wrap items-start justify-between gap-2">
-                  <div>
-                    <h3 class="text-base font-bold text-[var(--text-primary)]">Technical Leader &amp; Core Systems Architect</h3>
-                    <div class="text-xs font-medium text-[var(--accent-primary)]">PHARMACITY JSC — Chuỗi Bán lẻ Dược phẩm Hàng đầu Việt Nam</div>
-                  </div>
-                  <span class="font-mono-tabular text-xs px-2.5 py-1 rounded-md bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">
-                    2017 – Hiện tại
-                  </span>
-                </div>
-
-                <p class="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
-                  Chịu trách nhiệm định hướng kiến trúc kỹ thuật, giám sát vận hành hệ thống ERP &amp; Retail lõi và dẫn dắt đội ngũ kỹ sư đảm bảo nền tảng công nghệ vận hành xuyên suốt giai đoạn tăng trưởng từ vài chục lên hơn 1.000 cửa hàng trên toàn quốc.
-                </p>
-
-                <ul class="space-y-2 text-xs sm:text-sm text-[var(--text-secondary)]">
-                  <li class="flex items-start gap-2.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)] mt-2 shrink-0"></span>
-                    <span><strong>Tái cấu trúc &amp; Tối ưu hóa CSDL SQL Server:</strong> Phân tích kế hoạch thực thi (Execution Plan), thiết kế chiến lược chỉ mục (Covering Index) và phân vùng bảng cho hàng trăm triệu bản ghi giao dịch; giảm hơn 78% các vụ nghẽn Deadlock trong khung giờ cao điểm.</span>
-                  </li>
-                  <li class="flex items-start gap-2.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)] mt-2 shrink-0"></span>
-                    <span><strong>Thiết kế Cổng Tích hợp Chuẩn hóa (AX Integration Hub):</strong> Xây dựng lớp Gateway phân tán bằng C# .NET 8 và RabbitMQ, áp dụng nguyên tắc kiểm soát truy cập nghiêm ngặt (AX Adapter độc quyền, 100% Parameterized Query, Timeout &amp; Polly Circuit Breaker), bảo vệ tuyệt đối CSDL lõi khỏi quá tải từ các kênh E-commerce.</span>
-                  </li>
-                  <li class="flex items-start gap-2.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)] mt-2 shrink-0"></span>
-                    <span><strong>Quản trị Độ sẵn sàng Cao (High Availability):</strong> Duy trì cam kết SLA 99.98% uptime cho toàn chuỗi nhà thuốc, thiết lập quy trình kiểm thử tải, đối soát tự động và kịch bản khôi phục thảm họa (Disaster Recovery).</span>
-                  </li>
-                </ul>
-              </article>
-
-              <!-- Role 2 -->
-              <article class="p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-3 print-break-inside-avoid">
-                <div class="flex flex-wrap items-start justify-between gap-2">
-                  <div>
-                    <h3 class="text-base font-bold text-[var(--text-primary)]">Enterprise Systems Consultant &amp; Solutions Architect</h3>
-                    <div class="text-xs font-medium text-[var(--accent-telemetry)]">Tư vấn Độc lập &amp; Dự án Kiến trúc Doanh nghiệp</div>
-                  </div>
-                  <span class="font-mono-tabular text-xs px-2.5 py-1 rounded-md bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">
-                    2019 – Hiện tại (Song song)
-                  </span>
-                </div>
-
-                <p class="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
-                  Cung cấp dịch vụ tư vấn chuyên sâu cho các doanh nghiệp bán lẻ và phân phối: rà soát điểm nghẽn cơ sở dữ liệu, tối ưu hóa truy vấn T-SQL phức tạp và thiết kế kiến trúc kết nối ERP với hệ sinh thái Thương mại Điện tử, Hóa đơn điện tử và Logistics.
-                </p>
-
-                <ul class="space-y-2 text-xs sm:text-sm text-[var(--text-secondary)]">
-                  <li class="flex items-start gap-2.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-telemetry)] mt-2 shrink-0"></span>
-                    <span><strong>Database Auditing &amp; Query Tuning:</strong> Rút ngắn thời gian kết xuất báo cáo tổng hợp cuối ngày của khách hàng doanh nghiệp từ 45–60 phút xuống dưới 2 phút nhờ tái thiết kế chỉ mục và tách luồng Read-Only Replica.</span>
-                  </li>
-                  <li class="flex items-start gap-2.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-telemetry)] mt-2 shrink-0"></span>
-                    <span><strong>Tích hợp Đa nền tảng An toàn:</strong> Xây dựng API Gateway chuẩn hóa kết nối cổng thanh toán, vận chuyển và đối soát công nợ tự động với độ chính xác tuyệt đối.</span>
-                  </li>
-                </ul>
-              </article>
-
-              <!-- Role 3 -->
-              <article class="p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-3 print-break-inside-avoid">
-                <div class="flex flex-wrap items-start justify-between gap-2">
-                  <div>
-                    <h3 class="text-base font-bold text-[var(--text-primary)]">Microsoft Dynamics AX &amp; Retail POS Developer</h3>
-                    <div class="text-xs font-medium text-[var(--text-secondary)]">PHARMACITY JSC</div>
-                  </div>
-                  <span class="font-mono-tabular text-xs px-2.5 py-1 rounded-md bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">
-                    2015 – 2017
-                  </span>
-                </div>
-
-                <p class="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
-                  Phát triển, tùy biến và mở rộng các phân hệ cốt lõi trong Microsoft Dynamics AX 2012 R3 và phần mềm bán hàng Retail POS tại quầy thu ngân.
-                </p>
-
-                <ul class="space-y-2 text-xs sm:text-sm text-[var(--text-secondary)]">
-                  <li class="flex items-start gap-2.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--text-muted)] mt-2 shrink-0"></span>
-                    <span><strong>Phát triển Phân hệ Bán lẻ bằng X++ &amp; C#:</strong> Xây dựng bộ máy tính giá, khuyến mãi đa tầng, tích điểm khách hàng thân thiết và quản lý lô/hạn dùng thuốc (FEFO) ngay tại điểm bán.</span>
-                  </li>
-                  <li class="flex items-start gap-2.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--text-muted)] mt-2 shrink-0"></span>
-                    <span><strong>Đồng bộ Offline/Online &amp; Báo cáo SSRS:</strong> Đảm bảo đồng bộ giao dịch thông suốt từ cửa hàng về trung tâm và phát triển hệ thống báo cáo quản trị tài chính, tồn kho chuẩn xác.</span>
-                  </li>
-                </ul>
-              </article>
-            </div>
+            <div id="experience-timeline-list" class="space-y-4"></div>
           </section>
 
           <!-- ==================================================================
                SECTION 6: MANDATORY AX INTEGRATION & ENGINEERING GOVERNANCE
+               Data source: data/governance.json
                ================================================================== -->
           <section id="governance" class="space-y-4 print-break-inside-avoid">
             <div>
-              <h2 class="text-lg font-bold text-[var(--text-primary)]">Nguyên tắc Bất khả xâm phạm trong Kiến trúc &amp; Tích hợp AX</h2>
-              <p class="text-xs text-[var(--text-secondary)] mt-0.5">
-                Bộ quy chuẩn kỹ thuật bắt buộc được áp dụng xuyên suốt mọi dự án tích hợp ERP nhằm bảo vệ toàn vẹn dữ liệu và chống sập hệ thống lõi.
-              </p>
+              <h2 id="governance-section-title" class="text-lg font-bold text-[var(--text-primary)]"></h2>
+              <p id="governance-section-subtitle" class="text-xs text-[var(--text-secondary)] mt-0.5"></p>
             </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-              <div class="p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="font-mono-tabular text-xs font-bold text-[var(--accent-primary)]">RULE 01</span>
-                  <span class="status-pill status-healthy"><span class="status-pill-dot"></span><span>Mandatory</span></span>
-                </div>
-                <h3 class="text-sm font-semibold text-[var(--text-primary)]">AX Adapter Độc quyền</h3>
-                <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                  <strong>AX Adapter là điểm duy nhất được phép gọi vào AX.</strong> Mọi ứng dụng vệ tinh (Web, App, POS, 3PL) bắt buộc phải giao tiếp qua lớp Adapter chuẩn hóa, không kết nối phân tán.
-                </p>
-              </div>
-
-              <div class="p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="font-mono-tabular text-xs font-bold text-[var(--accent-primary)]">RULE 02</span>
-                  <span class="status-pill status-danger"><span class="status-pill-dot"></span><span>Strict Write Ban</span></span>
-                </div>
-                <h3 class="text-sm font-semibold text-[var(--text-primary)]">Cấm Ghi Trực tiếp AX SQL</h3>
-                <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                  <strong>Cấm tuyệt đối write trực tiếp vào AX SQL Server.</strong> Mọi thao tác thêm/sửa/xóa phải đi qua tầng nghiệp vụ AX để bảo toàn `RecId`, `RecVersion`, bộ đệm AOS và tính toàn vẹn kế toán.
-                </p>
-              </div>
-
-              <div class="p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="font-mono-tabular text-xs font-bold text-[var(--accent-telemetry)]">RULE 03</span>
-                  <span class="status-pill status-warning"><span class="status-pill-dot"></span><span>Fallback Only</span></span>
-                </div>
-                <h3 class="text-sm font-semibold text-[var(--text-primary)]">SQL AX Chỉ Cho Read-Only Fallback</h3>
-                <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                  <strong>SQL Server AX chỉ phục vụ Read-Only Fallback</strong> hoặc truy vấn báo cáo tách luồng trên bản sao (Read Replica), không làm ảnh hưởng đến hiệu năng giao dịch OLTP.
-                </p>
-              </div>
-
-              <div class="p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="font-mono-tabular text-xs font-bold text-[var(--accent-primary)]">RULE 04</span>
-                  <span class="status-pill status-healthy"><span class="status-pill-dot"></span><span>100% Safe SQL</span></span>
-                </div>
-                <h3 class="text-sm font-semibold text-[var(--text-primary)]">Truy vấn Parameterized</h3>
-                <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                  <strong>100% Query Parameterized, cấm hoàn toàn dynamic string SQL.</strong> Loại bỏ triệt để nguy cơ SQL Injection và giúp SQL Server tái sử dụng Execution Plan hiệu quả (chống Plan Cache Bloat).
-                </p>
-              </div>
-
-              <div class="p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="font-mono-tabular text-xs font-bold text-[var(--accent-primary)]">RULE 05</span>
-                  <span class="status-pill status-healthy"><span class="status-pill-dot"></span><span>Resilience</span></span>
-                </div>
-                <h3 class="text-sm font-semibold text-[var(--text-primary)]">Timeout + Circuit Breaker Bắt buộc</h3>
-                <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                  <strong>Mọi kết nối tích hợp bắt buộc cấu hình Timeout &amp; Circuit Breaker.</strong> Tự động ngắt mạch cô lập lỗi khi dịch vụ đích chậm, ngăn chặn hiệu ứng sập dây chuyền (Cascading Failure).
-                </p>
-              </div>
-
-              <div class="p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="font-mono-tabular text-xs font-bold text-[var(--accent-telemetry)]">RULE 06</span>
-                  <span class="status-pill status-healthy"><span class="status-pill-dot"></span><span>ACID &amp; Audit</span></span>
-                </div>
-                <h3 class="text-sm font-semibold text-[var(--text-primary)]">Đối soát &amp; Toàn vẹn Dữ liệu</h3>
-                <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                  Mọi giao dịch bán lẻ và tài chính đều gắn mã định danh duy nhất (Idempotency Key), đảm bảo đối soát khớp 100% giữa POS, Kho và Sổ cái.
-                </p>
-              </div>
-            </div>
+            <div id="governance-rules-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5"></div>
           </section>
 
           <!-- ==================================================================
                SECTION 7: EDUCATION & ACADEMIC FOUNDATION
+               Data source: data/experience.json (educationSection)
                ================================================================== -->
           <section id="education" class="space-y-3 print-break-inside-avoid">
-            <h2 class="text-lg font-bold text-[var(--text-primary)]">Học vấn &amp; Nền tảng Học thuật</h2>
-
-            <div class="p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div class="space-y-1.5">
-                <div class="flex flex-wrap items-center gap-2">
-                  <span class="font-mono-tabular text-xs font-semibold px-2.5 py-0.5 rounded bg-[var(--bg-subtle)] text-[var(--accent-telemetry)] border border-[var(--border-default)] whitespace-nowrap">2010 – 2015</span>
-                  <span class="status-pill status-healthy"><span class="status-pill-dot"></span><span>Tốt nghiệp Kỹ sư Chính quy</span></span>
-                </div>
-                <h3 class="text-base font-bold text-[var(--text-primary)]">Kỹ sư Hệ thống Thông tin (Bachelor of Engineering in Information Systems)</h3>
-                <div class="text-xs font-medium text-[var(--text-secondary)]">Trường Đại học Công nghệ Thông tin – Đại học Quốc gia TP.HCM (UIT - VNU-HCM)</div>
-                <p class="text-xs text-[var(--text-secondary)] leading-relaxed pt-1 max-w-3xl">
-                  Đào tạo chuyên sâu về Phân tích &amp; Thiết kế Hệ thống Thông tin Doanh nghiệp, Hệ quản trị Cơ sở Dữ liệu Quan hệ (RDBMS), Cấu trúc Dữ liệu &amp; Giải thuật, Kiến trúc Phần mềm và Bảo mật Hệ thống.
-                </p>
-              </div>
-            </div>
+            <h2 id="education-section-title" class="text-lg font-bold text-[var(--text-primary)]"></h2>
+            <div id="education-list" class="space-y-3"></div>
           </section>
 
           <!-- ==================================================================
                SECTION 8: CONTACT & ARCHITECTURAL CONSULTATION
+               Data source: data/profile.json (contact)
                ================================================================== -->
           <section id="contact" class="space-y-4 no-print">
             <div>
-              <h2 class="text-lg font-bold text-[var(--text-primary)]">Kết nối Hợp tác &amp; Tư vấn Giải pháp Kiến trúc</h2>
-              <p class="text-xs text-[var(--text-secondary)] mt-0.5">
-                Liên hệ trực tiếp để trao đổi về cơ hội hợp tác chiến lược, vị trí Principal Architect / Tech Lead hoặc tư vấn tối ưu hệ thống ERP &amp; Database.
-              </p>
+              <h2 id="contact-section-title" class="text-lg font-bold text-[var(--text-primary)]"></h2>
+              <p id="contact-section-subtitle" class="text-xs text-[var(--text-secondary)] mt-0.5"></p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
               <!-- Contact Direct Channels (5 cols) -->
-              <div class="lg:col-span-5 p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col justify-between space-y-4">
-                <div class="space-y-3">
-                  <h3 class="text-sm font-semibold text-[var(--text-primary)]">Thông tin Liên hệ Trực tiếp</h3>
-                  <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                    Sẵn sàng trao đổi chuyên sâu về bài toán mở rộng chuỗi bán lẻ, tích hợp AX 2012 an toàn và xử lý sự cố hiệu năng SQL Server.
-                  </p>
-
-                  <div class="space-y-2.5 pt-2">
-                    <div class="p-3 rounded-lg bg-[var(--bg-canvas)] border border-[var(--border-default)] flex items-center justify-between gap-2">
-                      <div class="min-w-0">
-                        <div class="text-[11px] text-[var(--text-muted)]">Địa chỉ Email</div>
-                        <a href="mailto:minhson.uit@gmail.com" class="font-mono-tabular text-xs font-semibold text-[var(--text-primary)] hover:text-[var(--accent-primary)] truncate block">minhson.uit@gmail.com</a>
-                      </div>
-                      <button type="button" class="btn-copy-email px-2.5 py-1 rounded bg-[var(--bg-subtle)] hover:border-[var(--border-hover)] text-[11px] font-medium text-[var(--text-primary)] border border-[var(--border-default)] whitespace-nowrap">
-                        Sao chép
-                      </button>
-                    </div>
-
-                    <div class="p-3 rounded-lg bg-[var(--bg-canvas)] border border-[var(--border-default)] flex items-center justify-between gap-2">
-                      <div class="min-w-0">
-                        <div class="text-[11px] text-[var(--text-muted)]">Hồ sơ LinkedIn</div>
-                        <a href="https://www.linkedin.com/in/minhson-uit/" target="_blank" rel="noopener noreferrer" class="font-mono-tabular text-xs font-semibold text-[var(--accent-telemetry)] hover:underline truncate block">linkedin.com/in/minhson-uit</a>
-                      </div>
-                      <span class="font-mono-tabular text-[11px] text-[var(--text-muted)] whitespace-nowrap">Verified</span>
-                    </div>
-
-                    <div class="p-3 rounded-lg bg-[var(--bg-canvas)] border border-[var(--border-default)] flex items-center justify-between gap-2">
-                      <div class="min-w-0">
-                        <div class="text-[11px] text-[var(--text-muted)]">Kho lưu trữ GitHub</div>
-                        <a href="https://github.com/minhsonuit" target="_blank" rel="noopener noreferrer" class="font-mono-tabular text-xs font-semibold text-[var(--text-primary)] hover:underline truncate block">github.com/minhsonuit</a>
-                      </div>
-                      <span class="font-mono-tabular text-[11px] text-[var(--text-muted)] whitespace-nowrap">Open Source</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between text-xs text-[var(--text-muted)]">
-                  <span>Địa bàn: TP. Hồ Chí Minh, VN</span>
-                  <span class="font-mono-tabular">GMT+7</span>
-                </div>
-              </div>
+              <div id="contact-direct-card" class="lg:col-span-5 p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col justify-between space-y-4"></div>
 
               <!-- Quick Consultation Dispatch Form (7 cols) -->
               <div class="lg:col-span-7 p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)]">
@@ -944,7 +346,7 @@
 
                   <div>
                     <label for="form-subject" class="block text-xs font-medium text-[var(--text-secondary)] mb-1">Chủ đề hợp tác</label>
-                    <input id="form-subject" type="text" required placeholder="Mời hợp tác vị trí Principal Architect / Tư vấn tối ưu AX & SQL Server" class="w-full px-3 py-2 rounded-lg bg-[var(--bg-subtle)] border border-[var(--border-default)] focus:border-[var(--accent-primary)] focus:outline-none text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)]">
+                    <input id="form-subject" type="text" required placeholder="Mời hợp tác vị trí Principal Architect / Tư vấn tối ưu AX &amp; SQL Server" class="w-full px-3 py-2 rounded-lg bg-[var(--bg-subtle)] border border-[var(--border-default)] focus:border-[var(--accent-primary)] focus:outline-none text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)]">
                   </div>
 
                   <div>
@@ -953,13 +355,13 @@
                   </div>
 
                   <div class="flex items-center justify-between gap-3 pt-1">
-                    <span class="text-[11px] text-[var(--text-muted)]">Phản hồi nhanh trong vòng 24 giờ làm việc.</span>
+                    <span id="form-sla-note" class="text-[11px] text-[var(--text-muted)]">Phản hồi nhanh trong vòng 24 giờ làm việc.</span>
                     <button type="submit" class="px-4 py-2 rounded-lg bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] text-white text-xs font-semibold inline-flex items-center gap-2 transition-colors duration-150 whitespace-nowrap">
                       <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="22" y1="2" x2="11" y2="13"/>
                         <polygon points="22 2 15 22 11 13 2 9 22 2"/>
                       </svg>
-                      <span>Gửi yêu cầu tư vấn</span>
+                      <span id="form-submit-label">Gửi yêu cầu tư vấn</span>
                     </button>
                   </div>
                 </form>
@@ -968,16 +370,7 @@
           </section>
 
           <!-- Footer -->
-          <footer class="pt-6 pb-8 border-t border-[var(--border-default)] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--text-muted)]">
-            <div>
-              © 2026 <strong class="text-[var(--text-primary)]">Võ Minh Sơn</strong> (<span class="font-mono-tabular">@minhsonuit</span>). Thiết kế chuẩn High-Craft UI &amp; Multi-Platform Responsive.
-            </div>
-            <div class="flex items-center gap-4 font-mono-tabular">
-              <a href="https://github.com/minhsonuit" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--text-primary)]">GitHub</a>
-              <a href="https://www.linkedin.com/in/minhson-uit/" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--text-primary)]">LinkedIn</a>
-              <a href="mailto:minhson.uit@gmail.com" class="hover:text-[var(--text-primary)]">Email</a>
-            </div>
-          </footer>
+          <footer id="app-footer" class="pt-6 pb-8 border-t border-[var(--border-default)] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--text-muted)]"></footer>
         </main>
 
         <!-- ====================================================================
@@ -1000,9 +393,7 @@
           </div>
 
           <!-- Inspector Scrollable Content -->
-          <div id="inspector-content" class="flex-1 overflow-y-auto p-4">
-            <!-- Dynamically populated by js/main.js when selecting any table row -->
-          </div>
+          <div id="inspector-content" class="flex-1 overflow-y-auto p-4"></div>
         </aside>
 
       </div>
@@ -1015,7 +406,8 @@
     <span id="toast-text">Đã sao chép địa chỉ email!</span>
   </div>
 
-  <!-- Interactive Application Logic -->
+  <!-- Decoupled Data Layer & Interactive UI Engine -->
+  <script src="./js/data-service.js"></script>
   <script src="./js/main.js"></script>
 </body>
 </html>

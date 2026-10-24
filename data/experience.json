@@ -1,0 +1,80 @@
+{
+  "experienceSection": {
+    "sectionTitle": "Hành trình Sự nghiệp & Kinh nghiệm Thực chiến",
+    "sectionSubtitle": "Đóng góp trực tiếp vào quá trình mở rộng thần tốc và vận hành ổn định của chuỗi bán lẻ hàng đầu Việt Nam.",
+    "roles": [
+      {
+        "id": "exp-pharmacity-lead",
+        "title": "Technical Leader & Core Systems Architect",
+        "company": "PHARMACITY JSC — Chuỗi Bán lẻ Dược phẩm Hàng đầu Việt Nam",
+        "period": "2017 – Hiện tại",
+        "accent": "primary",
+        "summary": "Chịu trách nhiệm định hướng kiến trúc kỹ thuật, giám sát vận hành hệ thống ERP & Retail lõi và dẫn dắt đội ngũ kỹ sư đảm bảo nền tảng công nghệ vận hành xuyên suốt giai đoạn tăng trưởng từ vài chục lên hơn 1.000 cửa hàng trên toàn quốc.",
+        "highlights": [
+          {
+            "lead": "Tái cấu trúc & Tối ưu hóa CSDL SQL Server:",
+            "detail": "Phân tích kế hoạch thực thi (Execution Plan), thiết kế chiến lược chỉ mục (Covering Index) và phân vùng bảng cho hàng trăm triệu bản ghi giao dịch; giảm hơn 78% các vụ nghẽn Deadlock trong khung giờ cao điểm."
+          },
+          {
+            "lead": "Thiết kế Cổng Tích hợp Chuẩn hóa (AX Integration Hub):",
+            "detail": "Xây dựng lớp Gateway phân tán bằng C# .NET 8 và RabbitMQ, áp dụng nguyên tắc kiểm soát truy cập nghiêm ngặt (AX Adapter độc quyền, 100% Parameterized Query, Timeout & Polly Circuit Breaker), bảo vệ tuyệt đối CSDL lõi khỏi quá tải từ các kênh E-commerce."
+          },
+          {
+            "lead": "Quản trị Độ sẵn sàng Cao (High Availability):",
+            "detail": "Duy trì cam kết SLA 99.98% uptime cho toàn chuỗi nhà thuốc, thiết lập quy trình kiểm thử tải, đối soát tự động và kịch bản khôi phục thảm họa (Disaster Recovery)."
+          }
+        ]
+      },
+      {
+        "id": "exp-enterprise-consultant",
+        "title": "Enterprise Systems Consultant & Solutions Architect",
+        "company": "Tư vấn Độc lập & Dự án Kiến trúc Doanh nghiệp",
+        "period": "2019 – Hiện tại (Song song)",
+        "accent": "telemetry",
+        "summary": "Cung cấp dịch vụ tư vấn chuyên sâu cho các doanh nghiệp bán lẻ và phân phối: rà soát điểm nghẽn cơ sở dữ liệu, tối ưu hóa truy vấn T-SQL phức tạp và thiết kế kiến trúc kết nối ERP với hệ sinh thái Thương mại Điện tử, Hóa đơn điện tử và Logistics.",
+        "highlights": [
+          {
+            "lead": "Database Auditing & Query Tuning:",
+            "detail": "Rút ngắn thời gian kết xuất báo cáo tổng hợp cuối ngày của khách hàng doanh nghiệp từ 45–60 phút xuống dưới 2 phút nhờ tái thiết kế chỉ mục và tách luồng Read-Only Replica."
+          },
+          {
+            "lead": "Tích hợp Đa nền tảng An toàn:",
+            "detail": "Xây dựng API Gateway chuẩn hóa kết nối cổng thanh toán, vận chuyển và đối soát công nợ tự động với độ chính xác tuyệt đối."
+          }
+        ]
+      },
+      {
+        "id": "exp-pharmacity-dev",
+        "title": "Microsoft Dynamics AX & Retail POS Developer",
+        "company": "PHARMACITY JSC",
+        "period": "2015 – 2017",
+        "accent": "muted",
+        "summary": "Phát triển, tùy biến và mở rộng các phân hệ cốt lõi trong Microsoft Dynamics AX 2012 R3 và phần mềm bán hàng Retail POS tại quầy thu ngân.",
+        "highlights": [
+          {
+            "lead": "Phát triển Phân hệ Bán lẻ bằng X++ & C#:",
+            "detail": "Xây dựng bộ máy tính giá, khuyến mãi đa tầng, tích điểm khách hàng thân thiết và quản lý lô/hạn dùng thuốc (FEFO) ngay tại điểm bán."
+          },
+          {
+            "lead": "Đồng bộ Offline/Online & Báo cáo SSRS:",
+            "detail": "Đảm bảo đồng bộ giao dịch thông suốt từ cửa hàng về trung tâm và phát triển hệ thống báo cáo quản trị tài chính, tồn kho chuẩn xác."
+          }
+        ]
+      }
+    ]
+  },
+  "educationSection": {
+    "sectionTitle": "Học vấn & Nền tảng Học thuật",
+    "items": [
+      {
+        "id": "edu-uit-vnuhcm",
+        "period": "2010 – 2015",
+        "status": "healthy",
+        "statusLabel": "Tốt nghiệp Kỹ sư Chính quy",
+        "degree": "Kỹ sư Hệ thống Thông tin (Bachelor of Engineering in Information Systems)",
+        "institution": "Trường Đại học Công nghệ Thông tin – Đại học Quốc gia TP.HCM (UIT - VNU-HCM)",
+        "description": "Đào tạo chuyên sâu về Phân tích & Thiết kế Hệ thống Thông tin Doanh nghiệp, Hệ quản trị Cơ sở Dữ liệu Quan hệ (RDBMS), Cấu trúc Dữ liệu & Giải thuật, Kiến trúc Phần mềm và Bảo mật Hệ thống."
+      }
+    ]
+  }
+}

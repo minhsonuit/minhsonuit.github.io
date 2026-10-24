@@ -1,0 +1,41 @@
+{
+  "sectionNote": "Các chỉ số KPI cốt lõi hiển thị tại phần Tổng quan Hồ sơ (Tự động co giãn theo lưới Responsive)",
+  "items": [
+    {
+      "id": "kpi-pos-scale",
+      "label": "Quy mô Vận hành POS",
+      "pillText": "Toàn quốc",
+      "status": "healthy",
+      "value": "1,000+ Stores",
+      "valueAccent": "primary",
+      "subtitle": "Đồng bộ Offline-first về AX 2012 HO"
+    },
+    {
+      "id": "kpi-daily-tx",
+      "label": "Sản lượng Giao dịch",
+      "pillText": "ACID 100%",
+      "status": "healthy",
+      "value": "10.4M tx/ngày",
+      "valueAccent": "primary",
+      "subtitle": "Khớp lệnh tồn kho & sổ cái kế toán"
+    },
+    {
+      "id": "kpi-sql-tuning",
+      "label": "Tối ưu SQL Server",
+      "pillText": "-78% Deadlock",
+      "status": "healthy",
+      "value": "18x Nhanh hơn",
+      "valueAccent": "telemetry",
+      "subtitle": "Hạ CPU đỉnh từ 92% xuống 32%"
+    },
+    {
+      "id": "kpi-uptime-sla",
+      "label": "Độ sẵn sàng Hệ thống",
+      "pillText": "Circuit Breaker",
+      "status": "healthy",
+      "value": "99.98% Uptime",
+      "valueAccent": "primary",
+      "subtitle": "AX Adapter cô lập lỗi đa kênh"
+    }
+  ]
+}
