@@ -1,0 +1,7 @@
+.agents
+.DS_Store
+*.swp
+.trae
+.gemini
+.claude
+.gemini-data
