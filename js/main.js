@@ -55,6 +55,7 @@ function renderAllSections(data) {
   renderCompetenciesSection(data.competencies);
   renderExperienceAndEducation(data.experience);
   renderGovernanceSection(data.governance);
+  renderLessonsSection(data.governance);
   renderContactAndFooter(data.profile);
 }
 
@@ -502,10 +503,11 @@ function renderInspectorPanel(systemId) {
         `).join('')}
       </div>
 
+      ${Array.isArray(sys.telemetryPoints) && sys.telemetryPoints.length > 1 ? `
       <div>
         <div class="text-xs font-semibold text-[var(--text-primary)] mb-1.5">${escapeHtml(sys.telemetryTitle)}</div>
         ${buildVercelSparklineSvg(sys.telemetryPoints, sys.telemetryUnit, sys.telemetryThreshold)}
-      </div>
+      </div>` : ''}
 
       <div class="space-y-2.5 text-xs leading-relaxed">
         <div class="p-3 rounded-lg border border-[var(--border-default)] bg-[var(--bg-canvas)]">
@@ -533,13 +535,14 @@ function renderInspectorPanel(systemId) {
         </ul>
       </div>
 
+      ${sys.codeSnippet ? `
       <div>
         <div class="flex items-center justify-between mb-1.5">
-          <span class="text-xs font-semibold text-[var(--text-primary)]">Mẫu Triển khai Thực chiến</span>
-          <span class="font-mono-tabular text-[11px] text-[var(--text-muted)]">Production Snippet</span>
+          <span class="text-xs font-semibold text-[var(--text-primary)]">Đoạn code minh họa</span>
+          <span class="font-mono-tabular text-[11px] text-[var(--text-muted)] whitespace-nowrap">Snippet</span>
         </div>
         <pre class="p-3 rounded-lg border border-[var(--border-default)] bg-[var(--bg-canvas)] text-[11px] font-mono-tabular text-[var(--text-secondary)] overflow-x-auto leading-relaxed"><code>${escapeHtml(sys.codeSnippet)}</code></pre>
-      </div>
+      </div>` : ''}
 
       <div>
         <div class="text-xs font-semibold text-[var(--text-primary)] mb-2">Công nghệ Sử dụng</div>
@@ -604,6 +607,38 @@ function buildMainBenchmarkSvg(bm, idx) {
   `;
 }
 
+/**
+ * Vẽ biểu đồ so sánh dạng thanh ngang (Trước / Sau) từ mảng bm.bars trong data/telemetry.json.
+ * Mỗi phần tử: { label, value (số dùng để tính tỷ lệ), display (chuỗi hiển thị), tone: 'before' | 'after' }
+ */
+function buildComparisonBars(bm) {
+  const bars = bm.bars.filter(b => Number(b.value) > 0);
+  if (bars.length === 0) return '';
+  const maxVal = Math.max(...bars.map(b => Number(b.value)));
+  const accentColor = bm.accentVar || 'var(--accent-telemetry)';
+
+  return `
+    <div class="space-y-2.5 py-1" role="img" aria-label="${escapeHtml(bm.ariaLabel || bm.title || '')}">
+      ${bars.map(b => {
+        const pct = Math.max(2, Math.round((Number(b.value) / maxVal) * 100));
+        const fill = b.tone === 'after' ? accentColor : 'var(--border-hover)';
+        return `
+          <div class="space-y-1">
+            <div class="flex items-center justify-between gap-2 text-[11px]">
+              <span class="text-[var(--text-secondary)] whitespace-nowrap">${escapeHtml(b.label)}</span>
+              <span class="font-mono-tabular font-semibold text-[var(--text-primary)] whitespace-nowrap">${escapeHtml(b.display)}</span>
+            </div>
+            <div class="h-2 rounded-full bg-[var(--bg-subtle)] overflow-hidden">
+              <div class="h-full rounded-full" style="width:${pct}%;background:${fill}"></div>
+            </div>
+          </div>
+        `;
+      }).join('')}
+      ${bm.note ? `<p class="text-[11px] text-[var(--text-muted)] leading-relaxed">${escapeHtml(bm.note)}</p>` : ''}
+    </div>
+  `;
+}
+
 function renderTelemetryBenchmarks(telemetry) {
   if (!telemetry) return;
 
@@ -634,7 +669,7 @@ function renderTelemetryBenchmarks(telemetry) {
             </span>
           </div>
 
-          ${buildMainBenchmarkSvg(bm, idx)}
+          ${Array.isArray(bm.bars) ? buildComparisonBars(bm) : buildMainBenchmarkSvg(bm, idx)}
 
           <div class="flex items-center justify-between text-[11px] font-mono-tabular text-[var(--text-muted)] pt-1 border-t border-[var(--border-subtle)]">
             <span>${escapeHtml(bm.footerLeft)}</span>
@@ -835,6 +870,46 @@ function renderGovernanceSection(governance) {
         </div>
       `;
     }).join('');
+  }
+}
+
+/**
+ * 8b. Render Section 6B: Lessons Learned & Trade-offs (data/governance.json -> lessons)
+ */
+function renderLessonsSection(governance) {
+  const lessons = governance?.lessons;
+  const sectionEl = document.getElementById('lessons');
+  if (!lessons || !Array.isArray(lessons.items) || lessons.items.length === 0) {
+    if (sectionEl) sectionEl.classList.add('hidden');
+    return;
+  }
+
+  const titleEl = document.getElementById('lessons-section-title');
+  const subtitleEl = document.getElementById('lessons-section-subtitle');
+  const gridEl = document.getElementById('lessons-grid');
+
+  if (titleEl) titleEl.textContent = lessons.sectionTitle || '';
+  if (subtitleEl) subtitleEl.textContent = lessons.sectionSubtitle || '';
+
+  if (gridEl) {
+    gridEl.innerHTML = lessons.items.map(item => `
+      <article class="p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-3">
+        <div class="flex items-start gap-2.5">
+          <span class="font-mono-tabular text-[11px] font-bold text-[var(--accent-primary)] whitespace-nowrap mt-0.5">${escapeHtml(item.code)}</span>
+          <h3 class="text-sm font-semibold text-[var(--text-primary)] leading-snug">${escapeHtml(item.title)}</h3>
+        </div>
+        <div class="grid grid-cols-1 gap-2 text-xs leading-relaxed">
+          <div class="p-2.5 rounded-lg bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+            <div class="text-[11px] font-semibold text-[var(--text-muted)] mb-0.5 whitespace-nowrap">Lý do</div>
+            <p class="text-[var(--text-secondary)]">${escapeHtml(item.reason)}</p>
+          </div>
+          <div class="p-2.5 rounded-lg bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+            <div class="text-[11px] font-semibold text-[var(--accent-telemetry)] mb-0.5 whitespace-nowrap">Đánh đổi</div>
+            <p class="text-[var(--text-secondary)]">${escapeHtml(item.tradeoff)}</p>
+          </div>
+        </div>
+      </article>
+    `).join('');
   }
 }
 

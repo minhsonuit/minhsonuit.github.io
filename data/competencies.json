@@ -1,6 +1,6 @@
 {
-  "sectionTitle": "Năng lực Lãnh đạo Kỹ thuật & Hệ sinh thái Công nghệ",
-  "sectionSubtitle": "Sự kết hợp giữa tư duy Quản trị Kiến trúc & Tối ưu Chi phí (FinOps), năng lực dẫn dắt Core Engineering Team và chuyên môn sâu về ERP Dynamics AX 2012, .NET 8 Microservices & High-Scale SQL Server.",
+  "sectionTitle": "Năng lực Chuyên môn & Công nghệ",
+  "sectionSubtitle": "Tập trung vào tư duy kiến trúc, tối ưu hiệu năng backend & database, ERP AX 2012, và hệ thống tải cao, sẵn sàng cao, chịu lỗi.",
   "categories": [
     {
       "id": "all",
@@ -8,7 +8,7 @@
     },
     {
       "id": "leadership",
-      "label": "Leadership & FinOps"
+      "label": "Leadership"
     },
     {
       "id": "erp",
@@ -16,95 +16,190 @@
     },
     {
       "id": "backend",
-      "label": ".NET & Integration"
+      "label": "Backend & Resilience"
     },
     {
       "id": "db",
-      "label": "SQL & Caching"
+      "label": "SQL Server & HA"
     }
   ],
   "groups": [
     {
       "id": "skill-engineering-leadership",
       "category": "leadership",
-      "title": "Engineering Leadership, Governance & FinOps",
-      "experience": "Lead 5–15 KS",
+      "title": "Technical Leadership & Vận hành",
+      "experience": "Quản lý 3 dev",
       "accent": "primary",
-      "description": "Trực tiếp dẫn dắt đội ngũ tinh gọn Core Engineering (5–15 kỹ sư), thiết lập kỷ luật kiến trúc (Architecture Governance), hoạch định chiến lược Hiện đại hóa hệ thống di sản (Zero-Downtime Legacy Modernization) và tối ưu hóa chi phí phần cứng / bản quyền SQL Server.",
+      "description": "Quản lý trực tiếp 3 developer, chịu trách nhiệm kỹ thuật mảng ERP, xử lý sự cố production, hỗ trợ các team liên quan (BI) và duy trì kỷ luật kỹ thuật.",
       "skills": [
-        { "name": "Core Team Leadership (5–15 Engineers)", "highlighted": true },
-        { "name": "Legacy Modernization (Zero Downtime)", "highlighted": true },
-        { "name": "FinOps & Hardware/License Cost Tuning", "highlighted": true },
-        { "name": "Architecture Governance & ADR", "highlighted": true },
-        { "name": "SLA 99.98% & Incident Post-Mortem", "highlighted": false },
-        { "name": "Cross-Departmental Alignment", "highlighted": false },
-        { "name": "Code Review & Mentorship", "highlighted": false }
+        {
+          "name": "ERP Technical Management",
+          "highlighted": true
+        },
+        {
+          "name": "Incident Troubleshooting",
+          "highlighted": true
+        },
+        {
+          "name": "Code Review & Mentoring",
+          "highlighted": false
+        },
+        {
+          "name": "Phối hợp BI / Business",
+          "highlighted": false
+        },
+        {
+          "name": "Monitoring AOS & Database",
+          "highlighted": true
+        }
       ]
     },
     {
       "id": "skill-erp-retail",
       "category": "erp",
-      "title": "Enterprise ERP & Retail POS Architecture",
-      "experience": "10+ năm",
+      "title": "Dynamics AX 2012 & Retail POS",
+      "experience": "11+ năm",
       "accent": "telemetry",
-      "description": "Làm chủ toàn diện kiến trúc lõi Microsoft Dynamics AX 2012 R3, phát triển và tối ưu hóa X++ trên MorphX IDE, tái thiết kế Posting Engine đa luồng và vận hành mạng lưới bán lẻ Offline-first POS quy mô trên 1.000 cửa hàng.",
+      "description": "Phát triển và tối ưu trên Microsoft Dynamics AX 2012 R3, phục vụ mạng lưới 1.182 nhà thuốc.",
       "skills": [
-        { "name": "Dynamics AX 2012 R3", "highlighted": true },
-        { "name": "X++ / MorphX IDE", "highlighted": true },
-        { "name": "Retail POS & Offline-First Sync", "highlighted": true },
-        { "name": "AIF / DIXF Custom Services", "highlighted": false },
-        { "name": "SSRS & RDP Optimization", "highlighted": false },
-        { "name": "Inventory (FEFO/GPP) & General Ledger", "highlighted": false },
-        { "name": "Multi-thread AOS Batch Jobs", "highlighted": false }
+        {
+          "name": "Dynamics AX 2012 R3",
+          "highlighted": true
+        },
+        {
+          "name": "X++ / MorphX",
+          "highlighted": true
+        },
+        {
+          "name": "Retail & Inventory (trọng tâm)",
+          "highlighted": true
+        },
+        {
+          "name": "Tối ưu API ERP",
+          "highlighted": true
+        },
+        {
+          "name": "Retail POS",
+          "highlighted": false
+        },
+        {
+          "name": "SSRS & Report Optimization",
+          "highlighted": false
+        },
+        {
+          "name": "AOS Batch / Đồng bộ dữ liệu",
+          "highlighted": false
+        }
       ]
     },
     {
       "id": "skill-backend-integration",
       "category": "backend",
-      "title": "Distributed Backend & AX Adapter Gateway",
-      "experience": "9+ năm",
+      "title": "Backend .NET & Tách service khỏi ERP",
+      "experience": "Thực chiến",
       "accent": "primary",
-      "description": "Thiết kế cổng giao tiếp độc quyền AX Adapter (Single Point of Entry) hiện đại hóa giao tiếp giữa ERP di sản và hệ sinh thái Microservices; áp dụng nghiêm ngặt Polly Circuit Breaker, Timeout, Rate Limiting và Outbox Pattern.",
+      "description": "Inventory Center Service trên Kafka/.NET 10 (2026); tách Customer (2018, .NET Core), hóa đơn điện tử (2020), Pricing & Promotion (2026) khỏi ERP thành service độc lập; viết lại các job nặng bằng .NET (inventory value: >1 tuần → ~4 giờ; commission: 5 ngày → ~4 giờ/tháng).",
       "skills": [
-        { "name": "C# / .NET 8 / ASP.NET Core", "highlighted": true },
-        { "name": "AX Adapter Gateway Pattern", "highlighted": true },
-        { "name": "Polly Circuit Breaker & Timeout", "highlighted": true },
-        { "name": "Outbox & Idempotent Consumers", "highlighted": true },
-        { "name": "Clean Architecture & CQRS", "highlighted": false },
-        { "name": "Dapper / EF Core (100% Parameterized)", "highlighted": false }
+        {
+          "name": "C# / .NET Core → .NET 10",
+          "highlighted": true
+        },
+        {
+          "name": "Tách service khỏi ERP",
+          "highlighted": true
+        },
+        {
+          "name": "Kafka (Event-driven)",
+          "highlighted": true
+        },
+        {
+          "name": "Batch xử lý dữ liệu lớn",
+          "highlighted": true
+        },
+        {
+          "name": "Xử lý song song & In-memory Cache",
+          "highlighted": false
+        },
+        {
+          "name": ".NET Framework 4.5 (legacy)",
+          "highlighted": false
+        },
+        {
+          "name": "Timeout & Circuit Breaker",
+          "highlighted": false
+        },
+        {
+          "name": "IIS (Windows) & Linux",
+          "highlighted": false
+        },
+        {
+          "name": "Kubernetes & Docker Compose",
+          "highlighted": false
+        }
       ]
     },
     {
       "id": "skill-database-engineering",
       "category": "db",
-      "title": "High-Volume SQL Server & Performance FinOps",
+      "title": "SQL Server Performance & Deadlock",
       "experience": "10+ năm",
       "accent": "telemetry",
-      "description": "Chuyên gia giải cứu khủng hoảng hiệu năng SQL Server quy mô trăm triệu bản ghi: phân tích sâu Execution Plan, thiết kế Covering Index, Table Partitioning và tách tải Read-Only Replica giúp giảm 78% Deadlock mà không cần nâng cấp phần cứng đắt đỏ.",
+      "description": "Tìm gốc rễ vấn đề hiệu năng trên dữ liệu lớn: execution plan, statistics, temp table, index, deadlock.",
       "skills": [
-        { "name": "SQL Server Enterprise (T-SQL)", "highlighted": true },
-        { "name": "Execution Plan & Index Tuning", "highlighted": true },
-        { "name": "Deadlock & Lock Escalation Resolution", "highlighted": true },
-        { "name": "Table Partitioning (500M+ Rows)", "highlighted": true },
-        { "name": "AlwaysOn Read-Only Replica", "highlighted": false },
-        { "name": "Query Store & Extended Events", "highlighted": false },
-        { "name": "PostgreSQL / Oracle", "highlighted": false }
+        {
+          "name": "SQL Server (T-SQL)",
+          "highlighted": true
+        },
+        {
+          "name": "Execution Plan Analysis",
+          "highlighted": true
+        },
+        {
+          "name": "Deadlock Root-Cause Analysis",
+          "highlighted": true
+        },
+        {
+          "name": "Statistics & Index Strategy",
+          "highlighted": true
+        },
+        {
+          "name": "Temp Table & Statistics (AX 2012)",
+          "highlighted": false
+        },
+        {
+          "name": "Tối ưu SQL cho BI",
+          "highlighted": false
+        },
+        {
+          "name": "Đọc Replica, ghi DB report riêng",
+          "highlighted": false
+        }
       ]
     },
     {
       "id": "skill-caching-devops",
       "category": "db",
-      "title": "Distributed Caching, Messaging & DevOps",
-      "experience": "8+ năm",
+      "title": "Sẵn sàng cao & Quản trị dữ liệu lớn",
+      "experience": "Thực chiến",
       "accent": "primary",
-      "description": "Triển khai bộ nhớ đệm phân tán nguyên tử (Atomic Redis Lua) giảm 90% tải đọc cho ERP lõi, hàng đợi sự kiện bất đồng bộ chịu tải hàng chục triệu thông điệp/ngày và quy trình CI/CD kiểm soát chất lượng mã nguồn chặt chẽ cho Core Team.",
+      "description": "Cấu hình Always On trên dữ liệu hơn 20 TB, restore và chuyển DB sang site khác trên production, archive dữ liệu, giám sát hạ tầng database.",
       "skills": [
-        { "name": "Redis Cluster (Atomic Lua Script)", "highlighted": true },
-        { "name": "RabbitMQ / Apache Kafka", "highlighted": true },
-        { "name": "Elasticsearch", "highlighted": true },
-        { "name": "Docker & Nginx / IIS", "highlighted": false },
-        { "name": "High Availability & DR Drills", "highlighted": false },
-        { "name": "Git / Automated CI-CD Pipelines", "highlighted": false }
+        {
+          "name": "SQL Server Always On",
+          "highlighted": true
+        },
+        {
+          "name": "Restore & Switch Site (Production)",
+          "highlighted": true
+        },
+        {
+          "name": "Data Archiving",
+          "highlighted": true
+        },
+        {
+          "name": "Giám sát DB / AOS",
+          "highlighted": false
+        }
       ]
     }
   ]

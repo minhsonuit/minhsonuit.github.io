@@ -1,36 +1,114 @@
 {
-  "sectionTitle": "Chỉ số Đo lường Hiệu năng & Tối ưu Chi phí Hạ tầng (Production Telemetry & FinOps)",
-  "sectionSubtitle": "Số liệu thực tế trước và sau khi tái cấu trúc cơ sở dữ liệu SQL Server 500M+ bản ghi & hiện đại hóa giao tiếp ERP qua cổng AX Adapter Gateway.",
+  "sectionTitle": "Hiệu năng Trước / Sau Tối ưu",
+  "sectionSubtitle": "So sánh trước và sau ở các bài toán đã xử lý. Số liệu là giá trị làm tròn từ vận hành thực tế, không phải benchmark trong phòng lab.",
   "benchmarks": [
     {
-      "id": "telemetry-sql-cpu",
-      "title": "Tải CPU Cụm SQL Server ERP Lõi & Hiệu quả FinOps (Giờ Cao Điểm)",
-      "subtitle": "Sau khi áp dụng Table Partitioning, Covering Index & Tách tải Read-Only Replica",
-      "pillText": "92% → 32% CPU",
+      "id": "bm-inventory-value",
+      "title": "Tính Inventory Value",
+      "subtitle": "2021–2022 • Viết lại bằng .NET 8",
+      "pillText": "~40x nhanh hơn",
       "status": "healthy",
-      "accentVar": "var(--accent-telemetry)",
-      "thresholdLineColor": "rgba(239,68,68,0.35)",
-      "thresholdLabel": "Ngưỡng quá tải cũ: 90% CPU (Tốn kém chi phí nâng cấp Core License)",
-      "ariaLabel": "Biểu đồ giảm tải CPU SQL Server và tối ưu FinOps",
-      "points": [92, 88, 81, 65, 50, 43, 38, 35, 34, 33, 32, 32],
-      "footerLeft": "Trước tối ưu: 92% CPU • 45 phút chạy EOD",
-      "footerRight": "Hiện tại: 32% CPU • 1.8 phút EOD (Tiết kiệm Server/License)",
+      "accentVar": "var(--accent-primary)",
+      "ariaLabel": "Tính Inventory Value",
+      "bars": [
+        {
+          "label": "Chức năng mặc định của ERP",
+          "value": 168,
+          "display": "> 1 tuần (không ra kết quả)",
+          "tone": "before"
+        },
+        {
+          "label": "Bản viết lại (.NET 8)",
+          "value": 4,
+          "display": "~4 giờ",
+          "tone": "after"
+        }
+      ],
+      "note": "Thanh \"trước\" được tính tối thiểu 168 giờ vì job chạy hơn 1 tuần vẫn chưa xong.",
+      "footerLeft": "Index seek • song song theo item",
+      "footerRight": "Đọc replica • ghi DB report",
       "footerRightAccent": "primary"
     },
     {
-      "id": "telemetry-ax-gateway",
-      "title": "Thông lượng AX Adapter Gateway (.NET 8 + Redis Cluster)",
-      "subtitle": "Hiện đại hóa ERP (Zero Downtime) & Bảo vệ AOS Server trong chiến dịch Flash Sale",
-      "pillText": "P99: 42 ms",
+      "id": "bm-commission",
+      "title": "Job tính Commission (dữ liệu 1 tháng)",
+      "subtitle": "2019 • Tối ưu query + cache trên RAM",
+      "pillText": "~30x nhanh hơn",
       "status": "healthy",
       "accentVar": "var(--accent-primary)",
-      "thresholdLineColor": "var(--border-hover)",
-      "thresholdLabel": "Đỉnh tải Flash Sale: 4,200 req/s (Circuit Closed • Zero AOS Crash)",
-      "ariaLabel": "Biểu đồ thông lượng AX Adapter Gateway",
-      "points": [1200, 1550, 1980, 2600, 3450, 4050, 4200, 3900, 3550, 3750, 3950, 4120],
-      "footerLeft": "Cache Hit Ratio: 94.6% (-90% tải đọc lên AX)",
-      "footerRight": "Timeout 3.0s + Polly Circuit Breaker",
-      "footerRightAccent": "telemetry"
+      "ariaLabel": "Job tính Commission (dữ liệu 1 tháng)",
+      "bars": [
+        {
+          "label": "Trước tối ưu",
+          "value": 120,
+          "display": "~5 ngày",
+          "tone": "before"
+        },
+        {
+          "label": "Sau tối ưu",
+          "value": 4,
+          "display": "~4 giờ",
+          "tone": "after"
+        }
+      ],
+      "note": "",
+      "footerLeft": "Giao dịch ~300k/ngày",
+      "footerRight": "Nạp dữ liệu tham chiếu lên RAM",
+      "footerRightAccent": "primary"
+    },
+    {
+      "id": "bm-sql-cpu",
+      "title": "CPU SQL Server khi chạy đồng bộ nặng",
+      "subtitle": "Tối ưu lại logic các luồng đồng bộ",
+      "pillText": "80–90% → 30–50%",
+      "status": "healthy",
+      "accentVar": "var(--accent-telemetry)",
+      "ariaLabel": "CPU SQL Server khi chạy đồng bộ nặng",
+      "bars": [
+        {
+          "label": "Trước tối ưu",
+          "value": 90,
+          "display": "80–90%",
+          "tone": "before"
+        },
+        {
+          "label": "Sau tối ưu",
+          "value": 50,
+          "display": "30–50%",
+          "tone": "after"
+        }
+      ],
+      "note": "Thanh hiển thị theo cận trên của mỗi khoảng.",
+      "footerLeft": "SQL Server hàng trăm core",
+      "footerRight": "Không nâng cấp phần cứng",
+      "footerRightAccent": "primary"
+    },
+    {
+      "id": "bm-archive",
+      "title": "Archive dữ liệu database ERP",
+      "subtitle": "2025 • Giảm tải database AX 2012",
+      "pillText": "~8 TB",
+      "status": "healthy",
+      "accentVar": "var(--accent-telemetry)",
+      "ariaLabel": "Archive dữ liệu database ERP",
+      "bars": [
+        {
+          "label": "Tăng trưởng mỗi tháng",
+          "value": 0.6,
+          "display": "500–600 GB",
+          "tone": "before"
+        },
+        {
+          "label": "Dung lượng đã archive",
+          "value": 8,
+          "display": "~8 TB",
+          "tone": "after"
+        }
+      ],
+      "note": "",
+      "footerLeft": "≈ 13–16 tháng tăng trưởng",
+      "footerRight": "Database > 20 TB",
+      "footerRightAccent": "primary"
     }
   ]
 }

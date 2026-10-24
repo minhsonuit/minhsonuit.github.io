@@ -1,41 +1,41 @@
 {
-  "sectionNote": "Các chỉ số KPI cốt lõi hiển thị tại phần Tổng quan Hồ sơ (Kết hợp Chiều sâu Kiến trúc, Hiệu quả FinOps & Năng lực Quản trị Core Team)",
+  "sectionNote": "Các chỉ số thực tế về quy mô vận hành, hạ tầng dữ liệu và hiệu quả tối ưu tại Pharmacity.",
   "items": [
     {
       "id": "kpi-pos-scale",
-      "label": "Quy mô & Hiện đại hóa",
-      "pillText": "Zero Downtime",
+      "label": "Quy mô vận hành",
+      "pillText": "Production",
       "status": "healthy",
-      "value": "1,000+ Stores",
+      "value": "~300k giao dịch/ngày",
       "valueAccent": "primary",
-      "subtitle": "Hiện đại hóa AX 2012 & Offline-first POS"
+      "subtitle": "1.182 nhà thuốc • mỗi giao dịch gọi hàng chục API"
     },
     {
-      "id": "kpi-daily-tx",
-      "label": "Sản lượng & Toàn vẹn",
-      "pillText": "ACID 100%",
+      "id": "kpi-db-scale",
+      "label": "Hạ tầng dữ liệu",
+      "pillText": "Always On • HA",
       "status": "healthy",
-      "value": "10.4M tx/ngày",
+      "value": "> 20 TB",
       "valueAccent": "primary",
-      "subtitle": "Khớp lệnh Tồn kho - POS - Sổ cái Kế toán"
+      "subtitle": "Tăng 500–600 GB/tháng • hàng trăm core, hàng TB RAM"
     },
     {
-      "id": "kpi-sql-tuning",
-      "label": "Hiệu năng & FinOps",
-      "pillText": "-78% Deadlock",
+      "id": "kpi-uptime",
+      "label": "Độ ổn định DB",
+      "pillText": "Always-on",
       "status": "healthy",
-      "value": "18x Nhanh hơn",
-      "valueAccent": "telemetry",
-      "subtitle": "CPU 92%→32% • Tối ưu chi phí Server/License"
+      "value": "> 6 tháng",
+      "valueAccent": "primary",
+      "subtitle": "Không restart; lần gần nhất chỉ để vá bảo mật • CPU DB 80–90% → 30–50% sau tối ưu"
     },
     {
-      "id": "kpi-uptime-sla",
-      "label": "Quản trị & Core Team",
-      "pillText": "Lead 5–15 KS",
+      "id": "kpi-career",
+      "label": "Lộ trình & Đội ngũ",
+      "pillText": "Manager • 3 dev",
       "status": "healthy",
-      "value": "99.98% SLA",
+      "value": "11+ năm",
       "valueAccent": "primary",
-      "subtitle": "Dẫn dắt Core Team & AX Adapter Governance"
+      "subtitle": "AX Dev → Tech Lead → Deputy → Manager"
     }
   ]
 }

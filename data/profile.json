@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "Võ Minh Sơn (minhsonuit) | Principal Systems Architect & Head of Core Engineering",
-    "description": "Hồ sơ năng lực & Kiến trúc hệ thống của Võ Minh Sơn (minhsonuit) - Principal Systems Architect & Head of Core Engineering. Chuyên gia Hiện đại hóa ERP (Dynamics AX 2012 R3 / X++), Retail POS 1.000+ điểm bán, .NET 8 Distributed Gateway, High-Scale SQL Server Tuning & FinOps.",
-    "keywords": "Võ Minh Sơn, minhsonuit, Principal Systems Architect, Head of Engineering, CTO, Microsoft Dynamics AX 2012, X++, Retail POS, C# .NET 8, SQL Server Performance Tuning, FinOps, Legacy Modernization, Pharmacity",
+    "title": "Võ Minh Sơn (minhsonuit) | ERP Technical Manager & Senior Backend / ERP Architect",
+    "description": "Hồ sơ năng lực của Võ Minh Sơn (minhsonuit) - ERP Technical Manager, Senior Backend & ERP Architect. Thực chiến Dynamics AX 2012 R3 (X++), tối ưu SQL Server quy mô lớn, hệ thống tải cao, sẵn sàng cao (AlwaysOn) và chịu lỗi tại chuỗi 1.182 nhà thuốc.",
+    "keywords": "Võ Minh Sơn, minhsonuit, ERP Technical Manager, Backend Architect, ERP Architect, Microsoft Dynamics AX 2012, X++, SQL Server Performance Tuning, Always On, High Availability, Deadlock, Data Archiving, Pharmacity",
     "author": "Võ Minh Sơn",
     "siteUrl": "https://minhsonuit.github.io/",
     "ogImage": "https://minhsonuit.github.io/resources/avatar.jpg"
@@ -10,31 +10,31 @@
   "identity": {
     "fullName": "Võ Minh Sơn",
     "handle": "@minhsonuit",
-    "shortRole": "Principal Architect",
-    "headline": "Võ Minh Sơn — Principal Systems Architect & Head of Core Engineering",
-    "operationalRole": "Principal Architect & Head of Core Engineering",
+    "shortRole": "ERP Technical Manager",
+    "headline": "Võ Minh Sơn — ERP Technical Manager • Senior Backend & ERP Architect",
+    "operationalRole": "ERP Technical Manager • Backend & ERP Architect",
     "location": "TP. Hồ Chí Minh, VN",
     "locationShort": "TP. Hồ Chí Minh",
-    "experienceShort": "10+ năm KN • Lead 5–15 KS",
+    "experienceShort": "11+ năm • Pharmacity",
     "timezone": "GMT+7",
     "avatar": "./resources/avatar.jpg",
     "availability": {
       "status": "healthy",
       "shortLabel": "Sẵn sàng",
-      "heroBadge": "Sẵn sàng cho vai trò Principal Architect / Head of Engineering / CTO"
+      "heroBadge": "Sẵn sàng trao đổi vai trò Technical Manager / Lead Backend & ERP Architect"
     },
     "academicBadge": "UIT VNU-HCM • Kỹ sư Hệ thống Thông tin",
-    "techSummaryBadge": "AX 2012 • .NET 8 • SQL • FinOps",
-    "summaryHtml": "Hơn <strong>10 năm kinh nghiệm thực chiến</strong> định hình kiến trúc hệ thống trọng yếu (Mission-Critical) và trực tiếp dẫn dắt đội ngũ tinh gọn <strong>Core Engineering (5–15 kỹ sư)</strong> tại <strong>PHARMACITY JSC</strong>. Chuyên gia giải bài toán <strong>Hiện đại hóa hệ thống di sản (Legacy Modernization)</strong>: kết nối ERP lõi <strong>Microsoft Dynamics AX 2012 R3 (X++)</strong> với kiến trúc phân tán <strong>C# / .NET 8, Redis Cluster &amp; RabbitMQ</strong> đảm bảo <strong>Zero Downtime</strong> cho hơn <strong>1.000 cửa hàng POS</strong> (<strong>10,4 triệu giao dịch/ngày</strong>). Thiết lập kỷ luật kỹ thuật (<strong>Architecture Governance</strong>) và tối ưu hóa hiệu năng <strong>SQL Server / FinOps</strong> giúp cắt giảm <strong>78% Deadlock</strong>, tiết kiệm hàng tỷ đồng chi phí nâng cấp phần cứng &amp; bản quyền."
+    "techSummaryBadge": "AX 2012 • SQL Server • .NET • HA",
+    "summaryHtml": "Hơn <strong>11 năm</strong> tại <strong>PHARMACITY JSC</strong>, đi từ AX Developer lên <strong>ERP Technical Manager</strong>; hai lần nhận giải <strong>Best Employee of the Year</strong> (2019, 2021). Mạnh ở <strong>tư duy kiến trúc hệ thống</strong>, <strong>tối ưu hiệu năng backend &amp; database</strong> và vận hành hệ thống <strong>tải cao, sẵn sàng cao, chịu lỗi</strong> trên nền <strong>Dynamics AX 2012 R3</strong> cho <strong>1.182 nhà thuốc</strong>: khoảng <strong>300 nghìn giao dịch/ngày</strong>, mỗi giao dịch kéo theo hàng chục lệnh gọi API, database trên <strong>20 TB</strong> và tăng <strong>500–600 GB/tháng</strong>. Một số việc tiêu biểu: tìm ra nguyên nhân <strong>deadlock</strong> tồn đọng khi post statement (2019); viết lại <strong>inventory value</strong> từ hơn 1 tuần xuống khoảng 4 giờ; dựng <strong>Always On</strong> khi DB đã trên 20 TB; <strong>archive ~8 TB</strong>; xây <strong>Inventory Center Service</strong> trên Kafka. Quản lý trực tiếp <strong>3 developer</strong>, cùng vận hành hàng chục AOS, nhiều web server (IIS, Kubernetes, Docker Compose) và SQL Server hàng trăm core, hàng TB RAM."
   },
   "headerTelemetry": {
     "breadcrumbTitle": "minhsonuit",
-    "breadcrumbSubtitle": "Principal Architecture, Legacy Modernization & Core Engineering Leadership",
+    "breadcrumbSubtitle": "ERP Technical Manager • Backend, ERP & Database Architecture",
     "primaryPill": {
       "status": "healthy",
-      "text": "1,000+ POS • Core Team 5–15"
+      "text": "1.182 nhà thuốc • 2–6 POS/cửa hàng"
     },
-    "secondaryMetric": "SLA 99.98% • Zero Downtime"
+    "secondaryMetric": "~300k giao dịch/ngày • DB >20 TB • hàng chục AOS"
   },
   "navigation": [
     {
@@ -46,14 +46,14 @@
     },
     {
       "id": "architecture",
-      "label": "Kiến trúc & Case Studies",
+      "label": "Case Study Thực chiến",
       "badgeSource": "architectureCount",
       "badgeValue": "06",
       "accent": true
     },
     {
       "id": "telemetry",
-      "label": "Biểu đồ Hiệu năng Thực tế",
+      "label": "Hiệu năng Trước / Sau",
       "badgeSource": "telemetryCount",
       "badgeValue": "02",
       "accent": false
@@ -80,6 +80,13 @@
       "accent": false
     },
     {
+      "id": "lessons",
+      "label": "Bài học & Trade-off",
+      "badgeSource": "lessonsCount",
+      "badgeValue": "06",
+      "accent": false
+    },
+    {
       "id": "education",
       "label": "Học vấn & Đào tạo",
       "badgeSource": "static",
@@ -90,7 +97,7 @@
       "id": "contact",
       "label": "Liên hệ & Tư vấn",
       "badgeSource": "static",
-      "badgeValue": "24/7",
+      "badgeValue": "Mở",
       "accent": false
     }
   ],
@@ -105,32 +112,32 @@
     ]
   },
   "contact": {
-    "sectionTitle": "Kết nối Hợp tác Chiến lược & Tư vấn Kiến trúc Hệ thống",
-    "sectionSubtitle": "Liên hệ trực tiếp để trao đổi về vị trí Principal Architect / Head of Engineering / CTO hoặc tư vấn chiến lược Hiện đại hóa ERP, Tối ưu SQL Server & FinOps.",
+    "sectionTitle": "Kết nối & Trao đổi Kỹ thuật",
+    "sectionSubtitle": "Liên hệ để trao đổi về vai trò Technical Manager / Lead Backend & ERP Architect, hoặc các bài toán tối ưu SQL Server, hiệu năng ERP và hệ thống sẵn sàng cao.",
     "cardTitle": "Thông tin Liên hệ Trực tiếp",
-    "cardDescription": "Sẵn sàng đồng hành cùng Ban Giám đốc (C-Level) giải quyết bài toán mở rộng chuỗi bán lẻ, hiện đại hóa ERP di sản không gián đoạn và xây dựng đội ngũ Core Engineering hiệu suất cao.",
+    "cardDescription": "Sẵn sàng trao đổi về hệ thống tải cao, ERP/AX 2012, SQL Server quy mô lớn và xây dựng đội kỹ thuật vận hành ổn định.",
     "email": "minhson.uit@gmail.com",
     "linkedin": {
       "label": "linkedin.com/in/minhson-uit",
       "url": "https://www.linkedin.com/in/minhson-uit/",
-      "badge": "Verified"
+      "badge": "LinkedIn"
     },
     "github": {
       "label": "github.com/minhsonuit",
       "url": "https://github.com/minhsonuit",
-      "badge": "Open Source"
+      "badge": "GitHub"
     },
     "form": {
-      "namePlaceholder": "Trần Minh Quân • CEO / CTO / HR Director",
+      "namePlaceholder": "Trần Minh Quân • Hiring Manager / Engineering Lead",
       "emailPlaceholder": "quan.tran@enterprise.vn",
-      "subjectPlaceholder": "Mời hợp tác vị trí Principal Architect / Head of Engineering / Tư vấn Hệ thống",
-      "messagePlaceholder": "Mô tả quy mô hệ thống, bài toán chuyển đổi kiến trúc hoặc mục tiêu vị trí lãnh đạo kỹ thuật...",
-      "slaNote": "Phản hồi trực tiếp trong vòng 24 giờ làm việc.",
-      "submitLabel": "Gửi đề xuất hợp tác"
+      "subjectPlaceholder": "Trao đổi vị trí Technical Manager / Backend & ERP Architect",
+      "messagePlaceholder": "Mô tả quy mô hệ thống, bài toán hiệu năng hoặc mục tiêu của vị trí...",
+      "slaNote": "Phản hồi trong thời gian sớm nhất.",
+      "submitLabel": "Gửi trao đổi"
     }
   },
   "footer": {
     "copyrightYear": 2026,
-    "tagline": "Executive Engineering Portfolio • High-Craft UI & Data-Driven Architecture."
+    "tagline": "Engineering Portfolio • Data-Driven Architecture."
   }
 }

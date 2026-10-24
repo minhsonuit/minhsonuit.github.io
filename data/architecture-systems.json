@@ -1,7 +1,7 @@
 {
   "sectionTitle": "Danh mục Giải pháp Kiến trúc Chiến lược & Hệ thống Trọng điểm",
-  "sectionSubtitleHtml": "Nhấn vào bất kỳ dòng hệ thống nào bên dưới để mở bảng <strong>Chi tiết Kiến trúc, Tác động FinOps, Telemetry &amp; Code mẫu</strong> ở khung bên phải.",
-  "defaultSelectedId": "ARCH-AX01",
+  "sectionSubtitleHtml": "Nhấn vào một dòng để xem <strong>bài toán, hướng giải quyết, kết quả</strong> ở khung bên phải. Các case study được viết từ công việc thực tế tại Pharmacity.",
+  "defaultSelectedId": "ARCH-DB01",
   "domains": [
     {
       "id": "all",
@@ -9,249 +9,578 @@
     },
     {
       "id": "erp-pos",
-      "label": "ERP & Retail POS"
+      "label": "ERP & API"
     },
     {
       "id": "integration",
-      "label": "AX Adapter & Gateway"
+      "label": "Service & Tích hợp"
     },
     {
       "id": "database",
-      "label": "SQL Server & FinOps"
+      "label": "SQL Server & HA"
     }
   ],
   "sortOptions": [
     {
       "value": "impact",
-      "label": "Sắp xếp: Tác động chiến lược cao nhất"
-    },
-    {
-      "value": "latency",
-      "label": "Sắp xếp: Độ trễ P99 thấp nhất"
-    },
-    {
-      "value": "throughput",
-      "label": "Sắp xếp: Lưu lượng lớn nhất"
+      "label": "Sắp xếp: Tác động cao nhất"
     }
   ],
   "systems": [
     {
-      "id": "ARCH-AX01",
-      "name": "Kiến trúc Retail POS 1.000+ Cửa hàng & Đồng bộ AX Zero-Downtime",
-      "domain": "erp-pos",
-      "domainLabel": "ERP & Retail POS",
+      "id": "ARCH-DB01",
+      "name": "Xử lý deadlock khi post statement: temp table AX 2012 làm sai statistics",
+      "domain": "database",
+      "domainLabel": "SQL Server & HA",
       "company": "PHARMACITY JSC",
-      "period": "2017 – Hiện tại",
-      "scale": "1,000+ POS Stores",
-      "throughput": "10.4M tx/ngày",
-      "throughputValue": 10400000,
-      "latencyP99": "185 ms",
-      "latencyValue": 185,
-      "impactScore": 99,
-      "status": "healthy",
-      "statusText": "SLA 99.98% • Zero Downtime",
-      "summary": "Hiện đại hóa kiến trúc bán lẻ phân tán Offline-first cho hơn 1.000 nhà thuốc toàn quốc: đảm bảo quầy thu ngân thanh toán dưới 1.8 giây ngay cả khi đứt cáp WAN và đồng bộ đối soát tự động 100% về ERP lõi Dynamics AX 2012 R3 mà không cần nâng cấp cụm phần cứng AOS.",
-      "problem": "Khi quy mô chuỗi vượt mốc 500 cửa hàng, cơ chế đồng bộ CDX/Async Server mặc định bị nghẽn cổ chai vào khung giờ cao điểm (17:00–21:00), gây trễ số liệu tồn kho, lệch công nợ ca bán hàng và đe dọa làm gián đoạn hoạt động kinh doanh toàn chuỗi.",
-      "solution": "Dẫn dắt Core Team tái thiết kế luồng đồng bộ phân tầng kết hợp Local Store DB (SQL Express), cơ chế nén gói tin theo lô (Batch Compression) qua cổng AX Adapter và X++ Multi-thread Posting Engine tại AOS Cluster.",
-      "metrics": [
-        { "label": "Thời gian thanh toán POS", "value": "< 1.8 giây", "delta": "-68% độ trễ quầy" },
-        { "label": "Khớp lệnh tài chính POS-GL", "value": "100.0%", "delta": "Zero Data Loss" },
-        { "label": "Khả năng chịu lỗi Offline", "value": "72 giờ", "delta": "Zero Downtime bán hàng" },
-        { "label": "Tối ưu hạ tầng AOS (FinOps)", "value": "+340% tải", "delta": "Không cần thêm Server" }
-      ],
-      "governance": [
-        "Giao thức đồng bộ kiểm soát chặt chẽ và duy nhất qua lớp AX Adapter Service.",
-        "Toàn bộ giao dịch POS bắt buộc gắn Idempotency Key chống ghi trùng khi mạng chập chờn.",
-        "Đối soát tự động cuối ca (End-of-Day Shift Reconciliation) trước khi hạch toán General Ledger."
-      ],
-      "techStack": ["Dynamics AX 2012 R3", "X++ (MorphX)", "Retail POS", "C# .NET 8", "SQL Replication", "Multi-thread Batch"],
-      "telemetryTitle": "Lưu lượng đồng bộ POS về HO (Nghìn giao dịch / giờ)",
-      "telemetryUnit": "k tx/h",
-      "telemetryThreshold": "Ngưỡng cảnh báo tải: 650k tx/h",
-      "telemetryPoints": [310, 340, 390, 420, 480, 520, 590, 610, 575, 540, 490, 460],
-      "codeSnippet": "// X++: Kiểm tra Idempotency & Post Statement an toàn theo lô\npublic void postRetailStatementBatch(RetailStatementId _statementId)\n{\n    RetailStatementTable statementTable;\n\n    ttsBegin;\n    select firstOnly forUpdate statementTable\n        where statementTable.statementId == _statementId;\n\n    if (statementTable && statementTable.Status == RetailStatementStatus::Validated)\n    {\n        RetailStatementPost::runServer(_statementId);\n    }\n    ttsCommit;\n}"
-    },
-    {
-      "id": "ARCH-GW02",
-      "name": "Hiện đại hóa ERP với AX Integration Adapter & Event Gateway (.NET 8)",
-      "domain": "integration",
-      "domainLabel": "Integration Gateway",
-      "company": "PHARMACITY JSC",
-      "period": "2018 – Hiện tại",
-      "scale": "Omnichannel Hub",
-      "throughput": "3,850 req/s",
-      "throughputValue": 8800000,
-      "latencyP99": "42 ms",
-      "latencyValue": 42,
+      "period": "2019",
+      "scale": "Dữ liệu > 20 TB",
+      "throughput": "Dữ liệu > 20 TB",
+      "latencyP99": "Hết deadlock post statement",
       "impactScore": 98,
       "status": "healthy",
-      "statusText": "Circuit Closed • 99.99%",
-      "summary": "Chiến lược Hiện đại hóa Hệ thống Di sản (Legacy Modernization): Xây dựng cổng giao tiếp độc quyền AX Adapter (Single Point of Entry) kết nối ERP Dynamics AX 2012 với hệ sinh thái Microservices (E-commerce, Super App, 3PL Grab/AhaMove, Cổng thanh toán) với Zero Downtime.",
-      "problem": "Các chiến dịch Flash Sale đa kênh khiến lưu lượng truy cập tăng đột biến gấp 10 lần. Nếu cho phép các ứng dụng vệ tinh gọi trực tiếp hoặc chọc thẳng vào DB của AX 2012 sẽ gây treo AOS Server, khóa bảng InventSum và làm tê liệt toàn bộ chuỗi nhà thuốc.",
-      "solution": "Thiết lập chuẩn Architecture Governance bắt buộc: Xây dựng AX Adapter độc quyền bằng ASP.NET Core (.NET 8), tích hợp Polly Circuit Breaker + Timeout nghiêm ngặt, Redis Read-Through Cache giảm 90% tải đọc và RabbitMQ điều tiết luồng ghi. Tuyệt đối cấm ứng dụng ngoài ghi trực tiếp vào AX SQL Server.",
+      "statusText": "Root cause • Hết deadlock post",
+      "summary": "Năm 2019, deadlock khi post statement là vấn đề tồn đọng chưa có phương án xử lý: xảy ra ngẫu nhiên ở một cửa hàng bất kỳ rồi kéo theo deadlock chung. Nguyên nhân gốc là temp table của AX 2012 được tái sử dụng khiến statistics sai lệch, execution plan chọn phương án chậm. Hiện không còn deadlock do post statement.",
+      "problem": "Gần như lần post statement nào cũng có nguy cơ deadlock, ngẫu nhiên ở một cửa hàng nào đó rồi lan thành deadlock chung. Không tái hiện được ổn định, và các hướng xử lý thông thường không hiệu quả.",
+      "solution": "AX 2012 tái sử dụng các temp table (tên không cố định) giữa các lần chạy, nên statistics không còn phản ánh đúng dữ liệu hiện tại; execution plan vì vậy chọn phương án chậm, giữ khóa lâu và gây deadlock. Cách xử lý: trước khi chạy nghiệp vụ liên quan, xác định đúng các temp table sẽ dùng và update statistics cho chúng. Phần khó nhất là tìm ra nguyên nhân; cách sửa thì đơn giản.",
       "metrics": [
-        { "label": "Độ trễ phản hồi API (P99)", "value": "42 ms", "delta": "-85% so với AIF cũ" },
-        { "label": "Giảm tải cho ERP Lõi (FinOps)", "value": "-90% Read", "delta": "94.6% Redis Cache Hit" },
-        { "label": "Cô lập sự cố (Fault Isolation)", "value": "100%", "delta": "Zero AOS Crash" },
-        { "label": "An toàn Truy vấn Dữ liệu", "value": "100%", "delta": "100% Parameterized" }
+        {
+          "label": "Thời điểm",
+          "value": "2019",
+          "delta": "Vấn đề tồn đọng"
+        },
+        {
+          "label": "Tính chất sự cố",
+          "value": "Ngẫu nhiên",
+          "delta": "Một store → deadlock chung"
+        },
+        {
+          "label": "Nguyên nhân gốc",
+          "value": "Temp table",
+          "delta": "Tái sử dụng → statistics sai"
+        },
+        {
+          "label": "Kết quả",
+          "value": "Hết deadlock",
+          "delta": "Do post statement"
+        }
       ],
       "governance": [
-        "AX Adapter là điểm duy nhất được phép gọi vào hệ thống AX.",
-        "Cấm tuyệt đối write trực tiếp vào AX SQL Server từ mọi dịch vụ vệ tinh.",
-        "SQL Server AX chỉ được phép dùng cho read-only fallback khi thật sự cần thiết.",
-        "100% truy vấn Parameterized, cấm hoàn toàn dynamic string SQL.",
-        "Áp dụng cứng Timeout (3.0s) + Circuit Breaker (tự động ngắt mạch cô lập lỗi)."
+        "Update statistics cho đúng các temp table sắp dùng trước khi chạy nghiệp vụ nặng.",
+        "Theo dõi execution plan của các luồng post quan trọng.",
+        "Ưu tiên tìm nguyên nhân gốc thay vì tăng tài nguyên."
       ],
-      "techStack": [".NET 8 Web API", "C#", "Polly Circuit Breaker", "RabbitMQ", "Redis Cluster", "AIF Custom Services"],
-      "telemetryTitle": "Độ trễ phản hồi AX Adapter Gateway P99 (ms)",
-      "telemetryUnit": "ms",
-      "telemetryThreshold": "Ngưỡng SLA Timeout: 250 ms",
-      "telemetryPoints": [68, 62, 55, 49, 46, 44, 48, 43, 41, 40, 42, 42],
-      "codeSnippet": "// .NET 8: Chính sách Timeout + Circuit Breaker bắt buộc cho AX Adapter\nvar axResiliencePipeline = new ResiliencePipelineBuilder<AxResponse>()\n    .AddTimeout(TimeSpan.FromSeconds(3.0))\n    .AddCircuitBreaker(new CircuitBreakerStrategyOptions<AxResponse> {\n        FailureRatio = 0.25,\n        SamplingDuration = TimeSpan.FromSeconds(30),\n        MinimumThroughput = 20,\n        BreakDuration = TimeSpan.FromSeconds(15)\n    }).Build();"
+      "techStack": [
+        "SQL Server",
+        "Dynamics AX 2012",
+        "Temp Table",
+        "Statistics",
+        "Execution Plan",
+        "Deadlock Analysis"
+      ],
+      "telemetryTitle": "",
+      "telemetryUnit": "",
+      "telemetryThreshold": "",
+      "telemetryPoints": [],
+      "codeSnippet": "-- T-SQL: Tìm statistics đã cũ trên các temp table AX trong tempdb (tham số hóa)\nexec sp_executesql\n  N'SELECT t.name AS table_name, s.name AS stats_name,\n         sp.rows, sp.modification_counter, sp.last_updated\n    FROM tempdb.sys.tables t\n    JOIN tempdb.sys.stats s ON s.object_id = t.object_id\n    CROSS APPLY tempdb.sys.dm_db_stats_properties(s.object_id, s.stats_id) sp\n    WHERE t.name LIKE @pPattern\n      AND sp.modification_counter > @pMinChanges\n    ORDER BY sp.modification_counter DESC;',\n  N'@pPattern nvarchar(128), @pMinChanges bigint',\n  @pPattern = N't%', @pMinChanges = 1000;"
+    },
+    {
+      "id": "ARCH-SV07",
+      "name": "Viết lại tính Inventory Value bằng .NET 8: từ 1 tuần không ra kết quả xuống ~4 giờ",
+      "domain": "integration",
+      "domainLabel": "Service & Tích hợp",
+      "company": "PHARMACITY JSC",
+      "period": "2021 – 2022",
+      "scale": "Dữ liệu tồn kho toàn chuỗi",
+      "throughput": "Dữ liệu toàn chuỗi",
+      "latencyP99": "~1 tuần → ~4 giờ",
+      "impactScore": 97,
+      "status": "healthy",
+      "statusText": "~4 giờ • Ít ảnh hưởng hệ thống",
+      "summary": "Chức năng tính inventory value mặc định của ERP chạy hơn 1 tuần không ra kết quả và làm chậm nghiêm trọng toàn hệ thống. Viết lại bằng .NET 8: tối ưu query, xử lý song song theo từng item, đọc trên replica và ghi kết quả ra database report riêng — chạy khoảng 4 giờ và ít ảnh hưởng hệ thống.",
+      "problem": "Chức năng chuẩn của AX 2012 không theo kịp khối lượng dữ liệu: query phải scan bảng/index lớn, xử lý tuần tự, và chạy trực tiếp trên database chính nên vừa chậm vừa chiếm tài nguyên của các nghiệp vụ khác.",
+      "solution": "(1) Viết lại query để tận dụng index sẵn có, tránh table scan và index scan. (2) Tách logic tính theo từng item để chạy song song. (3) Đọc dữ liệu từ replica (Always On) để không tạo tải lên primary. (4) Ghi kết quả ra database report riêng, tách khỏi database AX; tài khoản service chỉ có quyền write đúng bảng kết quả.",
+      "metrics": [
+        {
+          "label": "Trước",
+          "value": "> 1 tuần",
+          "delta": "Không ra kết quả"
+        },
+        {
+          "label": "Sau",
+          "value": "~4 giờ",
+          "delta": "Viết lại bằng .NET 8"
+        },
+        {
+          "label": "Đọc / Ghi",
+          "value": "Replica / DB report",
+          "delta": "Không ghi vào AX DB"
+        },
+        {
+          "label": "Xử lý",
+          "value": "Song song",
+          "delta": "Theo từng item"
+        }
+      ],
+      "governance": [
+        "Query tham số hóa, tận dụng index sẵn có thay vì tạo thêm index trên bảng lớn.",
+        "Chỉ đọc AX trên replica; không ghi vào AX SQL Server.",
+        "Kết quả ghi ra database report riêng; tài khoản service chỉ có quyền write đúng bảng kết quả (least privilege).",
+        "Có timeout, chạy ngoài giờ cao điểm."
+      ],
+      "techStack": [
+        ".NET 8",
+        "SQL Server",
+        "Always On Read Replica",
+        "Parallel Processing",
+        "Index Seek",
+        "Dynamics AX 2012",
+        "Least Privilege"
+      ],
+      "telemetryTitle": "",
+      "telemetryUnit": "",
+      "telemetryThreshold": "",
+      "telemetryPoints": [],
+      "codeSnippet": ""
+    },
+    {
+      "id": "ARCH-SV09",
+      "name": "Job tính Commission: từ 5 ngày xuống ~4 giờ cho dữ liệu 1 tháng",
+      "domain": "integration",
+      "domainLabel": "Service & Tích hợp",
+      "company": "PHARMACITY JSC",
+      "period": "2019",
+      "scale": "Giao dịch bán hàng 1 tháng",
+      "throughput": "~300k giao dịch/ngày",
+      "latencyP99": "5 ngày → ~4 giờ",
+      "impactScore": 93,
+      "status": "healthy",
+      "statusText": "~4 giờ / tháng dữ liệu",
+      "summary": "Job tính commission từ giao dịch bán hàng trước đây mất khoảng 5 ngày để xử lý dữ liệu 1 tháng. Sau khi tối ưu query và nạp dữ liệu tham chiếu lên RAM, thời gian còn khoảng 4 giờ.",
+      "problem": "Với ~300k giao dịch/ngày, dữ liệu 1 tháng rất lớn; job truy vấn lặp lại nhiều lần trên database, khiến thời gian chạy kéo dài tới 5 ngày.",
+      "solution": "Tối ưu lại các query chính; nạp dữ liệu dùng lặp lại vào cache trên RAM để không phải truy vấn database cho từng giao dịch.",
+      "metrics": [
+        {
+          "label": "Trước",
+          "value": "~5 ngày",
+          "delta": "Cho dữ liệu 1 tháng"
+        },
+        {
+          "label": "Sau",
+          "value": "~4 giờ",
+          "delta": "Cho dữ liệu 1 tháng"
+        },
+        {
+          "label": "Cách làm",
+          "value": "Query + Cache",
+          "delta": "Nạp dữ liệu lên RAM"
+        }
+      ],
+      "governance": [
+        "Query tham số hóa.",
+        "Giảm số lần truy vấn lặp lại vào database ERP."
+      ],
+      "techStack": [
+        ".NET",
+        "SQL Server",
+        "In-memory Cache",
+        "Batch Processing"
+      ],
+      "telemetryTitle": "",
+      "telemetryUnit": "",
+      "telemetryThreshold": "",
+      "telemetryPoints": [],
+      "codeSnippet": ""
+    },
+    {
+      "id": "ARCH-INV10",
+      "name": "Inventory Center Service: trung tâm biến động tồn kho realtime với Kafka",
+      "domain": "integration",
+      "domainLabel": "Service & Tích hợp",
+      "company": "PHARMACITY JSC",
+      "period": "2026",
+      "scale": "1.182 cửa hàng • tồn kho vật lý",
+      "throughput": "Event-driven (Kafka)",
+      "latencyP99": "Realtime hơn AX",
+      "impactScore": 96,
+      "status": "healthy",
+      "statusText": "Kafka • Event-driven",
+      "summary": "Trung tâm ghi nhận biến động tồn kho vật lý, chạy trên Kafka. Gánh tải truy vấn tồn kho thay cho AX 2012 và cập nhật realtime hơn, vì tồn kho trong AX có thể bị trễ do một số nghiệp vụ.",
+      "problem": "Tồn kho trong AX 2012 có thể trễ so với thực tế vì một số nghiệp vụ ảnh hưởng tới việc cập nhật. Đồng thời, nếu mọi hệ thống đều hỏi tồn kho trực tiếp từ AX thì AOS và database chịu tải lớn.",
+      "solution": "Xây Inventory Center Service nhận các sự kiện biến động tồn kho vật lý qua Kafka, cung cấp số tồn gần realtime cho các hệ thống khác mà không cần truy vấn AX. Kafka cũng được dùng cho các service đồng bộ master data sang hệ thống vệ tinh như mobile app và web e-commerce. Tham gia đủ các vai trò: thiết kế kiến trúc, viết code và dẫn dắt triển khai; service chạy trên .NET 10.",
+      "metrics": [
+        {
+          "label": "Vai trò",
+          "value": "Inventory Center",
+          "delta": "Biến động tồn kho vật lý"
+        },
+        {
+          "label": "Nền tảng",
+          "value": "Kafka • .NET 10",
+          "delta": "Event-driven"
+        },
+        {
+          "label": "So với AX",
+          "value": "Realtime hơn",
+          "delta": "Không bị trễ do nghiệp vụ AX"
+        },
+        {
+          "label": "Master data",
+          "value": "App • E-com",
+          "delta": "Đồng bộ qua Kafka"
+        }
+      ],
+      "governance": [
+        "Chấp nhận eventual consistency; có cơ chế idempotency khi xử lý sự kiện.",
+        "Đối soát tồn kho định kỳ với AX.",
+        "Không ghi trực tiếp vào AX SQL Server."
+      ],
+      "techStack": [
+        "Kafka",
+        ".NET 10",
+        "Event-driven",
+        "Idempotency",
+        "Dynamics AX 2012"
+      ],
+      "telemetryTitle": "",
+      "telemetryUnit": "",
+      "telemetryThreshold": "",
+      "telemetryPoints": [],
+      "codeSnippet": ""
+    },
+    {
+      "id": "ARCH-HA04",
+      "name": "Cấu hình SQL Server Always On khi dữ liệu vượt 20 TB",
+      "domain": "database",
+      "domainLabel": "SQL Server & HA",
+      "company": "PHARMACITY JSC",
+      "period": "01/2025",
+      "scale": "DB > 20 TB • hàng trăm core • hàng TB RAM",
+      "throughput": "DB > 20 TB",
+      "latencyP99": "Sẵn sàng cao (HA)",
+      "impactScore": 94,
+      "status": "healthy",
+      "statusText": "Always On • HA",
+      "summary": "Tháng 01/2025, trực tiếp cài đặt, cấu hình Always On cho database ERP khi dữ liệu đã vượt 20 TB, và đã thực hiện restore, chuyển DB sang site khác trên production.",
+      "problem": "Database ERP là điểm lỗi duy nhất của toàn chuỗi. Dựng Always On từ đầu khi dữ liệu còn nhỏ là cách dễ và ít tốn thời gian nhất; làm khi đã trên 20 TB thì seeding, đồng bộ replica và cửa sổ thao tác khó hơn nhiều.",
+      "solution": "Tự cài đặt và cấu hình Always On trên hạ tầng nhiều core, nhiều RAM, nhiều disk, không làm gián đoạn vận hành. Đã thực hiện thao tác restore và chuyển database sang site khác trên môi trường production; kết hợp giám sát AOS và database.",
+      "metrics": [
+        {
+          "label": "Triển khai",
+          "value": "01/2025",
+          "delta": "Khi DB đã > 20 TB"
+        },
+        {
+          "label": "Hạ tầng",
+          "value": "Hàng trăm core",
+          "delta": "Hàng TB RAM • nhiều disk"
+        },
+        {
+          "label": "Đã làm trên production",
+          "value": "Restore • Switch site",
+          "delta": "Chuyển DB sang site khác"
+        },
+        {
+          "label": "Uptime",
+          "value": "> 6 tháng",
+          "delta": "Restart gần nhất để vá bảo mật"
+        }
+      ],
+      "governance": [
+        "SQL Server AX chỉ dùng cho read-only fallback / báo cáo trên bản sao.",
+        "Giám sát liên tục AOS và database."
+      ],
+      "techStack": [
+        "SQL Server Always On",
+        "High Availability",
+        "Restore",
+        "Site Switch",
+        "Monitoring"
+      ],
+      "telemetryTitle": "",
+      "telemetryUnit": "",
+      "telemetryThreshold": "",
+      "telemetryPoints": [],
+      "codeSnippet": "-- T-SQL: Kiểm tra tình trạng đồng bộ replica Always On\nSELECT ag.name AS ag_name, ar.replica_server_name,\n  drs.synchronization_state_desc, drs.log_send_queue_size, drs.redo_queue_size\nFROM sys.dm_hadr_database_replica_states drs\nJOIN sys.availability_replicas ar ON ar.replica_id = drs.replica_id\nJOIN sys.availability_groups ag ON ag.group_id = drs.group_id;"
     },
     {
       "id": "ARCH-DB03",
-      "name": "Tối ưu hóa SQL Server 500M+ Bản ghi & Tối ưu Chi phí Hạ tầng (FinOps)",
+      "name": "Dự án Archive dữ liệu giảm tải database ERP AX 2012",
       "domain": "database",
-      "domainLabel": "SQL Server & FinOps",
-      "company": "PHARMACITY JSC & Enterprise Clients",
-      "period": "2017 – Hiện tại",
-      "scale": "500M+ Rows / Table",
-      "throughput": "28,500 QPS",
-      "throughputValue": 9600000,
-      "latencyP99": "18 ms",
-      "latencyValue": 18,
-      "impactScore": 97,
+      "domainLabel": "SQL Server & HA",
+      "company": "PHARMACITY JSC",
+      "period": "2025",
+      "scale": "Dữ liệu > 20 TB",
+      "throughput": "Dữ liệu > 20 TB",
+      "latencyP99": "Giảm ~8 TB",
+      "impactScore": 90,
       "status": "healthy",
-      "statusText": "Deadlock -78% • FinOps",
-      "summary": "Chiến dịch giải cứu hiệu năng và tối ưu chi phí hạ tầng (FinOps) trên các bảng giao dịch ERP vượt ngưỡng 500 triệu dòng (InventTrans, RetailTransactionSalesTrans), giúp tiết kiệm hàng tỷ đồng chi phí mua thêm CPU Core & bản quyền SQL Server Enterprise.",
-      "problem": "Dữ liệu lịch sử giao dịch phình đại khiến CPU cụm SQL Server thường xuyên chạm đỉnh 92%–98%, phát sinh hàng chục vụ Deadlock mỗi ngày làm gián đoạn việc chốt đơn. Phương án nâng cấp phần cứng và mua thêm license SQL Enterprise theo Core tốn kém chi phí rất lớn.",
-      "solution": "Trực tiếp chỉ đạo Core Team phân tích sâu Execution Plan qua Extended Events & Query Store; thiết kế lại Covering Index, áp dụng Table Partitioning theo kỳ kế toán, tinh chỉnh MAXDOP và chuẩn hóa 100% câu lệnh Parameterized để tái sử dụng Plan Cache.",
+      "statusText": "Archive ~8 TB",
+      "summary": "Năm 2025 triển khai archive dữ liệu cũ, giảm khoảng 8 TB khỏi database ERP AX 2012 — tương đương 13–16 tháng tăng trưởng (500–600 GB/tháng).",
+      "problem": "Database tăng khoảng 500–600 GB mỗi tháng và đã vượt 20 TB, làm chậm truy vấn, backup/maintenance và tốn tài nguyên của database ERP.",
+      "solution": "Triển khai dự án archive dữ liệu lịch sử ra khỏi database vận hành, giữ dữ liệu cần thiết cho nghiệp vụ và tra cứu.",
       "metrics": [
-        { "label": "Mức tải CPU SQL Server", "value": "32%", "delta": "Hạ từ 92% (Tiết kiệm License)" },
-        { "label": "Tần suất Deadlock / ngày", "value": "< 1 vụ", "delta": "Giảm hơn 78% sự cố khóa" },
-        { "label": "Tốc độ chạy báo cáo EOD", "value": "1.8 phút", "delta": "Nhanh gấp 18 lần (từ 45p)" },
-        { "label": "Buffer Cache Hit Ratio", "value": "99.8%", "delta": "Tối ưu I/O Disk Read" }
+        {
+          "label": "Đã archive",
+          "value": "~8 TB",
+          "delta": "Năm 2025"
+        },
+        {
+          "label": "Tốc độ tăng trưởng",
+          "value": "500–600 GB",
+          "delta": "Mỗi tháng"
+        },
+        {
+          "label": "Tương đương",
+          "value": "13–16 tháng",
+          "delta": "Tăng trưởng dữ liệu"
+        },
+        {
+          "label": "Quy mô DB",
+          "value": "> 20 TB",
+          "delta": "Database ERP AX 2012"
+        }
       ],
       "governance": [
-        "100% câu truy vấn bắt buộc Parameterized và phải qua bước kiểm duyệt Execution Plan trong Code Review.",
-        "Cấm tuyệt đối sử dụng NOLOCK bừa bãi gây Dirty Read trên các bảng số dư tài chính và tồn kho.",
-        "Tự động hóa bảo trì Index (Smart Reorganize/Rebuild) và cập nhật Statistics ngoài khung giờ cao điểm."
+        "Archive theo quy tắc nghiệp vụ, không ảnh hưởng báo cáo và đối soát cần thiết.",
+        "Không ghi trực tiếp vào AX SQL Server ngoài quy trình đã duyệt."
       ],
-      "techStack": ["SQL Server Enterprise", "T-SQL Tuning", "Execution Plan", "Table Partitioning", "FinOps Cost Saving", "Query Store"],
-      "telemetryTitle": "Mức tải CPU SQL Server cụm ERP Core (%)",
-      "telemetryUnit": "% CPU",
-      "telemetryThreshold": "Ngưỡng cảnh báo nóng: 75% CPU",
-      "telemetryPoints": [89, 84, 76, 65, 54, 48, 42, 38, 35, 34, 32, 32],
-      "codeSnippet": "-- T-SQL: Truy vấn Parameterized an toàn với Covering Index Seek\nexec sp_executesql \n  N'SELECT ITEMID, AVAILPHYSICAL, RESERVPHYSICAL\n    FROM dbo.INVENTSUM WITH (INDEX(IDX_INVENTSUM_ITEM_DIM_INC))\n    WHERE DATAAREAID = @pDataAreaId \n      AND ITEMID = @pItemId \n      AND CLOSED = 0;',\n  N'@pDataAreaId nvarchar(4), @pItemId nvarchar(20)',\n  @pDataAreaId = N'pmc', @pItemId = N'SKU-008492';"
+      "techStack": [
+        "SQL Server",
+        "Data Archiving",
+        "Dynamics AX 2012"
+      ],
+      "telemetryTitle": "",
+      "telemetryUnit": "",
+      "telemetryThreshold": "",
+      "telemetryPoints": [],
+      "codeSnippet": ""
     },
     {
-      "id": "ARCH-INV04",
-      "name": "Hệ thống Phân bổ Tồn kho Real-time (FEFO/GPP) & Chống Overselling",
-      "domain": "erp-pos",
-      "domainLabel": "ERP & Retail POS",
+      "id": "ARCH-DB02",
+      "name": "Tối ưu các luồng đồng bộ nặng, hạ tải CPU Database ERP",
+      "domain": "database",
+      "domainLabel": "SQL Server & HA",
       "company": "PHARMACITY JSC",
-      "period": "2019 – Hiện tại",
-      "scale": "50,000+ SKUs • 1,000 Kho",
-      "throughput": "1,950 rsv/s",
-      "throughputValue": 6200000,
-      "latencyP99": "29 ms",
-      "latencyValue": 29,
+      "period": "2019 – nay (liên tục)",
+      "scale": "SQL Server hàng trăm core • hàng TB RAM",
+      "throughput": "Hàng trăm core",
+      "latencyP99": "CPU 80–90% → 30–50%",
+      "impactScore": 96,
+      "status": "healthy",
+      "statusText": "CPU ổn định 30–50%",
+      "summary": "Một số chức năng đồng bộ làm CPU database lên 80–90%. Tối ưu lại logic xử lý để hệ thống chạy ổn định ở mức 30–50% CPU.",
+      "problem": "Các tiến trình đồng bộ dữ liệu nặng kéo CPU database lên 80–90%, ảnh hưởng đến các nghiệp vụ khác dùng chung hệ thống.",
+      "solution": "Phân tích từng luồng đồng bộ, tối ưu lại logic xử lý (cách truy vấn, cách ghi, tránh xử lý thừa) thay vì chỉ tăng tài nguyên phần cứng.",
+      "metrics": [
+        {
+          "label": "CPU trước tối ưu",
+          "value": "80–90%",
+          "delta": "Khi chạy đồng bộ nặng"
+        },
+        {
+          "label": "CPU sau tối ưu",
+          "value": "30–50%",
+          "delta": "Ổn định"
+        },
+        {
+          "label": "Cách tiếp cận",
+          "value": "Tối ưu logic",
+          "delta": "Không chỉ thêm phần cứng"
+        },
+        {
+          "label": "Phạm vi",
+          "value": "Nhiều luồng",
+          "delta": "Các chức năng đồng bộ"
+        }
+      ],
+      "governance": [
+        "Đo CPU/thời gian chạy trước và sau mỗi lần thay đổi logic.",
+        "Kiểm tra tác động lên các nghiệp vụ dùng chung trước khi đưa vào production."
+      ],
+      "techStack": [
+        "SQL Server",
+        "T-SQL Tuning",
+        "X++",
+        "AOS Batch",
+        "Monitoring"
+      ],
+      "telemetryTitle": "CPU database (%) — giá trị trung bình khoảng, không phải số đo từng phút",
+      "telemetryUnit": "% CPU",
+      "telemetryThreshold": "Trước ≈ 85% • Sau ≈ 40%",
+      "telemetryPoints": [
+        85,
+        40
+      ],
+      "codeSnippet": "-- T-SQL: Top query tốn CPU nhất (không dynamic SQL)\nSELECT TOP (20)\n  qs.total_worker_time / qs.execution_count AS avg_cpu_us,\n  qs.execution_count,\n  SUBSTRING(st.text, 1, 200) AS sql_text\nFROM sys.dm_exec_query_stats qs\nCROSS APPLY sys.dm_exec_sql_text(qs.sql_handle) st\nORDER BY avg_cpu_us DESC;"
+    },
+    {
+      "id": "ARCH-RT05",
+      "name": "Tối ưu code tích hợp AX 2012 cho service realtime phục vụ POS",
+      "domain": "integration",
+      "domainLabel": "Service & Tích hợp",
+      "company": "PHARMACITY JSC",
+      "period": "2019 – nay (liên tục)",
+      "scale": "~300k giao dịch/ngày • hàng chục API/giao dịch",
+      "throughput": "~300k giao dịch/ngày",
+      "latencyP99": "Giảm tải cho AX 2012",
       "impactScore": 95,
       "status": "healthy",
-      "statusText": "99.96% Accuracy • GPP",
-      "summary": "Kiến trúc giữ chỗ tồn kho thời gian thực (Available-to-Promise) theo từng số lô và hạn sử dụng thuốc (Batch/Expiry Date - FEFO), kết hợp bộ nhớ đệm nguyên tử Redis và đối soát chuẩn xác với bảng InventSum của Dynamics AX.",
-      "problem": "Ngành bán lẻ dược phẩm chịu sự quản lý nghiêm ngặt của chuẩn GPP về hạn dùng (FEFO). Khi khách đặt hàng qua App và mua tại nhà thuốc cùng lúc, việc truy vấn trực tiếp vào AX gây chậm trễ, dẫn đến bán vượt tồn (Overselling 3.8%) hoặc giao nhầm lô thuốc cận hạn.",
-      "solution": "Hiện đại hóa tầng kiểm tra tồn kho bằng Redis Lua Script nguyên tử (Atomic Decrement) phản hồi trong 29ms, đồng bộ sự kiện biến động tồn kho từ AX Adapter qua RabbitMQ và chỉ dùng SQL Read-Only Fallback khi khởi tạo bộ đệm.",
+      "statusText": "Legacy • Tối ưu phía AX",
+      "summary": "POS gọi một service realtime legacy (.NET Framework 4.5) vào AX 2012 qua connector. Tôi tối ưu phần code tích hợp bên trong AX để các lệnh gọi này không làm ảnh hưởng hệ thống.",
+      "problem": "~300k giao dịch bán hàng/ngày, mỗi giao dịch gọi hàng chục API. Service realtime gọi vào AX 2012 qua connector, nên nếu code tích hợp phía AX chậm thì tải dồn thẳng lên AOS và database.",
+      "solution": "Không viết lại service legacy mà tập trung tối ưu phần code tích hợp bên trong AX 2012 (X++ và truy vấn phía sau) mà connector gọi tới, để giữ ổn định cho POS và ERP.",
       "metrics": [
-        { "label": "Tỷ lệ Overselling đơn Online", "value": "< 0.04%", "delta": "Giảm mạnh từ 3.8%" },
-        { "label": "Thời gian giữ chỗ FEFO", "value": "29 ms", "delta": "Atomic Redis + AX Sync" },
-        { "label": "Tuân thủ chuẩn GPP/FEFO", "value": "100%", "delta": "Kiểm soát chặt hạn dùng" },
-        { "label": "Đồng bộ biến động tồn kho", "value": "< 1.5 giây", "delta": "Near Real-time" }
+        {
+          "label": "Giao dịch bán hàng",
+          "value": "~300k/ngày",
+          "delta": "1.182 cửa hàng • 2–6 POS"
+        },
+        {
+          "label": "API/giao dịch",
+          "value": "Hàng chục",
+          "delta": "Đều phải hỗ trợ"
+        },
+        {
+          "label": "Service realtime",
+          "value": ".NET 4.5",
+          "delta": "Legacy, gọi qua connector"
+        },
+        {
+          "label": "Phạm vi tối ưu",
+          "value": "Phía AX 2012",
+          "delta": "Code tích hợp X++"
+        }
       ],
       "governance": [
-        "SQL Server AX chỉ phục vụ Read-Only Fallback khi Redis Cluster cần warm-up.",
-        "Mọi lệnh trừ tồn kho chính thức đều phải đi qua AX Adapter để khởi tạo InventTrans hợp lệ.",
-        "Tự động giải phóng tồn kho tạm giữ (Reservation TTL) khi đơn hàng quá hạn thanh toán."
+        "AX Adapter / connector là điểm duy nhất được phép gọi AX.",
+        "Cấm write trực tiếp vào AX SQL Server.",
+        "Query tham số hóa, có timeout cho lệnh gọi tích hợp."
       ],
-      "techStack": ["Dynamics AX InventTrans", "Redis Lua Script", "C# .NET 8", "RabbitMQ", "FEFO / GPP Compliance"],
-      "telemetryTitle": "Độ lệch tồn kho giữa Cache và AX Core (%)",
-      "telemetryUnit": "% Drift",
-      "telemetryThreshold": "Ngưỡng cho phép tối đa: 0.15%",
-      "telemetryPoints": [0.14, 0.12, 0.10, 0.08, 0.07, 0.05, 0.04, 0.04, 0.03, 0.03, 0.02, 0.02],
-      "codeSnippet": "// C#: Truy vấn tồn kho FEFO qua AX Adapter với Read-Only Fallback an toàn\npublic async Task<InventorySnapshot> GetStoreFefoStockAsync(string storeId, string itemId, CancellationToken ct)\n{\n    var cached = await _redisCache.GetStockAsync(storeId, itemId, ct);\n    if (cached is not null) return cached;\n\n    return await _axAdapterClient.QueryReadOnlyStockAsync(\n        storeId: storeId, itemId: itemId, timeoutMs: 2500, ct);\n}"
+      "techStack": [
+        "Dynamics AX 2012 R3",
+        "X++",
+        ".NET Framework 4.5 (legacy)",
+        "Connector",
+        "SQL Server"
+      ],
+      "telemetryTitle": "",
+      "telemetryUnit": "",
+      "telemetryThreshold": "",
+      "telemetryPoints": [],
+      "codeSnippet": ""
     },
     {
-      "id": "ARCH-BI05",
-      "name": "Kiến trúc Tách tải Báo cáo Quản trị SSRS & Read-Only Replica",
-      "domain": "database",
-      "domainLabel": "SQL Server & FinOps",
-      "company": "PHARMACITY JSC & Tư vấn Doanh nghiệp",
-      "period": "2016 – Hiện tại",
-      "scale": "120+ Báo cáo VAS/IFRS",
-      "throughput": "450 GB/ngày",
-      "throughputValue": 4500000,
-      "latencyP99": "110 ms",
-      "latencyValue": 110,
-      "impactScore": 93,
-      "status": "healthy",
-      "statusText": "Zero OLTP Lock • Active",
-      "summary": "Tách biệt hoàn toàn tải báo cáo phân tích (OLAP/SSRS) ra khỏi cơ sở dữ liệu giao dịch trực tuyến (OLTP), giúp khối Tài chính - Kế toán kết xuất báo cáo nhập-xuất-tồn hàng trăm triệu dòng trong 48 giây mà không gây khóa bảng bán hàng.",
-      "problem": "Các báo cáo tổng hợp giá trị tồn kho và sổ cái kế toán chạy trực tiếp trên DB chính vào giờ hành chính thường xuyên gây Lock Escalation, làm treo quầy thu ngân và kéo dài thời gian chạy Batch Job đóng sổ đêm lên tới hơn 2 giờ.",
-      "solution": "Điều hướng toàn bộ truy vấn báo cáo nặng sang cụm SQL AlwaysOn Read-Only Replica; đồng thời thiết lập chuẩn code X++ cho Core Team: viết lại các Report Data Provider (RDP) bằng RecordInsertList và bảng tạm TempDB thay vì lặp từng dòng.",
-      "metrics": [
-        { "label": "Thời gian kết xuất Nhập-Xuất-Tồn", "value": "48 giây", "delta": "Rút ngắn từ 38 phút" },
-        { "label": "Ảnh hưởng lên DB OLTP chính", "value": "0%", "delta": "Tách luồng Read-Only" },
-        { "label": "Số lượng báo cáo SSRS chuẩn hóa", "value": "120+ mẫu", "delta": "Đạt chuẩn kiểm toán Big4" },
-        { "label": "Tốc độ xử lý Batch Job đêm", "value": "3.2x nhanh hơn", "delta": "Multi-thread AOS Batch" }
-      ],
-      "governance": [
-        "Báo cáo quản trị và BI bắt buộc chỉ truy vấn trên cụm SQL Read-Only Fallback / Reporting Replica.",
-        "Quy chuẩn Code Review: Cấm sử dụng vòng lặp while select lồng nhau quá 3 cấp trong X++ RDP.",
-        "Bắt buộc giới hạn khoảng thời gian truy vấn, sử dụng Parameterized Query và phân trang hợp lý."
-      ],
-      "techStack": ["SSRS Reports", "X++ RDP Classes", "TempDB Optimization", "SQL AlwaysOn Read-Replica", "VAS & IFRS Compliance"],
-      "telemetryTitle": "Thời gian hoàn thành Batch Job đóng sổ cuối ngày (Phút)",
-      "telemetryUnit": "phút",
-      "telemetryThreshold": "Ngưỡng SLA ca đêm: 120 phút",
-      "telemetryPoints": [145, 132, 118, 96, 84, 72, 65, 58, 54, 51, 49, 47],
-      "codeSnippet": "// X++: Tối ưu SSRS Report Data Provider bằng RecordInsertList & TempDB\npublic void populateInventoryReportTmp(InventValueReportTmp _inventValueTmp)\n{\n    InventSum        inventSum;\n    RecordInsertList insertList;\n\n    insertList = new RecordInsertList(\n        tableNum(InventValueReportTmp), true, true, true, false, true, _inventValueTmp);\n\n    while select sum(PostedQty), sum(PostedValue) from inventSum\n        group by ItemId, InventDimId\n        where inventSum.Closed == NoYes::No\n    {\n        _inventValueTmp.clear();\n        _inventValueTmp.ItemId   = inventSum.ItemId;\n        _inventValueTmp.TotalQty = inventSum.PostedQty;\n        insertList.add(_inventValueTmp);\n    }\n    insertList.insertDatabase();\n}"
-    },
-    {
-      "id": "ARCH-MSG06",
-      "name": "Nền tảng Tự động hóa Hóa đơn Điện tử & Đối soát Công nợ Đa kênh",
+      "id": "ARCH-SV08",
+      "name": "Tách tính năng khỏi ERP thành service độc lập (2018 – 2026)",
       "domain": "integration",
-      "domainLabel": "Integration Gateway",
-      "company": "PHARMACITY JSC & Tư vấn Doanh nghiệp",
-      "period": "2019 – Hiện tại",
-      "scale": "300K+ Hóa đơn / ngày",
-      "throughput": "1,200 msg/s",
-      "throughputValue": 3200000,
-      "latencyP99": "64 ms",
-      "latencyValue": 64,
-      "impactScore": 94,
+      "domainLabel": "Service & Tích hợp",
+      "company": "PHARMACITY JSC",
+      "period": "2018 – 2026",
+      "scale": "Customer • Pricing • Promotion • HĐĐT",
+      "throughput": "~300k hóa đơn/ngày",
+      "latencyP99": "Tách khỏi ERP lõi",
+      "impactScore": 91,
       "status": "healthy",
-      "statusText": "100% Tax & Fin Synced",
-      "summary": "Kiến trúc bất đồng bộ (Event-Driven Outbox) xử lý phát hành hơn 300.000 hóa đơn điện tử có mã cơ quan thuế và đối soát thanh toán QR/Ví điện tử mỗi ngày, giúp cắt giảm 85% khối lượng vận hành thủ công của bộ phận Kế toán.",
-      "problem": "Việc gọi HTTP đồng bộ sang cổng Hóa đơn điện tử và Ngân hàng ngay lúc in bill khiến thu ngân phải chờ 5–10 giây khi đối tác phản hồi chậm, đồng thời phát sinh sai lệch công nợ khi mạng gián đoạn.",
-      "solution": "Chuyển đổi sang mô hình Outbox Pattern kết hợp Message Broker (RabbitMQ/Kafka), tích hợp Polly Circuit Breaker + Exponential Backoff Retry và cập nhật kết quả phát hành về ERP duy nhất qua cổng AX Adapter.",
+      "statusText": "Service độc lập",
+      "summary": "Tách dần các tính năng ra khỏi AX 2012 thành service độc lập: Customer service (2018, .NET Core) cho POS gọi lấy thông tin khách hàng realtime vì số khách quá lớn để đồng bộ liên tục xuống POS; hóa đơn điện tử (2020, .NET) với khối lượng tương đương số giao dịch (~300k/ngày); Pricing, Promotion master data và setup (2026).",
+      "problem": "Các tính năng nằm trong ERP làm tăng tải AOS/database, khó mở rộng, khó triển khai độc lập và phụ thuộc vào tốc độ của AX.",
+      "solution": "Tách theo từng miền nghiệp vụ, mỗi service triển khai độc lập trên IIS hoặc Linux (Kubernetes, Docker Compose), phiên bản .NET theo thời điểm (.NET Core → .NET 8/9/10), giao tiếp với AX qua kênh tích hợp chuẩn.",
       "metrics": [
-        { "label": "Thời gian in bill tại quầy", "value": "0.4 giây", "delta": "Tách rời API bên thứ 3" },
-        { "label": "Tỷ lệ phát hành & khớp thuế", "value": "99.99%", "delta": "Auto-Retry & DLQ" },
-        { "label": "Tối ưu nhân sự vận hành (FinOps)", "value": "-85% Effort", "delta": "Đối soát tự động 100%" },
-        { "label": "Độ trễ xử lý Worker (P99)", "value": "64 ms", "delta": "High-Throughput .NET" }
+        {
+          "label": "Customer service",
+          "value": "2018",
+          "delta": ".NET Core • POS gọi realtime"
+        },
+        {
+          "label": "Hóa đơn điện tử",
+          "value": "2020",
+          "delta": "~300k/ngày"
+        },
+        {
+          "label": "Pricing & Promotion",
+          "value": "2026",
+          "delta": "Master data & setup"
+        },
+        {
+          "label": "Triển khai",
+          "value": "IIS • K8s",
+          "delta": "Docker Compose"
+        }
       ],
       "governance": [
-        "Mọi lệnh cập nhật số hóa đơn VAT và bút toán thanh toán về AX đều đi qua AX Adapter.",
-        "Áp dụng Circuit Breaker tự động chuyển sang chế độ lưu trữ tạm (Queue Buffering) khi cổng thuế bảo trì.",
-        "Lưu vết kiểm toán (Audit Trail) toàn diện và bất biến cho từng giao dịch tài chính."
+        "AX Adapter là điểm duy nhất được phép gọi AX.",
+        "Cấm write trực tiếp vào AX SQL Server.",
+        "Mọi kết nối tích hợp có Timeout + Circuit Breaker."
       ],
-      "techStack": [".NET 8 Worker", "RabbitMQ / Kafka", "Outbox Pattern", "Polly Resilience", "SQL Server Parameterized"],
-      "telemetryTitle": "Tỷ lệ xử lý thành công hàng đợi Hóa đơn Điện tử (%)",
-      "telemetryUnit": "% Success",
-      "telemetryThreshold": "Mục tiêu cam kết SLA: 99.90%",
-      "telemetryPoints": [99.85, 99.88, 99.91, 99.93, 99.95, 99.96, 99.97, 99.98, 99.98, 99.99, 99.99, 99.99],
-      "codeSnippet": "// .NET Worker: Xử lý Outbox Message với Idempotency & Circuit Breaker\npublic async Task ProcessInvoiceOutboxAsync(InvoiceEvent evt, CancellationToken ct)\n{\n    if (await _auditRepo.IsProcessedAsync(evt.TransactionId, ct)) return;\n    var taxResult = await _taxProviderPipeline.ExecuteAsync(\n        token => _taxClient.IssueEInvoiceAsync(evt, token), ct);\n    await _axAdapter.UpdateFiscalReferenceAsync(evt.TransactionId, taxResult.FiscalCode, ct);\n}"
+      "techStack": [
+        ".NET Core",
+        ".NET 8/9/10",
+        "IIS",
+        "Kubernetes",
+        "Docker Compose",
+        "Dynamics AX 2012"
+      ],
+      "telemetryTitle": "",
+      "telemetryUnit": "",
+      "telemetryThreshold": "",
+      "telemetryPoints": [],
+      "codeSnippet": "// C#: Gọi dịch vụ phụ thuộc với Timeout + Circuit Breaker (Polly)\nvar policy = Policy.WrapAsync(\n    Policy.Handle<Exception>().CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)),\n    Policy.TimeoutAsync(TimeSpan.FromSeconds(3)));\n\nvar result = await policy.ExecuteAsync(\n    ct => _client.GetAsync(url, ct), CancellationToken.None);"
+    },
+    {
+      "id": "ARCH-ERP06",
+      "name": "Tối ưu API ERP chậm, hỗ trợ query BI & giám sát AOS/DB",
+      "domain": "erp-pos",
+      "domainLabel": "ERP & API",
+      "company": "PHARMACITY JSC",
+      "period": "2019 – nay (liên tục)",
+      "scale": "AX 2012 • AOS • SQL Server",
+      "throughput": "AX 2012 R3",
+      "latencyP99": "API chậm đã tối ưu",
+      "impactScore": 92,
+      "status": "healthy",
+      "statusText": "Monitoring • Tuning",
+      "summary": "Mỗi giao dịch bán hàng (~300k/ngày) gọi hàng chục API. Một mình tối ưu hầu hết các API chậm trên ERP, hỗ trợ tối ưu các câu SQL nặng của team BI và giám sát các AOS lẫn database.",
+      "problem": "Nhiều API trên ERP chậm; team BI chạy các câu SQL nặng trực tiếp lên database AX 2012 gây tải cho hệ thống.",
+      "solution": "Phân tích và tối ưu từng API chậm; hỗ trợ BI viết lại/tối ưu các câu SQL nặng; theo dõi AOS và database để phát hiện bất thường sớm.",
+      "metrics": [
+        {
+          "label": "Tải API",
+          "value": "Hàng chục API",
+          "delta": "Mỗi giao dịch (~300k/ngày)"
+        },
+        {
+          "label": "API ERP chậm",
+          "value": "Hầu hết",
+          "delta": "Do một mình tối ưu"
+        },
+        {
+          "label": "Hỗ trợ BI",
+          "value": "SQL nặng",
+          "delta": "Tối ưu query vào AX DB"
+        },
+        {
+          "label": "Giám sát",
+          "value": "Hàng chục AOS + DB",
+          "delta": "Liên tục"
+        }
+      ],
+      "governance": [
+        "100% query tham số hóa, cấm dynamic string SQL.",
+        "Query BI nặng nên chạy trên bản sao đọc (read-only), không đè lên DB giao dịch."
+      ],
+      "techStack": [
+        "Dynamics AX 2012 R3",
+        "X++",
+        "SQL Server",
+        "AOS Monitoring",
+        "SSRS"
+      ],
+      "telemetryTitle": "",
+      "telemetryUnit": "",
+      "telemetryThreshold": "",
+      "telemetryPoints": [],
+      "codeSnippet": "-- T-SQL: Các request đang chờ khóa (phục vụ giám sát)\nSELECT r.session_id, r.blocking_session_id, r.wait_type, r.wait_time, r.status\nFROM sys.dm_exec_requests r\nWHERE r.blocking_session_id <> 0\nORDER BY r.wait_time DESC;"
     }
   ]
 }

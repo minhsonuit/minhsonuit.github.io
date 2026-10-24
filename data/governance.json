@@ -1,6 +1,6 @@
 {
-  "sectionTitle": "Kỷ luật Kiến trúc & Nguyên tắc Bất khả xâm phạm trong Tích hợp AX (Architecture Governance)",
-  "sectionSubtitle": "Bộ quy chuẩn kỹ thuật bắt buộc do tôi thiết lập và áp dụng nghiêm ngặt cho đội ngũ Core Engineering nhằm bảo vệ toàn vẹn dữ liệu tài chính và chống sập ERP lõi.",
+  "sectionTitle": "Nguyên tắc Kỹ thuật khi Tích hợp với AX 2012",
+  "sectionSubtitle": "Bộ nguyên tắc dùng để bảo vệ toàn vẹn dữ liệu tài chính và tránh làm sập ERP lõi khi tích hợp.",
   "rules": [
     {
       "code": "RULE 01",
@@ -45,10 +45,52 @@
     {
       "code": "RULE 06",
       "codeAccent": "telemetry",
-      "pillText": "ACID & FinOps",
+      "pillText": "Review",
       "status": "healthy",
-      "title": "Đối soát Tự động & Kỷ luật Code Review",
-      "descriptionHtml": "Mọi giao dịch bán lẻ và tài chính đều gắn <code>Idempotency Key</code> đối soát khớp 100% giữa POS - Kho - Sổ cái; mọi PR của Core Team đều phải qua kiểm duyệt Execution Plan trước khi lên Production."
+      "title": "Idempotency & Code Review",
+      "descriptionHtml": "Giao dịch tích hợp gắn <code>Idempotency Key</code> để chống ghi trùng khi retry; thay đổi liên quan truy vấn cần được review execution plan trước khi lên production."
     }
-  ]
+  ],
+  "lessons": {
+    "sectionTitle": "Bài học & Trade-off",
+    "sectionSubtitle": "Mỗi quyết định kỹ thuật đều có cái giá. Dưới đây là các bài học rút ra từ vận hành thực tế, kèm lý do và điều phải đánh đổi.",
+    "items": [
+      {
+        "code": "LESSON 01",
+        "title": "SQL Always On nên dựng từ đầu khi dữ liệu còn nhỏ",
+        "reason": "Khi dữ liệu nhỏ, seeding replica nhanh và cửa sổ downtime gần như không đáng kể. Để đến khi database nặng hàng trăm GB hay TB, việc dựng AG phải tính đến thời gian backup/restore, băng thông mạng, log chain và lịch bảo trì.",
+        "tradeoff": "Phải trả chi phí license và hạ tầng sớm, đồng thời vận hành thêm quorum, listener và failover test trong khi chưa thật sự cần HA."
+      },
+      {
+        "code": "LESSON 02",
+        "title": "Bảo trì index theo ngưỡng, không rebuild đồng loạt",
+        "reason": "Rebuild hàng loạt làm transaction log phình to, kéo theo độ trễ đồng bộ sang replica trong AG.",
+        "tradeoff": "Cần script phân loại (reorganize / rebuild / bỏ qua) và theo dõi fragmentation, statistics. Phức tạp hơn job maintenance mặc định, nhưng ổn định hơn nhiều."
+      },
+      {
+        "code": "LESSON 03",
+        "title": "Tìm root cause trước khi mua thêm phần cứng",
+        "reason": "Nhiều vấn đề hiệu năng đến từ query, index hoặc thiết kế, và tăng CPU/RAM chỉ che đi triệu chứng trong vài tháng.",
+        "tradeoff": "Mất thời gian điều tra, kết quả không tức thì, nhưng bền vững và rẻ hơn về lâu dài."
+      },
+      {
+        "code": "LESSON 04",
+        "title": "Đẩy báo cáo sang readable secondary",
+        "reason": "Giảm tải cho primary, tránh báo cáo nặng chặn giao dịch bán hàng.",
+        "tradeoff": "Dữ liệu báo cáo có độ trễ nhất định. Chọn synchronous hay asynchronous commit là bài toán cân bằng giữa an toàn dữ liệu và latency của primary."
+      },
+      {
+        "code": "LESSON 05",
+        "title": "Hạn chế can thiệp sâu vào lõi AX 2012",
+        "reason": "Mỗi chỗ sửa lõi là một điểm đau khi patch, nâng cấp hoặc chuyển nền tảng.",
+        "tradeoff": "Đôi khi phải chấp nhận giải pháp kém “gọn” hơn, hoặc mất thêm công để tách logic ra ngoài."
+      },
+      {
+        "code": "LESSON 06",
+        "title": "Event-driven (Kafka) cho tồn kho nhiều cửa hàng — Inventory Center Service",
+        "reason": "Tách các hệ thống, chịu tải tốt, các cửa hàng hoạt động độc lập; tồn kho cập nhật realtime hơn AX 2012 và giảm tải truy vấn tồn kho lên AX.",
+        "tradeoff": "Chấp nhận eventual consistency, cần thêm cơ chế idempotency và đối soát tồn kho."
+      }
+    ]
+  }
 }

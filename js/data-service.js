@@ -63,7 +63,8 @@ function buildComputedMetadata(raw) {
       telemetryCount: formatBadgeCount(benchmarks.length),
       competenciesCount: formatBadgeCount(skillGroups.length),
       experienceCount: formatBadgeCount(expRoles.length),
-      governanceCount: formatBadgeCount(govRules.length)
+      governanceCount: formatBadgeCount(govRules.length),
+      lessonsCount: formatBadgeCount((raw.governance?.lessons?.items || []).length)
     },
     totalSystems: systems.length,
     domainCounts,
