@@ -42,7 +42,7 @@
   </script>
 
   <!-- Dual-Palette & High-Craft Custom Stylesheet -->
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/style.css?v=20261024">
 
   <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
@@ -159,7 +159,7 @@
 
         <!-- Center/Right: Secondary Telemetry Statuses (Hidden on < 768px) & Action Controls -->
         <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
-          <div id="header-telemetry-badges" class="hidden md:flex items-center gap-2 pr-2 border-r border-[var(--border-default)]"></div>
+          <div id="header-telemetry-badges" class="hidden xl:flex items-center gap-2 pr-2 border-r border-[var(--border-default)]"></div>
 
           <!-- Toggle Right Inspector Panel Button -->
           <button type="button" data-action="toggle-inspector" class="px-2.5 py-1.5 rounded-md bg-[var(--bg-surface)] hover:bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-default)] text-xs font-medium inline-flex items-center gap-1.5 transition-colors duration-150 whitespace-nowrap" title="Đóng/Mở bảng Chi tiết Kiến trúc">
@@ -229,7 +229,7 @@
                     <circle cx="11" cy="11" r="8"/>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                   </svg>
-                  <input id="arch-search-input" type="search" placeholder="Tìm mã ARCH, X++, Redis, SQL..." class="w-full pl-8 pr-3 py-1.5 rounded-lg bg-[var(--bg-subtle)] border border-[var(--border-default)] focus:border-[var(--accent-primary)] focus:outline-none text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)]">
+                  <input id="arch-search-input" type="search" placeholder="Tìm deadlock, Kafka, Always On, .NET..." class="w-full pl-8 pr-3 py-1.5 rounded-lg bg-[var(--bg-subtle)] border border-[var(--border-default)] focus:border-[var(--accent-primary)] focus:outline-none text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)]">
                 </div>
 
                 <select id="arch-sort-select" aria-label="Sắp xếp hệ thống" class="w-full sm:w-auto px-2.5 py-1.5 rounded-lg bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs text-[var(--text-primary)] focus:border-[var(--accent-primary)] focus:outline-none font-medium"></select>
@@ -419,7 +419,7 @@
   </div>
 
   <!-- Decoupled Data Layer & Interactive UI Engine -->
-  <script src="./js/data-service.js"></script>
-  <script src="./js/main.js"></script>
+  <script src="./js/data-service.js?v=20261024"></script>
+  <script src="./js/main.js?v=20261024"></script>
 </body>
 </html>

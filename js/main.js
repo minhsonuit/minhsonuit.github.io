@@ -92,14 +92,14 @@ function renderSidebar(profile, computed) {
     const pillClass = getStatusPillClass(identity.availability?.status);
     statusCardEl.innerHTML = `
       <div class="flex items-center justify-between gap-2 mb-1">
-        <span class="text-[11px] font-medium text-[var(--text-muted)] whitespace-nowrap">Trạng thái công việc</span>
+        <span class="text-[11px] font-medium text-[var(--text-muted)] whitespace-nowrap">Trạng thái</span>
         <span class="status-pill ${pillClass}">
           <span class="status-pill-dot"></span>
           <span>${escapeHtml(identity.availability?.shortLabel || 'Sẵn sàng')}</span>
         </span>
       </div>
       <div class="text-xs font-medium text-[var(--text-primary)] leading-snug">${escapeHtml(identity.operationalRole)}</div>
-      <div class="font-mono-tabular text-[11px] text-[var(--text-secondary)] mt-1 whitespace-nowrap">${escapeHtml(identity.locationShort)} • ${escapeHtml(identity.experienceShort)}</div>
+      <div class="font-mono-tabular text-[11px] text-[var(--text-secondary)] mt-1">${escapeHtml(identity.locationShort)} • ${escapeHtml(identity.experienceShort)}</div>
     `;
   }
 
@@ -129,8 +129,8 @@ function renderSidebar(profile, computed) {
   if (complianceEl && sidebarCompliance) {
     complianceEl.innerHTML = `
       <div class="flex items-center justify-between gap-2">
-        <span class="text-xs font-semibold text-[var(--text-primary)] whitespace-nowrap">${escapeHtml(sidebarCompliance.title)}</span>
-        <span class="font-mono-tabular text-[10px] text-[var(--accent-telemetry)] whitespace-nowrap">${escapeHtml(sidebarCompliance.badge)}</span>
+        <span class="text-xs font-semibold text-[var(--text-primary)] min-w-0 truncate">${escapeHtml(sidebarCompliance.title)}</span>
+        <span class="font-mono-tabular text-[10px] text-[var(--accent-telemetry)] whitespace-nowrap shrink-0">${escapeHtml(sidebarCompliance.badge)}</span>
       </div>
       <ul class="space-y-1.5 text-[11px] text-[var(--text-secondary)] leading-normal">
         ${(sidebarCompliance.items || []).map(rule => `
@@ -191,13 +191,13 @@ function renderOverviewAndKpis(profile, kpis, computed) {
 
     heroContainer.innerHTML = `
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-        <div class="space-y-3 max-w-3xl">
+        <div class="space-y-3 max-w-3xl min-w-0 w-full">
           <div class="flex flex-wrap items-center gap-2">
-            <span class="status-pill ${pillClass}">
+            <span class="status-pill status-pill-wrap ${pillClass}">
               <span class="status-pill-dot"></span>
               <span>${escapeHtml(id.availability?.heroBadge || '')}</span>
             </span>
-            <span class="font-mono-tabular text-xs px-2.5 py-0.5 rounded-full bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] whitespace-nowrap">
+            <span class="font-mono-tabular text-xs px-2.5 py-0.5 rounded-xl bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] max-w-full">
               ${escapeHtml(id.academicBadge || '')}
             </span>
           </div>
@@ -217,7 +217,7 @@ function renderOverviewAndKpis(profile, kpis, computed) {
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                 <polyline points="22,6 12,13 2,6"/>
               </svg>
-              <span>Gửi yêu cầu tư vấn kiến trúc</span>
+              <span>Liên hệ trao đổi</span>
             </a>
 
             <a href="#architecture" class="px-3.5 py-2 rounded-lg bg-[var(--bg-subtle)] hover:border-[var(--border-hover)] text-[var(--text-primary)] border border-[var(--border-default)] text-xs font-semibold inline-flex items-center gap-2 transition-colors duration-150 whitespace-nowrap">
@@ -225,7 +225,7 @@ function renderOverviewAndKpis(profile, kpis, computed) {
                 <polyline points="16 18 22 12 16 6"/>
                 <polyline points="8 6 2 12 8 18"/>
               </svg>
-              <span>Kiểm tra hồ sơ hệ thống (${totalSystems} Case Studies)</span>
+              <span>Xem ${totalSystems} case study</span>
             </a>
 
             <button type="button" class="btn-copy-email px-3.5 py-2 rounded-lg bg-[var(--bg-subtle)] hover:border-[var(--border-hover)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-default)] text-xs font-medium inline-flex items-center gap-2 transition-colors duration-150 whitespace-nowrap">
@@ -241,9 +241,9 @@ function renderOverviewAndKpis(profile, kpis, computed) {
         <!-- Architect Portrait & Verification Card -->
         <div class="w-full md:w-auto flex sm:flex-row md:flex-col items-center gap-4 p-3.5 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-default)] shrink-0">
           <img src="${escapeHtml(id.avatar)}" alt="Chân dung ${escapeHtml(id.fullName)}" class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg object-cover border border-[var(--border-default)]" width="96" height="96">
-          <div class="text-left md:text-center space-y-1">
+          <div class="text-left md:text-center space-y-1 min-w-0">
             <div class="text-xs font-semibold text-[var(--text-primary)] whitespace-nowrap">${escapeHtml(id.fullName)}</div>
-            <div class="font-mono-tabular text-[11px] text-[var(--accent-telemetry)] whitespace-nowrap">${escapeHtml(id.techSummaryBadge || '')}</div>
+            <div class="font-mono-tabular text-[11px] text-[var(--accent-telemetry)]">${escapeHtml(id.techSummaryBadge || '')}</div>
             <div class="flex items-center md:justify-center gap-2 pt-1">
               <a href="${escapeHtml(contact.github?.url || '#')}" target="_blank" rel="noopener noreferrer" class="text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] underline underline-offset-2 font-mono-tabular">GitHub</a>
               <span class="text-[var(--text-muted)]">•</span>
@@ -264,15 +264,15 @@ function renderOverviewAndKpis(profile, kpis, computed) {
         : 'text-[var(--text-primary)]';
 
       return `
-        <div class="p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col justify-between gap-2">
-          <div class="flex items-center justify-between gap-2">
+        <div class="p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col justify-between gap-2 min-w-0">
+          <div class="flex flex-wrap items-center justify-between gap-2">
             <span class="text-xs font-medium text-[var(--text-secondary)] whitespace-nowrap">${escapeHtml(item.label)}</span>
             <span class="status-pill ${pillClass}">
               <span class="status-pill-dot"></span>
               <span>${escapeHtml(item.pillText)}</span>
             </span>
           </div>
-          <div class="font-mono-tabular text-2xl font-bold ${valueColorClass} whitespace-nowrap">${escapeHtml(item.value)}</div>
+          <div class="font-mono-tabular text-2xl font-bold ${valueColorClass} whitespace-nowrap truncate" title="${escapeHtml(item.value)}">${escapeHtml(item.value)}</div>
           <div class="text-xs text-[var(--text-muted)]">${escapeHtml(item.subtitle)}</div>
         </div>
       `;
@@ -495,10 +495,10 @@ function renderInspectorPanel(systemId) {
 
       <div class="grid grid-cols-2 gap-2.5">
         ${(sys.metrics || []).map(m => `
-          <div class="p-2.5 rounded-lg border border-[var(--border-default)] bg-[var(--bg-canvas)]">
+          <div class="p-2.5 rounded-lg border border-[var(--border-default)] bg-[var(--bg-canvas)] min-w-0">
             <div class="text-[11px] text-[var(--text-muted)] truncate">${escapeHtml(m.label)}</div>
-            <div class="font-mono-tabular text-sm font-bold text-[var(--text-primary)] mt-0.5 whitespace-nowrap">${escapeHtml(m.value)}</div>
-            <div class="text-[11px] text-[var(--accent-primary)] font-medium mt-0.5 whitespace-nowrap">${escapeHtml(m.delta)}</div>
+            <div class="font-mono-tabular text-sm font-bold text-[var(--text-primary)] mt-0.5 whitespace-nowrap truncate" title="${escapeHtml(m.value)}">${escapeHtml(m.value)}</div>
+            <div class="text-[11px] text-[var(--accent-primary)] font-medium mt-0.5 leading-snug">${escapeHtml(m.delta)}</div>
           </div>
         `).join('')}
       </div>
@@ -625,8 +625,8 @@ function buildComparisonBars(bm) {
         return `
           <div class="space-y-1">
             <div class="flex items-center justify-between gap-2 text-[11px]">
-              <span class="text-[var(--text-secondary)] whitespace-nowrap">${escapeHtml(b.label)}</span>
-              <span class="font-mono-tabular font-semibold text-[var(--text-primary)] whitespace-nowrap">${escapeHtml(b.display)}</span>
+              <span class="text-[var(--text-secondary)] truncate min-w-0" title="${escapeHtml(b.label)}">${escapeHtml(b.label)}</span>
+              <span class="font-mono-tabular font-semibold text-[var(--text-primary)] whitespace-nowrap shrink-0">${escapeHtml(b.display)}</span>
             </div>
             <div class="h-2 rounded-full bg-[var(--bg-subtle)] overflow-hidden">
               <div class="h-full rounded-full" style="width:${pct}%;background:${fill}"></div>
@@ -658,8 +658,8 @@ function renderTelemetryBenchmarks(telemetry) {
 
       return `
         <div class="p-4 sm:p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-default)] space-y-3">
-          <div class="flex items-start justify-between gap-2">
-            <div>
+          <div class="flex flex-wrap items-start justify-between gap-2">
+            <div class="min-w-0">
               <div class="text-sm font-semibold text-[var(--text-primary)]">${escapeHtml(bm.title)}</div>
               <div class="text-xs text-[var(--text-secondary)]">${escapeHtml(bm.subtitle)}</div>
             </div>
@@ -671,7 +671,7 @@ function renderTelemetryBenchmarks(telemetry) {
 
           ${Array.isArray(bm.bars) ? buildComparisonBars(bm) : buildMainBenchmarkSvg(bm, idx)}
 
-          <div class="flex items-center justify-between text-[11px] font-mono-tabular text-[var(--text-muted)] pt-1 border-t border-[var(--border-subtle)]">
+          <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-[11px] font-mono-tabular text-[var(--text-muted)] pt-2 border-t border-[var(--border-subtle)]">
             <span>${escapeHtml(bm.footerLeft)}</span>
             <span class="${rightAccentClass} font-medium">${escapeHtml(bm.footerRight)}</span>
           </div>

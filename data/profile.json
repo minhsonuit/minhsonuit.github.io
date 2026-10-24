@@ -15,7 +15,7 @@
     "operationalRole": "ERP Technical Manager • Backend & ERP Architect",
     "location": "TP. Hồ Chí Minh, VN",
     "locationShort": "TP. Hồ Chí Minh",
-    "experienceShort": "11+ năm • Pharmacity",
+    "experienceShort": "11+ năm",
     "timezone": "GMT+7",
     "avatar": "./resources/avatar.jpg",
     "availability": {
@@ -102,8 +102,8 @@
     }
   ],
   "sidebarCompliance": {
-    "title": "Chuẩn Kiến trúc AX 2012",
-    "badge": "ENFORCED",
+    "title": "Chuẩn tích hợp AX",
+    "badge": "RULES",
     "items": [
       "AX Adapter là điểm duy nhất gọi AX",
       "Cấm ghi trực tiếp vào AX SQL Server",

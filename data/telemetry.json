@@ -14,7 +14,7 @@
         {
           "label": "Chức năng mặc định của ERP",
           "value": 168,
-          "display": "> 1 tuần (không ra kết quả)",
+          "display": "> 1 tuần",
           "tone": "before"
         },
         {
@@ -24,7 +24,7 @@
           "tone": "after"
         }
       ],
-      "note": "Thanh \"trước\" được tính tối thiểu 168 giờ vì job chạy hơn 1 tuần vẫn chưa xong.",
+      "note": "Bản mặc định chạy hơn 1 tuần vẫn không ra kết quả; thanh \"trước\" tính tối thiểu 168 giờ.",
       "footerLeft": "Index seek • song song theo item",
       "footerRight": "Đọc replica • ghi DB report",
       "footerRightAccent": "primary"

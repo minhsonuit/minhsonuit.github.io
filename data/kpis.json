@@ -3,17 +3,17 @@
   "items": [
     {
       "id": "kpi-pos-scale",
-      "label": "Quy mô vận hành",
-      "pillText": "Production",
+      "label": "Giao dịch bán hàng",
+      "pillText": "Thực tế",
       "status": "healthy",
-      "value": "~300k giao dịch/ngày",
+      "value": "~300k/ngày",
       "valueAccent": "primary",
       "subtitle": "1.182 nhà thuốc • mỗi giao dịch gọi hàng chục API"
     },
     {
       "id": "kpi-db-scale",
-      "label": "Hạ tầng dữ liệu",
-      "pillText": "Always On • HA",
+      "label": "Database ERP",
+      "pillText": "Always On",
       "status": "healthy",
       "value": "> 20 TB",
       "valueAccent": "primary",
@@ -22,7 +22,7 @@
     {
       "id": "kpi-uptime",
       "label": "Độ ổn định DB",
-      "pillText": "Always-on",
+      "pillText": "Ổn định",
       "status": "healthy",
       "value": "> 6 tháng",
       "valueAccent": "primary",
@@ -30,8 +30,8 @@
     },
     {
       "id": "kpi-career",
-      "label": "Lộ trình & Đội ngũ",
-      "pillText": "Manager • 3 dev",
+      "label": "Tại Pharmacity",
+      "pillText": "3 dev",
       "status": "healthy",
       "value": "11+ năm",
       "valueAccent": "primary",

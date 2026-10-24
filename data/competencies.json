@@ -96,7 +96,7 @@
       "id": "skill-backend-integration",
       "category": "backend",
       "title": "Backend .NET & Tách service khỏi ERP",
-      "experience": "Thực chiến",
+      "experience": "Từ 2018",
       "accent": "primary",
       "description": "Inventory Center Service trên Kafka/.NET 10 (2026); tách Customer (2018, .NET Core), hóa đơn điện tử (2020), Pricing & Promotion (2026) khỏi ERP thành service độc lập; viết lại các job nặng bằng .NET (inventory value: >1 tuần → ~4 giờ; commission: 5 ngày → ~4 giờ/tháng).",
       "skills": [
@@ -180,7 +180,7 @@
       "id": "skill-caching-devops",
       "category": "db",
       "title": "Sẵn sàng cao & Quản trị dữ liệu lớn",
-      "experience": "Thực chiến",
+      "experience": "Từ 2025",
       "accent": "primary",
       "description": "Cấu hình Always On trên dữ liệu hơn 20 TB, restore và chuyển DB sang site khác trên production, archive dữ liệu, giám sát hạ tầng database.",
       "skills": [
