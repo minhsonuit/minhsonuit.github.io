@@ -1,63 +1,85 @@
 {
   "experienceSection": {
-    "sectionTitle": "Hành trình Sự nghiệp & Kinh nghiệm Thực chiến",
-    "sectionSubtitle": "Đóng góp trực tiếp vào quá trình mở rộng thần tốc và vận hành ổn định của chuỗi bán lẻ hàng đầu Việt Nam.",
+    "sectionTitle": "Lộ trình Thăng tiến & Lãnh đạo Kỹ thuật Thực chiến",
+    "sectionSubtitle": "Hơn 10 năm phát triển từ Kỹ sư cốt lõi lên vị trí Principal Architect & Head of Core Engineering, trực tiếp dẫn dắt quá trình mở rộng thần tốc và hiện đại hóa nền tảng công nghệ chuỗi hơn 1.000 cửa hàng.",
     "roles": [
       {
-        "id": "exp-pharmacity-lead",
-        "title": "Technical Leader & Core Systems Architect",
+        "id": "exp-pharmacity-principal",
+        "title": "Principal Systems Architect & Head of Core Engineering",
         "company": "PHARMACITY JSC — Chuỗi Bán lẻ Dược phẩm Hàng đầu Việt Nam",
-        "period": "2017 – Hiện tại",
+        "period": "2021 – Hiện tại",
         "accent": "primary",
-        "summary": "Chịu trách nhiệm định hướng kiến trúc kỹ thuật, giám sát vận hành hệ thống ERP & Retail lõi và dẫn dắt đội ngũ kỹ sư đảm bảo nền tảng công nghệ vận hành xuyên suốt giai đoạn tăng trưởng từ vài chục lên hơn 1.000 cửa hàng trên toàn quốc.",
+        "summary": "Trực tiếp quản lý, định hướng kiến trúc và dẫn dắt đội ngũ tinh gọn Core Engineering (5–15 kỹ sư chuyên sâu về ERP/X++, .NET Backend, Retail POS & DBA) phụ trách toàn bộ các hệ thống trọng yếu (Mission-Critical) vận hành mạng lưới hơn 1.000 nhà thuốc trên toàn quốc.",
         "highlights": [
           {
-            "lead": "Tái cấu trúc & Tối ưu hóa CSDL SQL Server:",
-            "detail": "Phân tích kế hoạch thực thi (Execution Plan), thiết kế chiến lược chỉ mục (Covering Index) và phân vùng bảng cho hàng trăm triệu bản ghi giao dịch; giảm hơn 78% các vụ nghẽn Deadlock trong khung giờ cao điểm."
+            "lead": "Hiện đại hóa Hệ thống Di sản Không Gián đoạn (Legacy Modernization & Zero Downtime):",
+            "detail": "Hoạch định và triển khai chiến lược tách dần tải nghiệp vụ từ ERP lõi Dynamics AX 2012 R3 sang kiến trúc phân tán C# .NET 8, Redis Cluster và RabbitMQ/Kafka qua cổng độc quyền AX Adapter; giúp hệ thống chịu tải 10,4 triệu giao dịch/ngày và các đợt Flash Sale gấp 10 lần mà không cần thay thế ERP đột ngột."
           },
           {
-            "lead": "Thiết kế Cổng Tích hợp Chuẩn hóa (AX Integration Hub):",
-            "detail": "Xây dựng lớp Gateway phân tán bằng C# .NET 8 và RabbitMQ, áp dụng nguyên tắc kiểm soát truy cập nghiêm ngặt (AX Adapter độc quyền, 100% Parameterized Query, Timeout & Polly Circuit Breaker), bảo vệ tuyệt đối CSDL lõi khỏi quá tải từ các kênh E-commerce."
+            "lead": "Tối ưu Chi phí Hạ tầng & Bản quyền (FinOps & High-Scale Database Optimization):",
+            "detail": "Chỉ đạo tái cấu trúc các bảng giao dịch 500+ triệu dòng (Table Partitioning, Covering Index, Read-Only Replica), hạ tải CPU máy chủ SQL Server từ 92% xuống 32% và giảm 78% sự cố Deadlock; giúp doanh nghiệp tiết kiệm hàng tỷ đồng chi phí nâng cấp phần cứng máy chủ và bản quyền SQL Server Enterprise."
           },
           {
-            "lead": "Quản trị Độ sẵn sàng Cao (High Availability):",
-            "detail": "Duy trì cam kết SLA 99.98% uptime cho toàn chuỗi nhà thuốc, thiết lập quy trình kiểm thử tải, đối soát tự động và kịch bản khôi phục thảm họa (Disaster Recovery)."
+            "lead": "Thiết lập Kỷ luật Kiến trúc & Nâng tầm Đội ngũ (Engineering Excellence & Governance):",
+            "detail": "Ban hành bộ quy chuẩn Architecture Governance bắt buộc (100% Parameterized SQL, cấm ghi trực tiếp AX DB, bắt buộc Polly Timeout & Circuit Breaker), chuẩn hóa quy trình Code Review, CI/CD, Incident Post-mortem và huấn luyện đội ngũ Core Team duy trì cam kết SLA 99.98%."
+          },
+          {
+            "lead": "Điều phối Kỹ thuật Liên phòng ban & Quản trị Rủi ro Tài chính:",
+            "detail": "Phối hợp trực tiếp với các khối Tài chính - Kế toán, Chuỗi cung ứng (Supply Chain), Dược (GPP/FEFO) và E-commerce để chuẩn hóa luồng đối soát tự động 100% (POS - Kho - Sổ cái GL), đáp ứng tiêu chuẩn kiểm toán khắt khe."
           }
         ]
       },
       {
         "id": "exp-enterprise-consultant",
-        "title": "Enterprise Systems Consultant & Solutions Architect",
-        "company": "Tư vấn Độc lập & Dự án Kiến trúc Doanh nghiệp",
+        "title": "Principal Enterprise Consultant & Solutions Architect",
+        "company": "Tư vấn Kiến trúc Độc lập & Chuyển đổi Hệ thống Doanh nghiệp",
         "period": "2019 – Hiện tại (Song song)",
         "accent": "telemetry",
-        "summary": "Cung cấp dịch vụ tư vấn chuyên sâu cho các doanh nghiệp bán lẻ và phân phối: rà soát điểm nghẽn cơ sở dữ liệu, tối ưu hóa truy vấn T-SQL phức tạp và thiết kế kiến trúc kết nối ERP với hệ sinh thái Thương mại Điện tử, Hóa đơn điện tử và Logistics.",
+        "summary": "Tư vấn chiến lược kiến trúc cho Ban Giám đốc (CTO/CIO/CFO) các doanh nghiệp bán lẻ và phân phối lớn về xử lý khủng hoảng hiệu năng cơ sở dữ liệu, hiện đại hóa ERP và thiết kế cổng tích hợp đa kênh an toàn.",
         "highlights": [
           {
-            "lead": "Database Auditing & Query Tuning:",
-            "detail": "Rút ngắn thời gian kết xuất báo cáo tổng hợp cuối ngày của khách hàng doanh nghiệp từ 45–60 phút xuống dưới 2 phút nhờ tái thiết kế chỉ mục và tách luồng Read-Only Replica."
+            "lead": "Giải cứu Khủng hoảng Hiệu năng SQL Server & Tối ưu Chi phí (FinOps Audit):",
+            "detail": "Rà soát chuyên sâu Execution Plan, loại bỏ Lock Escalation và tách luồng OLAP/OLTP trên Read-Only Replica, rút ngắn thời gian chạy báo cáo đóng sổ cuối ngày từ 45–60 phút xuống dưới 2 phút mà không cần mua thêm tài nguyên máy chủ."
           },
           {
-            "lead": "Tích hợp Đa nền tảng An toàn:",
-            "detail": "Xây dựng API Gateway chuẩn hóa kết nối cổng thanh toán, vận chuyển và đối soát công nợ tự động với độ chính xác tuyệt đối."
+            "lead": "Kiến trúc Tích hợp Đa kênh Chịu lỗi Cao (Fault-Tolerant Integration):",
+            "detail": "Thiết kế kiến trúc Outbox Pattern & Event-Driven Gateway kết nối ERP với Hóa đơn điện tử (300K+ hóa đơn/ngày), Cổng thanh toán và Đối tác vận chuyển 3PL, giảm 85% nhân sự đối soát thủ công."
+          }
+        ]
+      },
+      {
+        "id": "exp-pharmacity-techlead",
+        "title": "Technical Leader & Senior ERP / Database Architect",
+        "company": "PHARMACITY JSC",
+        "period": "2017 – 2021",
+        "accent": "primary",
+        "summary": "Dẫn dắt kỹ thuật trong giai đoạn Pharmacity mở rộng thần tốc từ vài chục lên hơn 500–1.000 cửa hàng; trực tiếp thiết kế lại kiến trúc đồng bộ POS và xây dựng thế hệ đầu tiên của cổng tích hợp AX Adapter.",
+        "highlights": [
+          {
+            "lead": "Tái thiết kế Kiến trúc Đồng bộ Bán lẻ Phân tán (Offline-First POS Sync):",
+            "detail": "Giải quyết triệt để điểm nghẽn đồng bộ CDX/Async Server khi quy mô vượt mốc 500 cửa hàng bằng cơ chế nén lô giao dịch (Batch Compression) và X++ Multi-thread Posting Engine, rút ngắn thời gian thanh toán tại quầy xuống dưới 1.8 giây."
+          },
+          {
+            "lead": "Xây dựng Hệ thống Giữ chỗ Tồn kho Real-time theo Lô/Hạn dùng (FEFO):",
+            "detail": "Kết hợp Redis Lua Script nguyên tử và đồng bộ sự kiện từ AX giúp kéo giảm tỷ lệ bán vượt tồn (Overselling) trên kênh Online từ 3.8% xuống dưới 0.04%, tuân thủ 100% chuẩn GPP ngành dược."
           }
         ]
       },
       {
         "id": "exp-pharmacity-dev",
-        "title": "Microsoft Dynamics AX & Retail POS Developer",
+        "title": "Senior Microsoft Dynamics AX & Retail POS Engineer",
         "company": "PHARMACITY JSC",
         "period": "2015 – 2017",
         "accent": "muted",
-        "summary": "Phát triển, tùy biến và mở rộng các phân hệ cốt lõi trong Microsoft Dynamics AX 2012 R3 và phần mềm bán hàng Retail POS tại quầy thu ngân.",
+        "summary": "Tham gia xây dựng nền tảng công nghệ cốt lõi từ giai đoạn đầu của chuỗi; phát triển, tùy biến chuyên sâu các phân hệ Microsoft Dynamics AX 2012 R3 (X++ / MorphX) và phần mềm bán lẻ Retail POS.",
         "highlights": [
           {
-            "lead": "Phát triển Phân hệ Bán lẻ bằng X++ & C#:",
-            "detail": "Xây dựng bộ máy tính giá, khuyến mãi đa tầng, tích điểm khách hàng thân thiết và quản lý lô/hạn dùng thuốc (FEFO) ngay tại điểm bán."
+            "lead": "Phát triển Lõi Nghiệp vụ Bán lẻ & Chuỗi Cung ứng (X++ / C#):",
+            "detail": "Xây dựng bộ máy tính giá bán lẻ, khuyến mãi đa tầng phức tạp, tích điểm thành viên (Loyalty) và kiểm soát xuất nhập tồn theo chuẩn FEFO ngay tại quầy thu ngân."
           },
           {
-            "lead": "Đồng bộ Offline/Online & Báo cáo SSRS:",
-            "detail": "Đảm bảo đồng bộ giao dịch thông suốt từ cửa hàng về trung tâm và phát triển hệ thống báo cáo quản trị tài chính, tồn kho chuẩn xác."
+            "lead": "Chuẩn hóa Hệ thống Báo cáo Quản trị SSRS & Tài chính:",
+            "detail": "Phát triển hơn 120 mẫu báo cáo tài chính, kế toán và nhập-xuất-tồn sử dụng X++ Report Data Provider (RDP) tối ưu hóa với RecordInsertList & TempDB."
           }
         ]
       }
@@ -73,7 +95,7 @@
         "statusLabel": "Tốt nghiệp Kỹ sư Chính quy",
         "degree": "Kỹ sư Hệ thống Thông tin (Bachelor of Engineering in Information Systems)",
         "institution": "Trường Đại học Công nghệ Thông tin – Đại học Quốc gia TP.HCM (UIT - VNU-HCM)",
-        "description": "Đào tạo chuyên sâu về Phân tích & Thiết kế Hệ thống Thông tin Doanh nghiệp, Hệ quản trị Cơ sở Dữ liệu Quan hệ (RDBMS), Cấu trúc Dữ liệu & Giải thuật, Kiến trúc Phần mềm và Bảo mật Hệ thống."
+        "description": "Đào tạo chuyên sâu về Kiến trúc Hệ thống Thông tin Doanh nghiệp (Enterprise Architecture), Hệ quản trị Cơ sở Dữ liệu Quan hệ (RDBMS Internals), Hệ thống Phân tán, Cấu trúc Dữ liệu & Giải thuật và Quản trị Dự án Phần mềm."
       }
     ]
   }

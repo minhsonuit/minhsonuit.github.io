@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "Võ Minh Sơn (minhsonuit) | Senior Software Architect & ERP Solutions Lead",
-    "description": "Hồ sơ năng lực & Kiến trúc hệ thống của Võ Minh Sơn (minhsonuit) - Chuyên gia Kiến trúc Phần mềm, Microsoft Dynamics AX 2012 R3 (X++), Retail POS 1.000+ điểm bán, .NET 8 AX Adapter Gateway & SQL Server Tuning.",
-    "keywords": "Võ Minh Sơn, minhsonuit, Microsoft Dynamics AX 2012, X++, Retail POS, Software Architect, C# .NET 8, SQL Server Performance Tuning, Pharmacity, ERP Solutions Lead",
+    "title": "Võ Minh Sơn (minhsonuit) | Principal Systems Architect & Head of Core Engineering",
+    "description": "Hồ sơ năng lực & Kiến trúc hệ thống của Võ Minh Sơn (minhsonuit) - Principal Systems Architect & Head of Core Engineering. Chuyên gia Hiện đại hóa ERP (Dynamics AX 2012 R3 / X++), Retail POS 1.000+ điểm bán, .NET 8 Distributed Gateway, High-Scale SQL Server Tuning & FinOps.",
+    "keywords": "Võ Minh Sơn, minhsonuit, Principal Systems Architect, Head of Engineering, CTO, Microsoft Dynamics AX 2012, X++, Retail POS, C# .NET 8, SQL Server Performance Tuning, FinOps, Legacy Modernization, Pharmacity",
     "author": "Võ Minh Sơn",
     "siteUrl": "https://minhsonuit.github.io/",
     "ogImage": "https://minhsonuit.github.io/resources/avatar.jpg"
@@ -10,31 +10,31 @@
   "identity": {
     "fullName": "Võ Minh Sơn",
     "handle": "@minhsonuit",
-    "shortRole": "Architect",
-    "headline": "Võ Minh Sơn — Senior Software Architect & ERP Solutions Lead",
-    "operationalRole": "Principal ERP / System Architect & Tech Lead",
+    "shortRole": "Principal Architect",
+    "headline": "Võ Minh Sơn — Principal Systems Architect & Head of Core Engineering",
+    "operationalRole": "Principal Architect & Head of Core Engineering",
     "location": "TP. Hồ Chí Minh, VN",
     "locationShort": "TP. Hồ Chí Minh",
-    "experienceShort": "10+ năm KN",
+    "experienceShort": "10+ năm KN • Lead 5–15 KS",
     "timezone": "GMT+7",
     "avatar": "./resources/avatar.jpg",
     "availability": {
       "status": "healthy",
       "shortLabel": "Sẵn sàng",
-      "heroBadge": "Sẵn sàng cho vai trò Principal Architect / Tech Lead / Tư vấn ERP"
+      "heroBadge": "Sẵn sàng cho vai trò Principal Architect / Head of Engineering / CTO"
     },
     "academicBadge": "UIT VNU-HCM • Kỹ sư Hệ thống Thông tin",
-    "techSummaryBadge": "AX 2012 • .NET 8 • SQL",
-    "summaryHtml": "Hơn <strong>10 năm kinh nghiệm thực chiến</strong> thiết kế kiến trúc, phát triển và tối ưu hóa hệ thống ERP lõi <strong>Microsoft Dynamics AX 2012 R3 (X++ / MorphX)</strong>, <strong>Retail POS</strong> và nền tảng phân tán <strong>C# / .NET 8</strong>. Trực tiếp dẫn dắt kỹ thuật tại <strong>PHARMACITY JSC</strong> vận hành mạng lưới <strong>hơn 1.000 cửa hàng bán lẻ</strong> trên toàn quốc, xử lý hơn <strong>10,4 triệu giao dịch mỗi ngày</strong> với yêu cầu khắt khe về tính toàn vẹn dữ liệu tài chính và khả năng chịu lỗi cao."
+    "techSummaryBadge": "AX 2012 • .NET 8 • SQL • FinOps",
+    "summaryHtml": "Hơn <strong>10 năm kinh nghiệm thực chiến</strong> định hình kiến trúc hệ thống trọng yếu (Mission-Critical) và trực tiếp dẫn dắt đội ngũ tinh gọn <strong>Core Engineering (5–15 kỹ sư)</strong> tại <strong>PHARMACITY JSC</strong>. Chuyên gia giải bài toán <strong>Hiện đại hóa hệ thống di sản (Legacy Modernization)</strong>: kết nối ERP lõi <strong>Microsoft Dynamics AX 2012 R3 (X++)</strong> với kiến trúc phân tán <strong>C# / .NET 8, Redis Cluster &amp; RabbitMQ</strong> đảm bảo <strong>Zero Downtime</strong> cho hơn <strong>1.000 cửa hàng POS</strong> (<strong>10,4 triệu giao dịch/ngày</strong>). Thiết lập kỷ luật kỹ thuật (<strong>Architecture Governance</strong>) và tối ưu hóa hiệu năng <strong>SQL Server / FinOps</strong> giúp cắt giảm <strong>78% Deadlock</strong>, tiết kiệm hàng tỷ đồng chi phí nâng cấp phần cứng &amp; bản quyền."
   },
   "headerTelemetry": {
     "breadcrumbTitle": "minhsonuit",
-    "breadcrumbSubtitle": "Enterprise ERP & Distributed Systems Architecture",
+    "breadcrumbSubtitle": "Principal Architecture, Legacy Modernization & Core Engineering Leadership",
     "primaryPill": {
       "status": "healthy",
-      "text": "AX 2012 R3 • 1,000+ POS"
+      "text": "1,000+ POS • Core Team 5–15"
     },
-    "secondaryMetric": "SLA 99.98%"
+    "secondaryMetric": "SLA 99.98% • Zero Downtime"
   },
   "navigation": [
     {
@@ -62,14 +62,14 @@
       "id": "competencies",
       "label": "Hệ sinh thái Kỹ năng",
       "badgeSource": "competenciesCount",
-      "badgeValue": "04",
+      "badgeValue": "05",
       "accent": false
     },
     {
       "id": "experience",
       "label": "Lịch sử Chuyên môn",
       "badgeSource": "experienceCount",
-      "badgeValue": "03",
+      "badgeValue": "04",
       "accent": false
     },
     {
@@ -105,10 +105,10 @@
     ]
   },
   "contact": {
-    "sectionTitle": "Kết nối Hợp tác & Tư vấn Giải pháp Kiến trúc",
-    "sectionSubtitle": "Liên hệ trực tiếp để trao đổi về cơ hội hợp tác chiến lược, vị trí Principal Architect / Tech Lead hoặc tư vấn tối ưu hệ thống ERP & Database.",
+    "sectionTitle": "Kết nối Hợp tác Chiến lược & Tư vấn Kiến trúc Hệ thống",
+    "sectionSubtitle": "Liên hệ trực tiếp để trao đổi về vị trí Principal Architect / Head of Engineering / CTO hoặc tư vấn chiến lược Hiện đại hóa ERP, Tối ưu SQL Server & FinOps.",
     "cardTitle": "Thông tin Liên hệ Trực tiếp",
-    "cardDescription": "Sẵn sàng trao đổi chuyên sâu về bài toán mở rộng chuỗi bán lẻ, tích hợp AX 2012 an toàn và xử lý sự cố hiệu năng SQL Server.",
+    "cardDescription": "Sẵn sàng đồng hành cùng Ban Giám đốc (C-Level) giải quyết bài toán mở rộng chuỗi bán lẻ, hiện đại hóa ERP di sản không gián đoạn và xây dựng đội ngũ Core Engineering hiệu suất cao.",
     "email": "minhson.uit@gmail.com",
     "linkedin": {
       "label": "linkedin.com/in/minhson-uit",
@@ -121,16 +121,16 @@
       "badge": "Open Source"
     },
     "form": {
-      "namePlaceholder": "Trần Minh Quân • CTO / HR Lead",
+      "namePlaceholder": "Trần Minh Quân • CEO / CTO / HR Director",
       "emailPlaceholder": "quan.tran@enterprise.vn",
-      "subjectPlaceholder": "Mời hợp tác vị trí Principal Architect / Tư vấn tối ưu AX & SQL Server",
-      "messagePlaceholder": "Mô tả quy mô hệ thống hiện tại, mục tiêu kỹ thuật hoặc thông tin vị trí...",
-      "slaNote": "Phản hồi nhanh trong vòng 24 giờ làm việc.",
-      "submitLabel": "Gửi yêu cầu tư vấn"
+      "subjectPlaceholder": "Mời hợp tác vị trí Principal Architect / Head of Engineering / Tư vấn Hệ thống",
+      "messagePlaceholder": "Mô tả quy mô hệ thống, bài toán chuyển đổi kiến trúc hoặc mục tiêu vị trí lãnh đạo kỹ thuật...",
+      "slaNote": "Phản hồi trực tiếp trong vòng 24 giờ làm việc.",
+      "submitLabel": "Gửi đề xuất hợp tác"
     }
   },
   "footer": {
     "copyrightYear": 2026,
-    "tagline": "Thiết kế chuẩn High-Craft UI & Data-Driven Architecture."
+    "tagline": "Executive Engineering Portfolio • High-Craft UI & Data-Driven Architecture."
   }
 }

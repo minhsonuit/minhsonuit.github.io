@@ -1,41 +1,41 @@
 {
-  "sectionNote": "Các chỉ số KPI cốt lõi hiển thị tại phần Tổng quan Hồ sơ (Tự động co giãn theo lưới Responsive)",
+  "sectionNote": "Các chỉ số KPI cốt lõi hiển thị tại phần Tổng quan Hồ sơ (Kết hợp Chiều sâu Kiến trúc, Hiệu quả FinOps & Năng lực Quản trị Core Team)",
   "items": [
     {
       "id": "kpi-pos-scale",
-      "label": "Quy mô Vận hành POS",
-      "pillText": "Toàn quốc",
+      "label": "Quy mô & Hiện đại hóa",
+      "pillText": "Zero Downtime",
       "status": "healthy",
       "value": "1,000+ Stores",
       "valueAccent": "primary",
-      "subtitle": "Đồng bộ Offline-first về AX 2012 HO"
+      "subtitle": "Hiện đại hóa AX 2012 & Offline-first POS"
     },
     {
       "id": "kpi-daily-tx",
-      "label": "Sản lượng Giao dịch",
+      "label": "Sản lượng & Toàn vẹn",
       "pillText": "ACID 100%",
       "status": "healthy",
       "value": "10.4M tx/ngày",
       "valueAccent": "primary",
-      "subtitle": "Khớp lệnh tồn kho & sổ cái kế toán"
+      "subtitle": "Khớp lệnh Tồn kho - POS - Sổ cái Kế toán"
     },
     {
       "id": "kpi-sql-tuning",
-      "label": "Tối ưu SQL Server",
+      "label": "Hiệu năng & FinOps",
       "pillText": "-78% Deadlock",
       "status": "healthy",
       "value": "18x Nhanh hơn",
       "valueAccent": "telemetry",
-      "subtitle": "Hạ CPU đỉnh từ 92% xuống 32%"
+      "subtitle": "CPU 92%→32% • Tối ưu chi phí Server/License"
     },
     {
       "id": "kpi-uptime-sla",
-      "label": "Độ sẵn sàng Hệ thống",
-      "pillText": "Circuit Breaker",
+      "label": "Quản trị & Core Team",
+      "pillText": "Lead 5–15 KS",
       "status": "healthy",
-      "value": "99.98% Uptime",
+      "value": "99.98% SLA",
       "valueAccent": "primary",
-      "subtitle": "AX Adapter cô lập lỗi đa kênh"
+      "subtitle": "Dẫn dắt Core Team & AX Adapter Governance"
     }
   ]
 }
